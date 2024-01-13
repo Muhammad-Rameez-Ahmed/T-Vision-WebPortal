@@ -1,0 +1,28 @@
+.card {
+    min-height: 6rem !important;
+    border-radius: 0%;
+
+    .card-body {
+        overflow: hidden;
+
+        .question {
+            font-weight: 700;
+            color: black;
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        .answer {
+            font-size: 13px;
+        }
+    }
+
+    &:hover {
+
+        background: #F7F8FA !important;
+        transform: scale(1.01);
+        border: 2px soild #0D67B5 !important;
+        box-shadow: 1px 3px 7px rgb(0 0 0 / 10%);
+    }
+
+}

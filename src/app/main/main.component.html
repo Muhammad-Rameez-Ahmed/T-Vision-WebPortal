@@ -1,0 +1,20 @@
+<div class="page">
+    <aside>
+        <app-sidebar></app-sidebar>
+    </aside>
+    <main class="card">
+        <header>
+            <app-header></app-header>
+        </header>
+
+        <cdk-virtual-scroll-viewport itemSize="1" style="height: 100vh;">
+            <div class="content">
+                <router-outlet></router-outlet>
+            </div>
+        </cdk-virtual-scroll-viewport>
+        <!-- <footer>
+            <app-footer></app-footer>
+        </footer> -->
+    </main>
+</div>
+<footer></footer>

@@ -1,0 +1,14 @@
+<!-- <ng-container *ngFor="let item of list"> -->
+<ng-container *ngFor="let item of list">
+    <div class="card">
+        <div class="card-body">
+            <div class="question">{{'Q: ' + item?.question }}</div>
+            <div class="answer">{{'A: ' + item?.answer }}</div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="list.length === 0">
+
+    <div class="d-flex justify-content-center mt-2">No Triage to show.</div>
+</ng-container>

@@ -1,0 +1,39 @@
+<div class="space-btw">
+
+    <div class="p-0 cc">
+        <div class="header">
+
+            <ul class="header__menu">
+                <li *ngIf="this.heading != 'Appointments' && this.heading != 'Patient Details'">
+                    <!-- <div class="card-header__search pr-2"> -->
+                    <!-- <input type="search" name="search" autocomplete="off" [(ngModel)]="value" (change)="test()"
+                        placeholder="Search Appointments"> -->
+                    <!-- <app-searchbar class="test" [(inputValue)]="value" (inputValueChange)="test()"
+                        [inputPlaceholder]="'Search ' + this.heading" inputWidth="18rem"></app-searchbar> -->
+                    <!-- </div> -->
+                </li>
+                <li class="menu__item menu__item-notification" ngbDropdown #infoDropdown="ngbDropdown" display="dynamic"
+                    placement="bottom-end" autoClose="outside" ngbDropdownToggle>
+                    <img src="./assets/images/header/notification.png" alt="" class="item__image">
+                    <span class="item__badge" [class.d-none]="getCount()===0"
+                        [innerText]="getCount()>9?'*':getCount()"></span>
+                    <div [class.d-none]="list.length===0" ngbDropdownMenu>
+                        <app-notification [list]="list"></app-notification>
+                    </div>
+                </li>
+                <li class="menu__item menu__item-account">
+                    <span class="item__initials" [innerText]="getInitials()"></span>
+                    <div class="item__user">
+                        <span class="user__name" [innerText]="name ?? 'N/a'"></span>
+                        <span class="user__email" [innerText]="email ?? 'N/a'"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="">
+        <div class="heading">
+            {{this.heading}}
+        </div>
+    </div>
+</div>

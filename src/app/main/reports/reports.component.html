@@ -1,0 +1,264 @@
+<ul class="tabs shadow-sm">
+    <li class="tabs__item" [routerLink]="'/reports/clients'" [routerLinkActive]="'active'"
+        (click)="selectedTab='clients'">
+        <span class="item__name">clients reports</span>
+    </li>
+    <li class="tabs__item" [routerLink]="'/reports/teams'" [routerLinkActive]="'active'" (click)="selectedTab='teams'">
+        <span class="item__name">teams reports</span>
+    </li>
+    <li class="tabs__item" [routerLink]="'/reports/members'" [routerLinkActive]="'active'"
+        (click)="selectedTab='members'">
+        <span class="item__name">members reports</span>
+    </li>
+</ul>
+
+<div class="d-flex justify-content-between mb-3">
+    <div class="heading">
+        <h1>reports</h1>
+        <h2 [innerText]="selectedTab+' Units'"></h2>
+    </div>
+
+    <ng-container *ngIf="!report.loading">
+        <button type="button" class="btn btn-link btn-sm export-btn text-dark text-decoration-none fw-600 ms-auto"
+            (click)="export()">
+            <img src="./assets/images/utilities/export.png" alt="export">
+            <span>Export</span>
+        </button>
+    </ng-container>
+</div>
+
+<ng-container *ngIf="report.loading else content">
+    <div class="row g-3">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-center my-5 py-5">
+                <h5 class="text-uppercase text-muted">
+                    <span [innerText]="report.loadingContent"></span>
+                </h5>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<ng-template #content>
+    <ng-container [ngSwitch]="selectedTab">
+        <ng-container *ngSwitchCase="'clients'">
+            <div class="d-flex">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <div class="card-header__datepicker">
+
+                            <div class="input-group input-group-sm ml-auto">
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker" autocomplete="off"
+                                        placeholder="Start Date" [(ngModel)]="fromDate" name="fromDate" id="fromDate"
+                                        [maxDate]="toDate ?? {year:9999, month: 0, day: 0}" ngbDatepicker
+                                        #sd="ngbDatepicker" (click)="sd.open()">
+                                    <input type="text" class="form-control datepicker" autocomplete="off"
+                                        placeholder="End Date" [(ngModel)]="toDate" name="toDate" id="toDate"
+                                        [minDate]="fromDate ?? {year:0, month: 0, day: 0}" ngbDatepicker
+                                        #ed="ngbDatepicker" (click)="ed.open()">
+                                    <span class="input-group-text datepicker__icon pointer"
+                                        (click)="fetchData()"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- <div class="card-header__search ms-auto">
+                            <input type="search" [(ngModel)]="search" name="search" [disabled]="loading"
+                                autocomplete="off" placeholder="Search..." (keyup.enter)="fetchData()"
+                                (change)="search === '' ? fetchData() : ''">
+                        </div> -->
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">Clients</th>
+                                    <th colspan="2" class="text-center">Current Month</th>
+                                    <th colspan="2" class="text-center">Last Month</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">FT</th>
+                                    <th class="text-center">Pages</th>
+                                    <th class="text-center">FT</th>
+                                    <th class="text-center">Pages</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngFor="let client of report.monthlyClientsUnits; let i = index;">
+                                    <tr [style.background-color]="getColors(i, 'b')">
+                                        <td class="text-name"><span [innerText]="client.client.name"></span></td>
+                                        <td class="text-center"><span
+                                                [innerText]="client.currentMonthUnits.ft|number"></span></td>
+                                        <td class="text-center"><span
+                                                [innerText]="client.currentMonthUnits.pages|number"></span></td>
+                                        <td class="text-center"><span
+                                                [innerText]="client.currentMonthUnits.ft|number"></span></td>
+                                        <td class="text-center"><span
+                                                [innerText]="client.currentMonthUnits.pages|number"></span></td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-footer__select small">
+                            <span>Showing</span>
+                            <select (change)="fetchData()" [(ngModel)]="size" [disabled]="loading" name="size"
+                                id="size">
+                                <option value="25">25</option>
+                                <option value="250">250</option>
+                                <option value="500">500</option>
+                            </select>
+                            <span>of {{list.length}} entries</span>
+                        </div>
+                        <ngb-pagination [collectionSize]="total" [(page)]="page" [boundaryLinks]="true"
+                            [disabled]="loading" size="sm"></ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'teams'">
+            <div class="d-flex">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <div class="card-header__datepicker">
+
+                            <div class="input-group input-group-sm ml-auto">
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker" autocomplete="off"
+                                        placeholder="Start Date" [(ngModel)]="fromDate" name="fromDate" id="fromDate"
+                                        [maxDate]="toDate ?? {year:9999, month: 0, day: 0}" ngbDatepicker
+                                        #sd="ngbDatepicker" (click)="sd.open()">
+                                    <input type="text" class="form-control datepicker" autocomplete="off"
+                                        placeholder="End Date" [(ngModel)]="toDate" name="toDate" id="toDate"
+                                        [minDate]="fromDate ?? {year:0, month: 0, day: 0}" ngbDatepicker
+                                        #ed="ngbDatepicker" (click)="ed.open()">
+                                    <span class="input-group-text datepicker__icon pointer"
+                                        (click)="fetchData()"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- <div class="card-header__search ms-auto">
+                            <input type="search" [(ngModel)]="search" name="search" [disabled]="loading"
+                                autocomplete="off" placeholder="Search..." (keyup.enter)="fetchData()"
+                                (change)="search === '' ? fetchData() : ''">
+                        </div> -->
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Teams</th>
+                                    <ng-container *ngFor="let client of report.clientsList">
+                                        <th class="text-center"><span [innerText]="client.name"></span></th>
+                                    </ng-container>
+                                    <th class="text-center">total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngFor="let team of report.teamsList; let i = index;">
+                                    <tr [style.background-color]="getColors(i, 'a')">
+                                        <td><span [innerText]="team.name"></span></td>
+                                        <ng-container *ngFor="let client of report.clientsList; let j = index;">
+                                            <td class="text-center" [style.background-color]="getColors(j, 'b')"><span
+                                                    [innerText]="report.getClientTeamUnits(team, client)|number"></span>
+                                            </td>
+                                        </ng-container>
+                                        <td class="text-center"
+                                            [innerText]="report.getClientTeamUnitsTotal(team)|number">
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-footer__select small">
+                            <span>Showing</span>
+                            <select (change)="fetchData()" [(ngModel)]="size" [disabled]="loading" name="size"
+                                id="size">
+                                <option value="25">25</option>
+                                <option value="250">250</option>
+                                <option value="500">500</option>
+                            </select>
+                            <span>of {{list.length}} entries</span>
+                        </div>
+                        <ngb-pagination [collectionSize]="total" [(page)]="page" [boundaryLinks]="true"
+                            [disabled]="loading" size="sm"></ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'members'">
+            <div class="d-flex">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <div class="card-header__datepicker">
+
+                            <div class="input-group input-group-sm ml-auto">
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker" autocomplete="off"
+                                        placeholder="Start Date" [(ngModel)]="fromDate" name="fromDate" id="fromDate"
+                                        [maxDate]="toDate ?? {year:9999, month: 0, day: 0}" ngbDatepicker
+                                        #sd="ngbDatepicker" (click)="sd.open()">
+                                    <input type="text" class="form-control datepicker" autocomplete="off"
+                                        placeholder="End Date" [(ngModel)]="toDate" name="toDate" id="toDate"
+                                        [minDate]="fromDate ?? {year:0, month: 0, day: 0}" ngbDatepicker
+                                        #ed="ngbDatepicker" (click)="ed.open()">
+                                    <span class="input-group-text datepicker__icon pointer"
+                                        (click)="fetchData()"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- <div class="card-header__search ms-auto">
+                            <input type="search" [(ngModel)]="search" name="search" [disabled]="loading"
+                                autocomplete="off" placeholder="Search..." (keyup.enter)="fetchData()"
+                                (change)="search === '' ? fetchData() : ''">
+                        </div> -->
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Members Performance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="chart-wrapper">
+                                            <canvas baseChart [data]="report.barChartData"
+                                                [options]="report.barChartOptions" [plugins]="report.barChartPlugins"
+                                                [legend]="report.barChartLegend" [type]="'bar'"
+                                                style="height: 16rem; width: 100%;">
+                                            </canvas>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-footer__select small">
+                            <span>Showing</span>
+                            <select (change)="fetchData()" [(ngModel)]="size" [disabled]="loading" name="size"
+                                id="size">
+                                <option value="25">25</option>
+                                <option value="250">250</option>
+                                <option value="500">500</option>
+                            </select>
+                            <span>of {{list.length}} entries</span>
+                        </div>
+                        <ngb-pagination [collectionSize]="total" [(page)]="page" [boundaryLinks]="true"
+                            [disabled]="loading" size="sm"></ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+</ng-template>

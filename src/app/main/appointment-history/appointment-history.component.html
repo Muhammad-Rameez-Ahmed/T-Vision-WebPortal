@@ -1,0 +1,100 @@
+<div class="d-lg-flex justify-content-end align-items-center mb-3">
+    <!-- 
+    <div class="heading">
+        <h1>overview</h1>
+        <h2>projects</h2>
+    </div> -->
+
+    <!-- <button class="add-btn" (click)="show()">
+        <span class="fw-600">Add Doctor</span>
+    </button> -->
+    <!-- <mat-form-field class="p-2">
+        <mat-label>Status</mat-label>
+        <mat-select [(value)]="selectedStatus" appearance="fill">
+            <mat-option *ngFor="let item of status" [value]="item.id">
+                {{item.status}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field> -->
+    <mat-form-field class="p-2">
+        <mat-label>Select Date</mat-label>
+        <input matInput [matDatepicker]="dt" [(ngModel)]="selectedDate" [min]="selectedStatus !== 3 ? minDate : ''"
+            [max]="selectedStatus === 3 ? minDate : ''">
+        <mat-datepicker-toggle matSuffix [for]="dt"></mat-datepicker-toggle>
+        <mat-datepicker #dt></mat-datepicker>
+    </mat-form-field>
+
+    <button class="filter-btn" (click)="show()">Filter
+    </button>
+</div>
+<div class="card">
+    <div class="card-header">
+        Appointments
+
+        <!-- <input type="date" class="date"> -->
+    </div>
+    <div class="card-body">
+
+        <div *ngIf="showNO" class="d-flex justify-content-center">
+            <div class="name text-muted h-6">No Appointment Available</div>
+        </div>
+        <div class="p-2 mt-2" *ngIf="!showNO">
+            <div class="row align-items-start" *ngFor="let appointments of modellist">
+                <ng-container *ngIf="appointments.appointmentPatient?.patientNhsId">
+                    <div class="col-sm-1 p-0">
+                        <span class="align-top time">{{appointments.appointmentSession.sessionStartTime}} -
+                            {{appointments.appointmentSession.sessionEndTime}}</span>
+                    </div>
+                    <div class="col-sm-11 p-0 border-top mt-2">
+                        <!-- <button type="button" class="pill-btn" *ngIf="appointments.booked">Appointments
+                        Open+</button> -->
+                        <div class="w-100 cursor">
+                            <div class="card-sm mt-2 mb-3 mr-2" (click)="openDetails(appointments)">
+                                <div class="id p-2">{{'NHS ID: '+appointments.appointmentPatient.patientNhsId}}</div>
+                                <div class="ml-2 d-lg-flex justify-content-between align-items-center">
+                                    <div class=" d-lg-flex justify-content-between gap-4 align-items-center">
+                                        <img class="image-size profile-image-small mx-md-auto rounded-circle p-2"
+                                            [src]="appointments.appointmentPatient.patientUserProfile ? appointments.appointmentPatient.patientUserProfile: '../../../assets/images/Group 3465065.png'"
+                                            alt="">
+                                        <div>
+                                            <div class="name text-muted h-6">
+                                                {{appointments.appointmentPatient.patientUserName+"
+                                                "+appointments.appointmentPatient.patientLastName}}</div>
+                                            <div class="des">{{'Reason: '+appointments.appointmentSpecialDescription}}
+                                            </div>
+                                            <div class="des">{{'Date: ' + appointments.appointmentDate}}</div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="">
+                                    <div class="name text-muted h-6">{{appointments.appointmentPatient.patientUserName+"
+                                        "+appointments.appointmentPatient.patientLastName}}</div>
+                                    <div class="des">{{'Reason: '+appointments.appointmentSpecialDescription}}</div>
+                                </div> -->
+                                    <div class="d-flex justify-content-lg-between gap-5">
+                                        <div class="p-2">
+
+                                            <span *ngIf="appointments.appointmentStatus === 2"
+                                                class="badge badge-danger">Canceled</span>
+                                            <span *ngIf="appointments.appointmentStatus === 3"
+                                                class="badge badge-success">Completed</span>
+                                            <span *ngIf="appointments.appointmentStatus === 0"
+                                                class="badge badge-primary">Pending</span>
+
+                                            <span *ngIf="appointments.appointmentStatus === 1"
+                                                class="badge badge-warning">Walk-In</span>
+                                        </div>
+                                        <!-- <div class=" p-0" *ngIf="appointments.appointmentStatus === 0">
+                                        <img class="check" (click)="update(appointments.appointmentId)"
+                                            src="../../../assets/images/close.png" alt="">
+                                    </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

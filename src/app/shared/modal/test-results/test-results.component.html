@@ -1,0 +1,95 @@
+<div class="card">
+    <div class="card-header">Test Result</div>
+    <div class="card-body m-2">
+
+        <div class="mb-4">
+
+            <label class="mhs">Title: {{data.testName}}</label>
+            <button class="add-btn-submit" *ngIf="data.testResult" (click)="export()">Export</button>
+        </div>
+        <div class="row  p-2 mx-2 border bolder sh">
+            <div class="col-md-1">
+                <mat-label>Sr</mat-label>
+            </div>
+            <div class="col-md-4">
+                <mat-label>Description</mat-label>
+            </div>
+            <div class="col-md-3">
+                <mat-label>Result</mat-label>
+            </div>
+            <div class="col-md-3">
+                <mat-label>Range</mat-label>
+            </div>
+        </div>
+        <ng-container *ngIf="data.testResult">
+
+            <ng-container *ngFor="let item of display; let i = index">
+                <div class="row p-2 mx-2  border-bottom up-size">
+                    <div class="col-md-1">
+                        {{i+1}}
+                    </div>
+                    <div class="col-md-4">
+                        {{item.Description}}
+                    </div>
+                    <div class="col-md-3">
+                        {{item?.Result}}
+                    </div>
+                    <div class="col-md-3">
+                        {{item?.NormalRange}}
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!data.testResult">
+            <form>
+                <ng-container *ngFor="let item of recordList; let i = index;">
+
+                    <div class="row p-2 m-2 border-bottom">
+
+                        <div class=" col-md-1  d-flex align-items-center">
+                            {{i+1}}
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field class="example-full-width" floatLabel="never">
+                                <input matInput [(ngModel)]="item.Description" placeholder="Description"
+                                    [name]="'des_' + i" autocomplete="off">
+                            </mat-form-field>
+
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field class="example-full-width" floatLabel="never">
+                                <input matInput [(ngModel)]="item.Result" placeholder="Result" [name]="'res_' + i"
+                                    autocomplete="off">
+                            </mat-form-field>
+
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field class="example-full-width" floatLabel="never">
+                                <input matInput [(ngModel)]="item.NormalRange" placeholder="Range" [name]="'ran_' + i"
+                                    autocomplete="off">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center justify-content-center"
+                            *ngIf="recordList.length > 1">
+                            <div class="cursor" (click)="remove(i)">x</div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <div class=" add-more m-2" (click)="add()">
+                    <div class="droplet">+</div>
+                </div>
+            </form>
+            <div class="p-1">
+                <button class="add-btn-submit" type="submit" [disabled]="loading " (click)="submit()">
+
+                    <ng-container *ngIf=" loading">
+                        <span class="spinner-border spinner-border-sm me-2" role="status " aria-hidden="true"></span>
+                    </ng-container>
+                    <span class=" fw-600" [innerText]="loading ? 'Submitting' : 'Submit'">Submit</span>
+                </button>
+            </div>
+
+        </ng-container>
+    </div>
+</div>

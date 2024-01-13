@@ -1,0 +1,109 @@
+<div class="d-flex gap-2">
+    <mat-form-field class="">
+
+        <mat-label>Patients</mat-label>
+        <mat-select [(value)]="this.id" appearance="fill" (valueChange)="getPatientTest()">
+            <mat-option [value]="0">All</mat-option>
+            <mat-option *ngFor="let item of modellist" [value]="item.patientId">
+                {{item?.patientUserName +' '+ item?.patientLastName }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="">
+
+        <mat-label>Recommended On</mat-label>
+
+        <input matInput type="date" name="startTime" [(ngModel)]="this.date" (change)="getPatientTest()">
+    </mat-form-field>
+</div>
+
+
+
+<div class="d-flex justify-content-center">
+    <div *ngIf="notfound" class="name">No Record Found</div>
+    <div *ngIf="loading" class="name"><span class="spinner-border spinner-border-sm me-2" role="status "
+            aria-hidden="true"></span> Loading...</div>
+</div>
+<div class="d-flex" *ngIf="!loading && !notfound">
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Test</th>
+                        <th>Recommended to</th>
+                        <th>Recommended By</th>
+                        <th>recommended on</th>
+                        <th class="text-center">Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of testList; let i = index;">
+                        <tr>
+                            <td><span [innerText]="i +1+((size*page)-size)"></span></td>
+                            <td><span [innerText]="item.testName"></span></td>
+                            <td>
+                                <span
+                                    [innerText]="item.appointmentId.appointmentPatient.patientUserName + ' ' + item.appointmentId.appointmentPatient.patientLastName"></span>
+                            </td>
+                            <td>
+                                <span [innerText]="item.testRecommendedBy.doctorName"></span>
+                            </td>
+                            <td><span [innerText]="item.appointmentId.appointmentDate"></span></td>
+
+                            <td class="text-center">
+                                <img class="cursor"
+                                    [src]="item.testResult ? '../../../assets/images/Show.png' : '../../../assets/images/Edit.png'"
+                                    alt="" (click)="updateTest(item)">
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <!-- <ng-container *ngIf="list.length === 0 && !loading">
+                        <tr class="loading border-bottom-0">
+                            <td colspan="7" class="border-bottom-0">
+                                <div class="d-flex justify-content-center my-5">
+                                    <h5 class="text-uppercase text-muted">
+                                        no record found!
+                                    </h5>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container> -->
+                    <!-- <ng-container *ngIf="loading">
+                        <tr class="loading border-bottom-0">
+                            <td colspan="6" class="border-bottom-0">
+                                <div class="d-flex justify-content-center my-5">
+                                    <div class="spinner-border" role="status"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container> -->
+                </tbody>
+            </table>
+        </div>
+        <!-- <div class="card-footer">
+            <div class="card-footer__select small">
+                <select class="select-page" name="size" id="size">
+                    <option value="25">25</option>
+                    <option value="250">250</option>
+                    <option value="500">500</option>
+                </select>
+                <span>Show on page</span>
+            </div> -->
+        <!-- <ngb-pagination [collectionSize]="{{doctorslist.length()}}" [(page)]="{{'1'}}" [pageSize]="{{'5'}}"
+                [boundaryLinks]="true" size="sm">
+            </ngb-pagination> -->
+        <!-- </div> -->
+    </div>
+
+</div>
+
+
+<div class="d-flex justify-content-center mt-2" *ngIf="!loading && !notfound">
+    <ngb-pagination [collectionSize]="list.length" [(page)]="page" [maxSize]="5" [rotate]="true" [pageSize]="size"
+        [boundaryLinks]="true" size="sm" (pageChange)=" field = 'index'; pageChange($event)">
+    </ngb-pagination>
+</div>

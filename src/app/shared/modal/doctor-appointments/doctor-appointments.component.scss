@@ -1,0 +1,185 @@
+.card {
+
+    min-height: 40rem !important;
+    overflow: hidden !important;
+
+    .card-body {
+        overflow-x: hidden !important;
+        overflow-y: overlay !important;
+    }
+
+    .card-header {
+        font-weight: 500 !important;
+    }
+}
+
+.appointment {
+    // width: 33.33% !important;
+    min-height: 50vh !important;
+    overflow: hidden;
+}
+
+.head {
+    font-weight: 500 !important;
+    font-size: 14px;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+
+    color: #000000;
+}
+
+
+::ng-deep .nav-tabs .nav-link.active,
+.nav-tabs .nav-link.hover,
+.nav-tabs .nav-item.show .nav-link {
+    color: var(--bs-nav-tabs-link-active-color);
+    background-color: var(--bs-nav-tabs-link-active-bg);
+    border-color: var(--bs-nav-tabs-link-active-border-color);
+    border-bottom: 2px solid #0D67B5 !important;
+    border-top: none !important;
+    border-right: none !important;
+    border-left: none !important;
+}
+
+::ng-deep .nav-link {
+    display: block;
+    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    // font-size: var(--bs-nav-link-font-size);
+    font-size: 14px;
+    font-weight: var(--bs-nav-link-font-weight);
+    color: black;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+
+    &:hover {
+        // background: #000000;
+        border-bottom: 2px solid #0D67B5 !important;
+        border-top: none !important;
+        border-right: none !important;
+        border-left: none !important;
+    }
+}
+
+
+
+// ::ng-deep .nav-tabs .nav-link.active,
+// .nav-tabs .nav-item.show .nav-link {
+//     border: none;
+//     padding: 0.5rem 1rem 0.5rem 1rem;
+
+// }
+
+
+
+
+::ng-deep .nav-tabs {
+    --bs-nav-tabs-border-width: 1px;
+    --bs-nav-tabs-border-color: #dee2e6;
+    --bs-nav-tabs-border-radius: none;
+    --bs-nav-tabs-link-hover-border-color: transparent transparent #0D67B5 transparent !important;
+    --bs-nav-tabs-link-active-color: #495057;
+    --bs-nav-tabs-link-active-bg: #fff;
+    // --bs-nav-tabs-link-active-border-color: #dee2e6 #dee2e6 #fff;
+    border-bottom: var(--bs-nav-tabs-border-width) solid var(--bs-nav-tabs-border-color);
+
+    box-shadow: 1px 3px 7px rgb(0 0 0 / 10%) !important;
+}
+
+.records {
+    padding-left: 0% !important;
+    min-height: 50vh !important;
+}
+
+.stick {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background-color:
+        #fff;
+}
+
+
+.date {
+    border: none;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 25px;
+    /* identical to box height, or 156% */
+    width: 7.5rem;
+
+    color: #0D67B5;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    // filter: invert(100%);
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='7' height='5' viewBox='0 0 7 5' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M0.684675 0.25H6.31311C6.70249 0.25 6.89718 0.837891 6.62155 1.18242L3.80843 4.70156C3.6378 4.91484 3.35999 4.91484 3.18936 4.70156L0.376238 1.18242C0.100613 0.837891 0.2953 0.25 0.684675 0.25Z' fill='%230D67B5'/%3e%3c/svg%3e ");
+    background-position: left 0rem center;
+    background-size: 0.5rem;
+}
+
+input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+}
+
+::ng-deep .modal-sm {
+    --bs-modal-width: 450px !important;
+}
+
+.pill-btn {
+    color: #7D8FB3;
+
+    background: #F7F8FA;
+    border: none;
+    // border-radius;
+    border-radius: 25px;
+    font-size: 10px;
+    padding: 0.5rem 1rem;
+    font-weight: 750;
+    margin-bottom: 1vh;
+    // font-family: Roboto;
+    // font-style: normal;
+}
+
+
+.name {
+    // font-family: sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+
+
+    /* Grey Blue 60 */
+
+    color: #6B7A99;
+}
+
+.des {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 16px;
+    /* identical to box height */
+
+
+    color: #9B9B9B;
+
+}
+
+
+.card-sm {
+    height: 100%;
+    width: 95%;
+    background: #fff;
+
+    box-shadow: 0px 3px 2px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.id {
+    font-size: 10px;
+    font-weight: 700;
+    padding-bottom: 0% !important;
+    color: #6B7A99;
+}

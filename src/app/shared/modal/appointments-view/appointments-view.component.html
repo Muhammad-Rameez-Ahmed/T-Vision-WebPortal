@@ -1,0 +1,178 @@
+<div class="card">
+    <!-- 
+    <ul ngbNav #nav="ngbNav" class="nav-tabs m-0">
+        <li [ngbNavItem]="1">
+            <a ngbNavLink class="card-header border-bottom">
+                Details
+            </a>
+            <ng-template ngbNavContent>
+
+                <app-doctor-details [model]="model"></app-doctor-details> -->
+    <!-- <div class="p-4">
+                    <div class="mhs">
+                        <img class="profiler" src="{{image? image: '../../../assets/images/Ellipse 5.png'}}" alt="">
+                        <input class="mt-2" type="file" hero nbInput name="file1" id="userimage" accept="image/*"
+                            (change)="InputImage($event)" hidden required />
+
+                    </div>
+
+                    <label class="mhs pb-2">Doctor Profile Picture</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Name</mat-label>
+                                <input matInput placeholder="John" [(ngModel)]="model.doctorName" name="firstname"
+                                    required disabled>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Category</mat-label>
+                                <mat-select [(value)]="model.doctorCategory" appearance="fill" required disabled>
+                                    <mat-option *ngFor="let item of categories" [value]="item.docCategoryId">
+                                        {{item.docCategoryName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-form-field class=" example-full-width">
+                                <mat-label>Email</mat-label>
+                                <input matInput autocomplete="current-password webauthn"
+                                    [pattern]="'[^@ \t\r\n]+@[^@ . \t\r\n]+\.[^@. \t\r\n][^@ \t\r\n]+'"
+                                    placeholder="john@gmail.com" [(ngModel)]="model.doctorEmail" name="emailnew"
+                                    #email="ngModel" required disabled>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-8">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Contact</mat-label>
+                                <input matInput [pattern]="'([0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9])'"
+                                    placeholder="0213123123" [(ngModel)]="model.doctorContact" name="contact" required
+                                    disabled>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Gender</mat-label>
+                                <mat-select [(value)]="model.doctorGender" appearance="fill" disabled required>
+                                    <mat-option *ngFor="let item of gender" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div> -->
+    <!-- </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+            <a ngbNavLink class="card-header border-bottom">
+                Appointments
+            </a>
+            <ng-template ngbNavContent> -->
+    <div class="d-lg-flex justify-content-end align-items-center pb-lg-0 p-2 filter-sticky border-bottom shadow-sm">
+        <mat-form-field class="p-2 w-100">
+            <mat-label>Status</mat-label>
+            <mat-select [(value)]="selectedStatus" appearance="fill">
+                <mat-option *ngFor="let item of status" [value]="item.id">
+                    {{item.status}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="p-2 w-100">
+            <mat-label>Select Date</mat-label>
+            <input matInput [matDatepicker]="dt" [(ngModel)]="selectedDate" [min]="minDate">
+            <mat-datepicker-toggle matSuffix [for]="dt"></mat-datepicker-toggle>
+            <mat-datepicker #dt></mat-datepicker>
+        </mat-form-field>
+
+        <button class="filter-btn w-100" (click)="show()">Filter
+        </button>
+    </div>
+    <div *ngIf="showNO" class="d-flex justify-content-center">
+        <div class="name text-muted h-6">No Appointment Available</div>
+    </div>
+    <div class="p-2 mt-2">
+        <div class="row">
+            <div class=" align-items-end col-lg-6 border-start" *ngFor="let appointments of modellist">
+                <div class="">
+                    <div class="p-0">
+                        <span class="align-bottom time">{{appointments.appointmentSession.sessionStartTime}}
+                            -
+                            {{appointments.appointmentSession.sessionEndTime}}</span>
+                    </div>
+                    <div class="p-0 mb-2 ">
+                        <div class="w-100">
+                            <div class="card-sm mb-lg-3 mr-lg-2 m-2 pb-3">
+                                <div class="id p-2">{{'NHSID:'+
+                                    appointments.appointmentPatient.patientNhsId}}
+                                </div>
+                                <div class="ml-2 row align-items-center">
+                                    <div class="col-3 d-flex">
+                                        <img class="image-size profile-image-small mx-md-auto rounded-circle p-2"
+                                            [src]="appointments.appointmentPatient.patientUserProfile ? appointments.appointmentPatient.patientUserProfile: '../../../assets/images/Group 3465065.png'"
+                                            alt="">
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="name text-muted h-6">
+                                            {{appointments.appointmentPatient.patientUserName+"
+                                            "+appointments.appointmentPatient.patientLastName}}</div>
+                                        <div class="des">{{'Reason: '
+                                            +appointments.appointmentSpecialDescription}}
+                                        </div>
+                                        <div class=" p-0">
+
+                                            <span *ngIf="appointments.appointmentStatus === 2"
+                                                class="badge badge-danger">Canceled</span>
+                                            <span *ngIf="appointments.appointmentStatus === 3"
+                                                class="badge badge-success">Completed</span>
+                                            <span *ngIf="appointments.appointmentStatus === 0"
+                                                class="badge badge-primary">Pending</span>
+
+                                            <span *ngIf="appointments.appointmentStatus === 1"
+                                                class="badge badge-warning">Walk-In</span>
+                                        </div>
+
+                                        <ng-container *ngIf="appointments.appointmentStatus === 0">
+                                            <img class="check cursor"
+                                                (click)="update(appointments.appointmentId,'2','Canacled')"
+                                                src="../../../assets/images/cancel.png" alt="">
+                                            <img class="check cursor"
+                                                (click)="update(appointments.appointmentId,'3','Completed')"
+                                                src="../../../assets/images/check.png" alt="">
+                                            <img class="check cursor"
+                                                (click)="update(appointments.appointmentId,'1','Walk-In')"
+                                                src="../../../assets/images/walk-in.png" alt="">
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- </ng-template>
+        </li>
+    </ul>
+
+
+
+
+    <div class="card-body p-0">
+
+
+        <div [ngbNavOutlet]="nav" class=""></div>
+    </div>
+-->
+</div>

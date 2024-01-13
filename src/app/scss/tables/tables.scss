@@ -1,0 +1,96 @@
+.table tbody td.text-name {
+    width: 40% !important;
+}
+
+
+// .card-body {
+
+
+.card {
+    display: block !important;
+    overflow: auto;
+    // height: 100% !important;
+    // min-height: fit-content !important;
+    // min-height: calc(100vh - 13.7rem);
+    height: fit-content !important;
+    min-height: fit-content !important;
+    border-radius: 10px !important;
+
+    .card-body {
+        height: auto !important;
+        overflow-x: hidden !important;
+        // border-radius: 10px !important;
+    }
+}
+
+// }
+
+// .card {}
+
+.table {
+    // width: 99.5% !important;
+    // display: flex;
+    font-family: 'work sans';
+
+    thead {
+        overflow: hidden;
+        /* background-color: #fbfbfb; */
+        background-color: white !important;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        height: 3rem !important;
+        box-shadow: 1px 3px 7px rgb(0 0 0 / 10%) !important;
+
+        th {
+            font-weight: 600;
+            // color: #7D8FB3;
+
+            font-size: 0.9rem !important;
+            // background: #F7F8FA;
+            color: black;
+            // color: #0D67B5;
+            // background-color: #F5F3FF;
+        }
+    }
+
+    tbody {
+
+        overflow-y: overlay !important;
+
+        tr {
+            border-radius: 8px;
+            transition: all .2s ease-in-out;
+            height: 3rem !important;
+
+            td {
+                font-size: 0.9rem !important;
+                font-weight: 600;
+            }
+
+            &:hover {
+                // width: 110% !important;
+                // background-color: aqua !important;
+                // background-color: #F5F3FF !important;
+                background: #F7F8FA !important;
+                transform: scale(1.01);
+                border: 1px soild #0D67B5 !important;
+
+                box-shadow: 1px 4px 7px rgb(0 0 0 / 10%);
+            }
+        }
+    }
+}
+
+
+
+
+@media screen and (max-width: 800px) {
+    .card {
+        .card-body {
+            height: auto !important;
+            overflow-x: scroll !important;
+            // border-radius: 10px !important;
+        }
+    }
+}

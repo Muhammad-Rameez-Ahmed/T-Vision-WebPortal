@@ -1,0 +1,140 @@
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="appointmentForm">
+            <div class="row">
+                <div class="col-lg-4 mb-2">
+                    <ngb-datepicker class="ngb-date w-100 p-0" #dp formControlName="date"
+                        (navigate)="date = $event.next" navigation="arrows" [maxDate]="maxDate" [minDate]="minDate">
+                    </ngb-datepicker>
+
+
+                </div>
+                <div class="col-lg-8 mb-2 pl-0">
+                    <div class="card-modal ngb-date p-2">
+                        <div class="card-header-modal pb-2 pt-2">
+                            <div class="d-flex align-items-center justify-content-start gap-4">
+                                <div class="">
+                                    <img class="image-size profile-image-small mx-md-auto rounded-circle"
+                                        [src]="'../../../../assets/images/Ellipse 5.png'" alt="">
+                                </div>
+
+                                <div class="">
+                                    <div class="name">{{data.slotDoctorId.doctorName}}</div>
+                                    <div class="details">{{data.slotDoctorId.doctorCategory.docCategoryName +' - '+
+                                        data.slotDoctorId.doctorBelongsTo.siteName}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body-modal pt-3 max">
+                            <div class="date mb-2">
+                                4th September availablity
+                            </div>
+                            <div class="max">
+                                <div class="">
+                                    <div class="">
+                                        <div class="btn-group">
+                                            <ng-container *ngFor="let item of data.sessions">
+                                                <button class="btn btn-secondary"
+                                                    [class.active]="isActive(item.sessionStartTime)"
+                                                    (click)="setActive(item.sessionStartTime)" type="button"
+                                                    [disabled]="item.sessionDetail">{{item.sessionStartTime}}</button>
+                                            </ng-container>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-lg-4">
+
+                </div>
+                <div class="col-lg-8">
+                    <div class="d-flex justify-content-between">
+                        <div class="">
+                            <div class="patient">Patient Details</div>
+                        </div>
+                        <div class="">
+                            <div class="modal-search">
+
+                                <ng-select [items]="list" bindLabel="patientNhsId" bindValue="patientId"
+                                    placeholder="Search by NHS ID" formControlName="patient"
+                                    (change)="selectedPatient($event)">
+
+                                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                                        <div>
+                                            <img height="40" width="40"
+                                                class="image-size profile-image-small mx-md-auto rounded-circle"
+                                                [src]="item.patientUserProfile ? item.patientUserProfile : '../../../../assets/images/Ellipse 5.png'" />
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="label">NHS ID</div>
+                                                <div class="name">{{item.patientNhsId}}</div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="label">Name</div>
+                                                <div class="name">{{item.patientUserName + ' ' + item.patientLastName}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </ng-select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-patient p-3">
+                        <ng-container *ngIf="patientDetails">
+                            <div class="d-flex align-items-center justify-content-start gap-4">
+                                <div class="">
+                                    <img class="profile image-size profile-image-small mx-md-auto rounded-circle"
+                                        [src]="patientDetails.patientUserProfile ? patientDetails.patientUserProfile : '../../../../assets/images/Ellipse 5.png'"
+                                        alt="">
+                                </div>
+
+                                <div class="">
+                                    <div class="patientName">{{patientDetails.patientUserName + ' ' +
+                                        patientDetails.patientLastName}}</div>
+                                    <div class="patientNum">{{patientDetails.patientNhsId}}</div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between pt-4">
+                                <div class="">
+                                    <div class="label">Name</div>
+                                    <div class="name">{{patientDetails.patientUserName}}</div>
+                                </div>
+                                <div class=" p-0">
+                                    <div class="label">Age</div>
+                                    <div class="name">{{patientDetails.patientUserAge + ' Years'}}</div>
+                                </div>
+                                <div class=" p-0">
+                                    <div class="label">Gender</div>
+                                    <div class="name" *ngIf="patientDetails.patientUserGender === 1">Male</div>
+                                    <div class="name" *ngIf="patientDetails.patientUserGender === 0">Female</div>
+                                </div>
+                                <div class="col-md-3 p-0">
+                                </div>
+                            </div>
+
+                        </ng-container>
+                        <ng-container *ngIf="!patientDetails">
+
+                            <div class="d-flex justify-content-center">
+                                <div class="patientNum">No Patient Selected. Please Select One.</div>
+                            </div>
+                        </ng-container>
+
+                        <textarea class="form-control text-area mt-2" id="exampleFormControlTextarea1" rows="3"
+                            placeholder="Describe the problem" formControlName="reason"></textarea>
+                        <button class="submit" (click)="submit()" [disabled]="appointmentForm.invalid || disabled">Book
+                            Appointment</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

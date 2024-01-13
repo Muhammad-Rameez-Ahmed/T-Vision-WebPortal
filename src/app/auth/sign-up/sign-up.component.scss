@@ -1,0 +1,213 @@
+.card {
+    margin-top: 6rem;
+    min-height: 31rem;
+    width: 22rem;
+
+    .card-body {
+        overflow: hidden;
+    }
+}
+
+.round {
+    border-radius: 1rem;
+}
+
+::ng-deep .mat-horizontal-content-container {
+    padding-bottom: 0rem !important;
+}
+
+.add-image {
+    border: 6px solid #0D67B5;
+    color: #0D67B5;
+    font-size: 3rem;
+    border-radius: 100%;
+    width: 5rem;
+    height: 5rem;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.profile-image {
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+::ng-deep form {
+    margin-block: 2rem;
+
+
+    label {
+        &.form-label {
+            color: #868e96;
+            font-size: 0.78rem !important;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+    }
+
+
+    input.form-control,
+    select.form-select,
+    textarea.form-control,
+    .mat-select.form-control {
+        height: auto;
+        // padding: 0.4375rem 0.75rem !important;
+        padding: 0.78rem !important;
+        font-size: 0.78rem !important;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        border: 1px solid #e1e5eb;
+        font-weight: 300;
+        border-radius: 0.25rem;
+        box-shadow: none;
+    }
+}
+
+
+
+img {
+    display: block;
+    max-height: 6rem;
+    object-fit: fill;
+    padding: 0px;
+    background-color: transparent;
+    object-position: center;
+    border-radius: 10rem;
+    width: auto;
+    // aspect-ratio: 1/4;
+    height: 8rem;
+    // min-height: 6rem;
+    cursor: pointer;
+    // border: 1px solid #cdcdcd;
+    // margin: 5px;
+    // 
+
+}
+
+
+.mhs {
+    // min-height: 8rem;
+    display: flex;
+    justify-content: center;
+}
+
+
+.design {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    background-color: #0D67B5;
+    border-radius: 1rem 1rem 70% 70%;
+    border: 0px;
+}
+
+.password {
+    &__input {
+        padding-right: 3.5rem;
+    }
+
+    &__visibility {
+        cursor: pointer;
+        height: 1.2rem;
+        object-fit: contain;
+        position: absolute;
+        right: 1.5rem;
+        top: 58%;
+        transition: opacity 0.3s ease;
+        user-select: none;
+        width: 1.2rem;
+        -webkit-user-select: none;
+    }
+}
+
+.brand {
+    display: block;
+    height: 5rem;
+    margin: 0 auto 1rem;
+    object-fit: cover;
+    width: auto;
+}
+
+
+.nunito {
+    font-family: 'Nunito Sans';
+    font-weight: 800;
+}
+
+
+
+@media screen and (max-width: 992px) {
+
+    .round {
+        border-radius: 0rem;
+    }
+
+    .card {
+
+        margin: 0;
+        min-height: 100vh !important;
+        height: 100vh !important;
+        width: 100vw;
+        border: none;
+
+        .design {
+            padding-top: 2rem;
+            border-radius: 0rem 0rem 70% 70%;
+
+        }
+    }
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
+.type {
+    cursor: pointer;
+
+    &:hover {
+
+        .type-box {
+            background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.36), rgba(13, 103, 181, 0.8));
+
+            svg {
+                transform: scale(1.05);
+            }
+        }
+
+    }
+}
+
+.clicked {
+
+    background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.36), rgba(13, 103, 181, 0.8));
+}
+
+
+.form-control {
+    padding: 1rem;
+}
+
+.line {
+    border-left: 1px solid grey;
+    height: 6rem;
+    margin: 1rem;
+}
+
+.btn {
+    padding: 1rem;
+
+}
+
+
+.btn-white {
+    &:hover {
+        background-color: #0D67B5;
+        color: white;
+    }
+}

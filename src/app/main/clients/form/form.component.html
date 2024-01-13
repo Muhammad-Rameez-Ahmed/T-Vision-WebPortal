@@ -1,0 +1,79 @@
+<div class="form-container">
+    <div class="row g-0">
+        <div class="col-md-6 offset-md-3 border-bottom mt-4 mb-3 pb-3 px-0">
+            <div class="heading">
+                <img src="./assets/images/utilities/back.png" alt="back" [routerLink]="'/clients'">
+                <h1>overview / clients</h1>
+                <h2>{{formType}} client</h2>
+            </div>
+        </div>
+        <div class="col-md-6 offset-md-3 mb-5 pb-3">
+            <form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit()">
+                <fieldset [disabled]="loading">
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="model.name" name="name"
+                                id="name" maxlength="32" placeholder="Enter full name here" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" [(ngModel)]="model.email" name="email" id="email"
+                                maxlength="32" [pattern]="'[^@ \t\r\n]+@[^@ . \t\r\n]+\.[^@. \t\r\n][^@ \t\r\n]+'"
+                                placeholder="Enter email address here">
+                        </div>
+
+                        <div class="col-md-12 mt-4">
+                            <span class="x-small border-top d-block w-100 pt-3">
+                                Please provide contact person's information of this client.
+                            </span>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="contact.name" class="form-label">Contact Person</label>
+                            <div class="input-group pointer mb-1">
+                                <input type="text" class="form-control" [(ngModel)]="model.contact.name"
+                                    name="contact.name" id="contact.name" maxlength="32"
+                                    placeholder="Enter full name here">
+                                <input type="tel" class="form-control" [(ngModel)]="model.contact.phone"
+                                    name="contact.phone" id="contact.phone" minlength="8" maxlength="16"
+                                    placeholder="03XXXXXXXXX" (keypress)="isNumber($event)">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mt-4">
+                            <span class="x-small border-top d-block w-100 pt-3">
+                                Here {{formType}} client will be assigned to designated status.<br />
+                                By default new client will be set as active status.
+                            </span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="status" class="form-label">Status</label>
+                            <ng-select [items]="statusList" bindLabel="name" [(ngModel)]="model.status" name="status"
+                                id="status" placeholder="Select status from dropdown" [disabled]="loading" required>
+                            </ng-select>
+                        </div>
+
+                        <div class="col-md-12 mt-5">
+                            <div class="d-flex justify-content-end gap-3">
+                                <button type="button" class="btn btn-link text-dark text-decoration-none fw-600"
+                                    [class.d-none]="formType === 'update'" [disabled]="form.untouched"
+                                    (click)="onReset(form)">Reset</button>
+                                <button type="submit" class="btn btn-dark px-4" [disabled]="form.invalid || loading">
+                                    <ng-container *ngIf="loading">
+                                        <span class="spinner-border spinner-border-sm me-2" role="status "
+                                            aria-hidden="true"></span>
+                                    </ng-container>
+                                    <span [innerText]="loading ? 'Loading...' : 'Continue'">Continue</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

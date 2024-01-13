@@ -1,0 +1,52 @@
+@import '../../scss/tables/tables.scss';
+@import '../../scss/paginator/paginator.scss';
+
+.table tbody td.text-name {
+    // width: 20% !important;
+    width: auto !important;
+}
+
+
+.cursor {
+    cursor: pointer;
+}
+
+img {
+    margin-left: 10px;
+}
+
+.name {
+    // font-family: sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+
+    color: #6B7A99;
+
+    /* Grey Blue 60 */
+}
+
+input {
+    font-size: .75rem;
+    line-height: 1.5;
+    color: #0D67B5;
+    background-color: #F5F3FF;
+    border: none;
+    font-weight: 500;
+    border-radius: 25rem;
+    padding: 0.4375rem 10rem 0.4375rem 0.625rem;
+    min-width: 11.25rem;
+    // background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjQ0FDRURCIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gICAgPHBhdGggZD0iTTE1LjUgMTRoLS43OWwtLjI4LS4yN0MxNS40MSAxMi41OSAxNiAxMS4xMSAxNiA5LjUgMTYgNS45MSAxMy4wOSAzIDkuNSAzUzMgNS45MSAzIDkuNSA1LjkxIDE2IDkuNSAxNmMxLjYxIDAgMy4wOS0uNTkgNC4yMy0xLjU3bC4yNy4yOHYuNzlsNSA0Ljk5TDIwLjQ5IDE5bC00Ljk5LTV6bS02IDBDNy4wMSAxNCA1IDExLjk5IDUgOS41UzcuMDEgNSA5LjUgNSAxNCA3LjAxIDE0IDkuNSAxMS45OSAxNCA5LjUgMTR6Ii8+ICAgIDxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48L3N2Zz4=);
+    background-image: url("data:image/svg+xml,%3csvg fill='%230D67B5' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3e%3cpath d='M0 0h24v24H0z' fill='none'/%3e%3c/svg%3e");
+    background-position: right 7px center;
+    background-repeat: no-repeat;
+    background-size: 1.25rem;
+}
+
+
+input::placeholder {
+    color: #0D67B5;
+    font-weight: 500;
+}

@@ -1,0 +1,99 @@
+<div class="form-container">
+    <div class="row g-0">
+        <div class="col-md-6 offset-md-3 border-bottom mt-4 mb-3 pb-3 px-0">
+            <div class="heading">
+                <img src="./assets/images/utilities/back.png" alt="back" [routerLink]="'/members'">
+                <h1>overview / members</h1>
+                <h2>{{formType}} member</h2>
+            </div>
+        </div>
+        <div class="col-md-6 offset-md-3 mb-5 pb-3">
+            <form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit()">
+                <fieldset [disabled]="loading">
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="model.name" name="name"
+                                id="name" maxlength="32" placeholder="Enter full name here" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" [(ngModel)]="model.email" name="email" id="email"
+                                maxlength="32" [pattern]="'[^@ \t\r\n]+@[^@ . \t\r\n]+\.[^@. \t\r\n][^@ \t\r\n]+'"
+                                placeholder="Enter email address here" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="tel" class="form-control" [(ngModel)]="model.phone" name="phone" id="phone"
+                                minlength="8" maxlength="16" placeholder="03XXXXXXXXX" (keypress)="isNumber($event)"
+                                required>
+                        </div>
+                        <ng-container *ngIf="formType === 'new'">
+                            <div class="col-md-6">
+                                <label for="password" class="form-label">Password</label>
+                                <div class="input-group pointer">
+                                    <input type="tel" class="form-control" [(ngModel)]="password" name="password"
+                                        id="password" [pattern]="'^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$'"
+                                        placeholder="Enter your password here" #copy required>
+                                    <span class="input-group-text copy__icon" id="password"
+                                        (click)="copyToClipboard(copy)"></span>
+                                </div>
+                                <span class="x-small fw-light fst-italic">New member is required this password to
+                                    login</span>
+                            </div>
+                        </ng-container>
+
+                        <div class="col-md-12 mt-4">
+                            <span class="x-small border-top d-block w-100 pt-3">
+                                Here {{formType}} member will be assigned to designated roles & status.<br />
+                                By default new member will be set as active status.
+                            </span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="status" class="form-label">Status</label>
+                            <ng-select [items]="statusList" bindLabel="name" [(ngModel)]="model.status" name="status"
+                                id="status" placeholder="Select status from dropdown" [disabled]="loading" required>
+                            </ng-select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="role" class="form-label">Role</label>
+                            <ng-select [items]="rolesList" bindLabel="name" [(ngModel)]="model.role" name="role"
+                                id="role" placeholder="Select role from dropdown" [disabled]="loading" required>
+                            </ng-select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="team" class="form-label">Team</label>
+                            <ng-select [items]="teamsList" bindLabel="name" [(ngModel)]="model.team" name="team"
+                                id="team" placeholder="Select team from dropdown" [loading]="optLoading[0]"
+                                [disabled]="loading" required>
+                            </ng-select>
+                            <span class="x-small fw-light fst-italic pointer" [routerLink]="'/teams/form/new'">
+                                <span class="action-link d-inline">Click here to create new team record</span>
+                            </span>
+                        </div>
+
+                        <div class="col-md-12 mt-5">
+                            <div class="d-flex justify-content-end gap-3">
+                                <button type="button" class="btn btn-link text-dark text-decoration-none fw-600"
+                                    [class.d-none]="formType === 'update'" [disabled]="form.untouched"
+                                    (click)="onReset(form)">Reset</button>
+                                <button type="submit" class="btn btn-dark px-4" [disabled]="form.invalid || loading">
+                                    <ng-container *ngIf="loading">
+                                        <span class="spinner-border spinner-border-sm me-2" role="status "
+                                            aria-hidden="true"></span>
+                                    </ng-container>
+                                    <span [innerText]="loading ? 'Loading...' : 'Continue'"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

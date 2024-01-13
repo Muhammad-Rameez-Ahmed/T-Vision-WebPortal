@@ -1,0 +1,159 @@
+<div class="d-flex justify-content-lg-between mb-3">
+    <!-- 
+    <div class="heading">
+        <h1>overview</h1>
+        <h2>projects</h2>
+    </div> -->
+
+
+    <input type="text" name="search" [(ngModel)]="inputValue" (keyup)="Search()" placeholder="Search Patient">
+
+    <!-- <app-searchbar class="mt-1 " [(inputValue)]="value" (inputValueChange)="test()"
+        [inputPlaceholder]="'Search Patients'" inputWidth="18rem"></app-searchbar> -->
+    <button class="add-btn" (click)="form()">
+        <span class=" fw-600">Add Patient</span>
+    </button>
+
+</div>
+
+
+<div class="d-flex justify-content-center">
+    <div *ngIf="notfound" class="name">No Record Found</div>
+    <div *ngIf="loading" class="name"><span class="spinner-border spinner-border-sm me-2" role="status "
+            aria-hidden="true"></span> Loading...</div>
+</div>
+
+<!-- <div class="row gap-4">
+    <ng-container *ngFor="let item of modellist; let i = index;">
+        <div class="p-4 wid border rounder bg-white shadow my-4 my-lg-0">
+
+            <div class="d-flex border-bottom justify-content-between">
+                <h6 class="name">{{'NHS ID # '+item.patientNhsId}}</h6>
+                <div class="btn-group btn-group-sm" role="group">
+                    <h6 class="cursor" (click)="view(item)">
+                        <img src="./assets/images/Show.png" alt="View">
+                    </h6>
+                    <h6 class="cursor" (click)="update(true, item)">
+                        <img src="./assets/images/Edit.png" alt="View">
+                    </h6>
+                </div>
+            </div>
+
+            <div class="row pt-4">
+                <div class=" p-0 d-flex align-items-center justify-content-center">
+                    <div class=" mhs">
+                        <img class="profiler"
+                            src="{{item.patientUserProfile ? item.patientUserProfile:'../../../assets/images/Ellipse 5.png'}}"
+                            alt="">
+
+                    </div>
+                </div>
+                <div class="pt-2">
+                    <div>
+
+                        <div class="row mt-3 border-bottom">
+                            <div class="col-lg-6 label">Name</div>
+                            <div class="col-lg-6 val name">{{item.patientUserName +' '+ item.patientLastName}}</div>
+                        </div>
+                        <div class="row mt-3 border-bottom">
+                            <div class="col-lg-6 label">Email</div>
+                            <div class="col-lg-6 val name">{{item.patientEmail}}</div>
+                        </div>
+                        <div class="row mt-3 border-bottom">
+                            <div class="col-lg-6 label">Contact</div>
+                            <div class="col-lg-6 val name">{{item.patientUserPhone}}</div>
+                        </div>
+                        <div class="row mt-3 border-bottom">
+                            <div class="col-lg-6 label">Age</div>
+                            <div class="col-lg-6 val name">{{item.patientUserAddress}}</div>
+                        </div>
+                        <div class="row mt-3 border-bottom">
+                            <div class="col-lg-6 label">Address</div>
+                            <div class="col-lg-6 val name">{{item.patientUserAddress}}</div>
+                        </div>
+                        <div class="row mt-3 border-bottom">
+                            <div class="col-lg-6 label">Status</div>
+                            <div class="col-lg-6 val name">
+                                <mat-slide-toggle color="primary" [(ngModel)]="item.patientIsActive"
+                                    (change)="delete(item.patientId, i, $event)"></mat-slide-toggle>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-around">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </ng-container>
+</div> -->
+
+<div class="d-flex" *ngIf="!loading && !notfound">
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="1">#</th>
+                        <th colspan="1" class="">name</th>
+                        <th colspan="1" class="">age</th>
+                        <th colspan="2" class="">phone no.</th>
+                        <th colspan="2" class="">email</th>
+                        <th colspan="3" class="">address</th>
+                        <th colspan="1" class="text-center" *ngIf="type === 'staff'">Status</th>
+                        <th colspan="1" class="text-center">actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of list; let i = index;">
+                        <tr>
+                            <td colspan="1"><span [innerText]="i +1+((size*page)-size)"></span></td>
+                            <td colspan="1" class="text-name">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <span class="name"
+                                            [innerText]="item.patientUserName +' '+ item.patientLastName"></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="time" [innerText]="'NHS ID: '+ item.patientNhsId"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td colspan="1"><span [innerText]="item.patientUserAge"></span></td>
+                            <td colspan="2"><span [innerText]="item.patientUserPhone"></span></td>
+                            <td colspan="2"><span [innerText]="item.patientEmail"></span></td>
+                            <td colspan="3"><span [innerText]="item.patientUserAddress" class="name"></span></td>
+                            <td colspan="1" *ngIf="type === 'staff'">
+
+                                <mat-slide-toggle color="primary" [(ngModel)]="item.patientIsActive"
+                                    (change)="delete(item.patientId, i, $event)"></mat-slide-toggle>
+                            </td>
+                            <td colspan="1" class="text-center">
+
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <div class="cursor" (click)="update(true, item)">
+                                        <img src="./assets/images/Edit.png" alt="View">
+                                    </div>
+
+                                    <div class="cursor" (click)="view(item)">
+                                        <img src="./assets/images/Show.png" alt="View">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="d-flex justify-content-center mt-2" *ngIf="!loading && !notfound">
+    <ngb-pagination [collectionSize]="modellist.length" [(page)]="page" [maxSize]="3" [rotate]="true" [pageSize]="10"
+        [boundaryLinks]="true" size="sm" (pageChange)=" field = 'index'; pageChange($event)">
+    </ngb-pagination>
+</div>
+<!-- MODAL -->

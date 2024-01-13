@@ -1,0 +1,100 @@
+<div class="d-flex justify-content-lg-between mb-3">
+  <input
+    type="text"
+    name="search"
+    [(ngModel)]="inputValue"
+    (keyup)="Search()"
+    placeholder="Search User"
+  />
+  <button class="add-btn" (click)="show()">
+    <span class="fw-600">Add User</span>
+  </button>
+</div>
+
+ <div class="d-flex justify-content-center">
+    <div *ngIf="notfound" class="name">No Record Found</div>
+    <div *ngIf="loading" class="name"><span class="spinner-border spinner-border-sm me-2" role="status "
+            aria-hidden="true"></span> Loading...</div>
+</div> 
+
+<div class="d-flex" *ngIf="!loading && !notfound">
+  <div class="card shadow-sm">
+    <div class="card-body p-0 table-responsive">
+      <table class="table  table-hover">
+        
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>name</th>
+            <th>email</th>
+            <th class="text-center">Type</th>
+            <th>Contact Number</th>
+            <!-- <th class="text-center">Status</th> -->
+            <th class="text-center">actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of list; let i = index">
+            <tr>
+              <td><span [innerText]="(page - 1) * size + i + 1"></span></td>
+              <td class="text-name">
+                <span class="name" [innerText]="item.name"></span>
+              </td>
+              <td><span [innerText]="item.email"></span></td>
+              <td class="text-center">
+              
+                <span  *ngIf="item.roleName=='DESKTOP_USER'" class="badge badge-success text-center">Desktop User</span>
+                <span  *ngIf="item.roleName=='MOBILE_USER'" class="badge badge-primary text-center">Mobile User</span>
+                <!-- <span  *ngIf="!item.doctorIsActive" class="badge badge-danger">Not Available </span> -->
+              </td>
+              <td class=""><span [innerText]="item.contact"></span></td>
+              <!-- <td class="text-center"> -->
+              <!-- <mat-slide-toggle
+                  color="primary"
+                  [(ngModel)]="item.userIsActive"
+                  (change)="delete(item.userId,i, $event)"
+                ></mat-slide-toggle> -->
+              <!-- <div class="btn-group btn-group-sm" role="group">
+
+                </div>
+                 -->
+              <!-- </td> -->
+              <td class="text-center">
+                <div class="btn-group btn-group-sm" role="group">
+                  <div class="cursor" (click)="update(true, item)">
+                    <img src="./assets/images/Edit.png" alt="View" />
+                  </div>
+                  <div class="cursor" (click)="showView(item)">
+                    <img src="./assets/images/Show.png" alt="View" />
+                  </div>
+                  <div class="cursor" (click)="delete(item.userId, i, $event)">
+                    <img src="./assets/images/delete2.png" alt="View" />
+                  </div>
+                  <!-- <div class="cursor" (click)="showApp()">
+                    <img src="./assets/images/calendar.png" alt="View" />
+                  </div> -->
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center mt-2" *ngIf="!loading && !notfound">
+  <ngb-pagination
+    [collectionSize]="modellist.length"
+    [(page)]="page"
+    [maxSize]="5"
+    [rotate]="true"
+    [pageSize]="10"
+    [boundaryLinks]="true"
+    size="sm"
+    (pageChange)="field = 'index'; pageChange($event)"
+  >
+  </ngb-pagination>
+</div>
+
+<!-- MODAL -->

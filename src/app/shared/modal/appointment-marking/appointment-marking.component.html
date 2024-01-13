@@ -1,0 +1,59 @@
+<div class="card">
+    <div class="card-header">
+        Appointment
+    </div>
+    <div class="card-body">
+        <div class="d-flex justify-content-center">
+            <img class="p-img image-size profile-image-small mx-md-auto rounded-circle p-2"
+                [src]="data.patient.patientUserProfile ? data.patient.patientUserProfile : '../../../../assets/images/Group 3465065.png'"
+                alt="">
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <div class=" info m-md-4 m-sm-2">
+                <div class="row">
+                    <div class="col-md-6 col-4">Name</div>
+                    <!-- <div class="col-md-2 col-sm-1">-</div> -->
+                    <div class="col-md-6 col-8 info-des">{{data.patient.patientUserName + ' ' +
+                        data.patient.patientLastName}}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-4">Age</div>
+                    <!-- <div class="col-md-2 col-sm-1">-</div> -->
+                    <div class="col-md-6 col-8 info-des">{{data.patient.patientUserAge + ' Years'}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-4">Email</div>
+                    <!-- <div class="col-md-2 col-sm-1">-</div> -->
+                    <div class="col-md-6 col-8 info-des">{{data.patient.patientEmail}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-4">Contact</div>
+                    <!-- <div class="col-md-2 col-sm-1">-</div> -->
+                    <div class="col-md-6 col-8 info-des">{{data.patient.patientUserPhone}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-4">Address</div>
+                    <!-- <div class="col-md-2 col-sm-1">-</div> -->
+                    <div class="col-md-6 col-8 info-des">{{data.patient.patientUserAddress}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-around">
+            <div class="shadow mb-md-5 mb-3 bg-white rounded-circle pointer cancel"
+                (click)="update(data.appointId,'2','Canacled')">
+                <!-- <img src="../../../../assets/images/cancel.png" alt="" (click)="update(data.appointId,'2','Canacled')"> -->
+            </div>
+            <div class="shadow mb-md-5 mb-3 bg-white rounded-circle pointer walkin"
+                (click)="update(data.appointId,'1','Walk-In')">
+                <!-- <img src="../../../../assets/images/walk-in.png" alt="" (click)="update(data.appointId,'1','Walk-In')"> -->
+            </div>
+        </div>
+    </div>
+</div>

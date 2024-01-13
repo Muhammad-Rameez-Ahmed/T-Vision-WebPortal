@@ -1,0 +1,160 @@
+<div class="d-flex justify-content-lg-between mb-3">
+    <!-- 
+    <div class="heading">
+        <h1>overview</h1>
+        <h2>projects</h2>
+    </div> -->
+
+    <input type="text" name="search" [(ngModel)]="inputValue" (keyup)="Search()" placeholder="Search Doctor">
+    <button class="add-btn" (click)="show()">
+        <span class="fw-600">Add Doctor</span>
+    </button>
+
+</div>
+
+<div class="d-flex justify-content-center">
+    <div *ngIf="notfound" class="name">No Record Found</div>
+    <div *ngIf="loading" class="name"><span class="spinner-border spinner-border-sm me-2" role="status "
+            aria-hidden="true"></span> Loading...</div>
+</div>
+<div class="d-flex" *ngIf="!loading && !notfound">
+
+    <div class="card shadow-sm">
+        <!-- <div class="card-header"> -->
+        <!-- <div class="card-header__datepicker">
+
+                <div class="input-group input-group-sm ml-auto">
+                    <div class="input-group">
+                        <input type="text" class="form-control datepicker" autocomplete="off" placeholder="Start Date"
+                            [(ngModel)]="fromDate" name="fromDate" id="fromDate"
+                            [maxDate]="toDate ?? {year:9999, month: 0, day: 0}" ngbDatepicker #sd="ngbDatepicker"
+                            (click)="sd.open()">
+                        <input type="text" class="form-control datepicker" autocomplete="off" placeholder="End Date"
+                            [(ngModel)]="toDate" name="toDate" id="toDate"
+                            [minDate]="fromDate ?? {year:0, month: 0, day: 0}" ngbDatepicker #ed="ngbDatepicker"
+                            (click)="ed.open()">
+                        <span class="input-group-text datepicker__icon pointer" (click)="fetchData()"></span>
+                    </div>
+                </div>
+
+            </div> -->
+        <!-- 
+            <div class="card-header__reset ms-auto">
+                <span>reset</span>
+            </div> -->
+
+        <!-- <div class="card-header__search"> -->
+        <!-- <input type="search" name="search" autocomplete="off" placeholder="Search..."> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <div class="card-body p-0 table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>name</th>
+                        <th>email</th>
+                        <th>Contact Number</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of list; let i = index;">
+                        <tr>
+                            <td><span [innerText]="i+1"></span></td>
+                            <td class="text-name">
+                                <span class="name" [innerText]="item.doctorName"></span>
+                                <!-- <span class="time"> -->
+                                <!-- <span class="time__created" [innerText]="item.doctorGender"></span> -->
+                                <!-- <span class="time__updated" [innerText]="'Modified at: '+ (item.updated)"></span> -->
+                                <!-- </span> -->
+                            </td>
+                            <td><span [innerText]="item.doctorEmail"></span></td>
+                            <!-- <td><span [innerText]="item.contact"></span></td> -->
+                            <td class=""><span [innerText]="item.doctorContact"></span></td>
+                            <!-- <td class="text-name">
+                                <span class="name" [innerText]="item.clinicName"></span>
+                                <span class="time">
+                                    <span class="time__created" [innerText]="item.clinicTime"></span>
+                                </span>
+                            </td> -->
+                            <td class="text-center">
+
+                                <mat-slide-toggle color="primary" [(ngModel)]="item.doctorIsActive"
+                                    (change)="delete(item.doctorId, i, $event)"></mat-slide-toggle>
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <!-- <button type="button" class="btn btn-white px-4"
+                                        [routerLink]="'/dashboard/doctors/form'">
+                                        <img src="./assets/images/utilities/edit.png" alt="edit">
+                                        <span>Edit</span>
+                                    </button> -->
+                                    <div class="cursor" (click)="update(true, item)">
+                                        <img src="./assets/images/Edit.png" alt="View">
+                                        <!-- <span>Edit</span> -->
+                                    </div>
+                                    <div class="cursor" (click)="showView(item)">
+                                        <img src="./assets/images/Show.png" alt="View">
+                                        <!-- <span>Edit</span> -->
+                                    </div>
+                                    <div class="cursor" (click)="showApp(item)">
+                                        <img src="./assets/images/calendar.png" alt="View">
+                                      
+                                    </div>
+                                    <!-- <div class="cursor" (click)="delete(item.doctorId)">
+                                        <img src="./assets/images/delete2.png" alt="View">
+                                    </div> -->
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <!-- <ng-container *ngIf="list.length === 0 && !loading">
+                        <tr class="loading border-bottom-0">
+                            <td colspan="7" class="border-bottom-0">
+                                <div class="d-flex justify-content-center my-5">
+                                    <h5 class="text-uppercase text-muted">
+                                        no record found!
+                                    </h5>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container> -->
+                    <!-- <ng-container *ngIf="loading">
+                        <tr class="loading border-bottom-0">
+                            <td colspan="6" class="border-bottom-0">
+                                <div class="d-flex justify-content-center my-5">
+                                    <div class="spinner-border" role="status"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container> -->
+                </tbody>
+            </table>
+        </div>
+        <!-- <div class="card-footer">
+            <div class="card-footer__select small">
+                <select class="select-page" name="size" id="size">
+                    <option value="25">25</option>
+                    <option value="250">250</option>
+                    <option value="500">500</option>
+                </select>
+                <span>Show on page</span>
+            </div> -->
+        <!-- <ngb-pagination [collectionSize]="{{doctorslist.length()}}" [(page)]="{{'1'}}" [pageSize]="{{'5'}}"
+                [boundaryLinks]="true" size="sm">
+            </ngb-pagination> -->
+        <!-- </div> -->
+    </div>
+
+</div>
+
+
+<div class="d-flex justify-content-center mt-2" *ngIf="!loading && !notfound">
+    <ngb-pagination [collectionSize]="modellist.length" [(page)]="page" [maxSize]="5" [rotate]="true" [pageSize]="10"
+        [boundaryLinks]="true" size="sm" (pageChange)=" field = 'index'; pageChange($event)">
+    </ngb-pagination>
+</div>
+
+<!-- MODAL -->

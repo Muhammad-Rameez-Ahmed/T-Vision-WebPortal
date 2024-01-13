@@ -1,0 +1,418 @@
+<div class="d-flex justify-content-between gap-3 mb-3 p-3">
+
+    <div class="heading">
+        <h1>overview</h1>
+        <h2 [innerText]="submission?'submissions':'assignments'"></h2>
+    </div>
+
+    <ng-container *ngIf="!submission">
+        <!-- <button type="button" class="btn btn-link btn-sm export-btn text-dark text-decoration-none fw-600 ms-auto"
+            (click)="export()">
+            <img src="./assets/images/utilities/export.png" alt="export">
+            <span>Export</span>
+        </button> -->
+        <ng-container *permission="[getPermissions(role.admin), getPermissions(role.team_lead)]">
+            <button class="btn btn-outline-secondary btn-sm px-4" [routerLink]="'/assignments/form/new'">
+                <span class="fw-600 text-uppercase">add assignment</span>
+            </button>
+        </ng-container>
+    </ng-container>
+
+</div>
+
+<div class="d-flex">
+
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <div class="card-header__datepicker">
+                <div class="input-group input-group-sm ml-auto">
+                    <div class="input-group">
+                        <input type="text" class="form-control datepicker" autocomplete="off" placeholder="Start Date"
+                            [(ngModel)]="fromDate" name="fromDate" id="fromDate"
+                            [maxDate]="toDate ?? {year:9999, month: 0, day: 0}" ngbDatepicker #sd="ngbDatepicker"
+                            (click)="sd.open()">
+                        <input type="text" class="form-control datepicker" autocomplete="off" placeholder="End Date"
+                            [(ngModel)]="toDate" name="toDate" id="toDate"
+                            [minDate]="fromDate ?? {year:0, month: 0, day: 0}" ngbDatepicker #ed="ngbDatepicker"
+                            (click)="ed.open()">
+                        <span class="input-group-text datepicker__icon pointer" (click)="fetchData()"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-header__client">
+                <ng-select [items]="clientList" bindLabel="name" [(ngModel)]="client" name="client" id="client"
+                    placeholder="Select client..." (change)="fetchData()">
+                </ng-select>
+            </div>
+
+            <div class="card-header__reset ms-auto">
+                <span (click)="resetFilter()">reset</span>
+            </div>
+
+            <div class="card-header__search">
+                <input type="search" [(ngModel)]="search" name="search" [disabled]="loading" autocomplete="off"
+                    placeholder="Search..." (keyup.enter)="fetchData()" (change)="search === '' ? fetchData() : ''">
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th class="sort" (click)="sort('name')">name</th>
+                        <th class="sort text-center" (click)="sort('jobType')">Job Type</th>
+                        <th class="sort text-center" (click)="sort('workType')">Work Type</th>
+                        <th class="sort text-center" (click)="sort('tcpType')">TCP Type</th>
+                        <th class="text-center">Total Units</th>
+                        <th class="sort text-center" (click)="sort('consLayout')">cons. layout</th>
+                        <th class="sort" (click)="sort('deadLine')">Deadline</th>
+                        <th class="text-center">Client</th>
+                        <th class="text-center">Members</th>
+                        <th class="sort text-center" (click)="sort('status')">status</th>
+                        <th class="text-end">actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of list; let i = index;">
+                        <!-- <ng-container *ngIf="item."></ng-container> -->
+                        <tr [ngClass]="getColumnsColors(item.status)" [class.table-danger]="getDeadline(item)">
+                            <td><span [innerText]="item.index"></span></td>
+                            <td class="text-name">
+                                <span class="name" [innerText]="item.name"></span>
+                                <span class="link">
+                                    <img src="./assets/images/utilities/link.png" [alt]="item.link">
+                                    <a [href]="item.link">Download Link</a>
+                                </span>
+                                <span class="time">
+                                    <span class="time__created"
+                                        [innerText]="(item.created?.toDate()|date:'EEE, MMM d, y, h:mm a')"></span>
+                                </span>
+                            </td>
+                            <td class="text-center"><span [innerText]="item.jobType?.name ?? 'N/a'"></span></td>
+                            <td class="text-center"><span [innerText]="item.workType?.name ?? 'N/a'"></span></td>
+                            <td class="text-center"><span [innerText]="item.tcpType?.name ?? 'N/a'"></span></td>
+                            <td>
+                                <div class="units">
+                                    <div class="units__ft">
+                                        <div class="total" [innerText]="getUnits(item.files, 'ft', item)|number"></div>
+                                        <div class="title">ft</div>
+                                    </div>
+                                    <div class="units__divider">|</div>
+                                    <div class="units__pages">
+                                        <div class="total" [innerText]="getUnits(item.files, 'pages', item)|number">
+                                        </div>
+                                        <div class="title">pages</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-center"><span [innerText]="item.consLayout"></span></td>
+                            <td><span [innerText]="(item.deadLine?.toDate()|date)"></span></td>
+                            <td class="text-center"><span [innerText]="item?.project?.client?.name ?? 'N/a'"></span>
+                            </td>
+                            <td class="text-center">
+                                <span class="members">
+                                    <ng-container *ngFor="let member of item.members">
+                                        <span [innerText]="member?.name ?? 'N/a'"></span>
+                                    </ng-container>
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <div role="button" ngbDropdown #statusDropdown="ngbDropdown" display="dynamic"
+                                    placement="bottom-end" autoClose="outside" ngbDropdownToggle>
+                                    <span [innerText]="item.status?.name ?? 'N/a'"></span>
+                                    <div ngbDropdownMenu>
+                                        <ng-container *ngFor="let status of statusList">
+                                            <button ngbDropdownItem [innerText]="status.name"
+                                                (click)="updateStatus(item.id, status)"></button>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td class="text-end">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <ng-container *ngIf="submission">
+                                        <button type="button" class="btn btn-white px-4"
+                                            [routerLink]="['/assignments/form', item.id]"
+                                            [queryParams]="{isRevision: true}"
+                                            *permission="[getPermissions(role.admin), getPermissions(role.team_lead)]">
+                                            <img src="./assets/images/utilities/revision.png" alt="revision">
+                                            <span>Revision</span>
+                                        </button>
+                                    </ng-container>
+                                    <ng-container *ngIf="!submission">
+                                        <button type="button" class="btn btn-white px-4"
+                                            [routerLink]="['/assignments/form', item.id]"
+                                            *permission="[getPermissions(role.admin), getPermissions(role.team_lead), getPermissions(role.executive)]"
+                                            [queryParams]="{isEdit: true}">
+                                            <img src="./assets/images/utilities/edit.png" alt="edit">
+                                            <span>Edit</span>
+                                        </button>
+                                        <ng-container *ngIf="item.status?.id !== getFileStatus(fileStatus.complete).id">
+                                            <button type="button" class="btn btn-white px-4"
+                                                [routerLink]="['/assignments/form', item.id]"
+                                                [queryParams]="{isSubmit: true}"
+                                                *permission="[getPermissions(role.admin), getPermissions(role.team_lead), getPermissions(role.engineering_department), getPermissions(role.executive)]">
+                                                <img src="./assets/images/utilities/submit.png" alt="submit">
+                                                <span>Submit</span>
+                                            </button>
+                                        </ng-container>
+                                    </ng-container>
+                                    <button type="button" class="btn btn-white px-4"
+                                        (click)="openModal(detailsModal, item)"
+                                        *permission="[getPermissions(role.admin), getPermissions(role.team_lead), getPermissions(role.executive)]">
+                                        <img src="./assets/images/utilities/details.png" alt="details">
+                                        <span>Details</span>
+                                    </button>
+                                </div>
+                            </td>
+
+                        </tr>
+                    </ng-container>
+                    <!-- list.length === 0 && !loading -->
+                    <ng-container *ngIf="total === 0 && !loading">
+                        <tr class="loading border-bottom-0">
+                            <td colspan="12" class="border-bottom-0">
+                                <div class="d-flex justify-content-center my-5">
+                                    <h5 class="text-uppercase text-muted">
+                                        no record found!
+                                    </h5>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <ng-container *ngIf="loading">
+                        <tr class="loading border-bottom-0">
+                            <td colspan="12" class="border-bottom-0">
+                                <div class="d-flex justify-content-center my-5">
+                                    <div class="spinner-border" role="status"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <div class="card-footer__select small">
+                <span>Showing</span>
+                <select (change)="fetchData()" [(ngModel)]="size" [disabled]="loading" name="size" id="size">
+                    <option value="25">25</option>
+                    <option value="250">250</option>
+                    <option value="500">500</option>
+                </select>
+                <span>of {{list.length}} entries</span>
+            </div>
+            <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="size" [boundaryLinks]="true"
+                [disabled]="loading" size="sm" (pageChange)="field = 'index'; fetchData();"></ngb-pagination>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #detailsModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" [innerText]="model?.name"></h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body p-0">
+        <table class="table border-top text-break">
+            <tbody>
+                <tr class="text-uppercase table-light col-md-12 fw-600 px-0">
+                    <td colspan="2" class="w-100">{{submission?'Submission':'Assignment'}} Information</td>
+                </tr>
+                <tr>
+                    <td class="fw-600">Name</td>
+                    <td>
+                        <div class="d-flex align-items-center gap-1">
+                            <span [innerText]="model?.name"></span>
+                            <span class="action-link fst-italic" [innerText]="'('+model?.status?.name+')'"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fw-600">Details</td>
+                    <td>
+                        <div class="d-flex gap-3 stack-item-3">
+                            <div class="d-inline">
+                                <span class="fw-600">Project: </span>
+                                <span [innerText]="model?.project?.name"></span>
+                            </div>
+                            <div class="d-inline">
+                                <span class="fw-600">Client: </span>
+                                <span [innerText]="model?.project?.client?.name"></span>
+                            </div>
+                            <div class="d-inline">
+                                <span class="fw-600">Team: </span>
+                                <span [innerText]="model?.project?.team?.name"></span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fw-600">Type</td>
+                    <td>
+                        <div class="d-flex gap-3 stack-item-3">
+                            <div class="d-inline">
+                                <span class="fw-600">Job: </span>
+                                <span [innerText]="model?.jobType?.name"></span>
+                            </div>
+                            <div class="d-inline">
+                                <span class="fw-600">Work: </span>
+                                <span [innerText]="model?.workType?.name"></span>
+                            </div>
+                            <ng-container *ngIf="model?.tcpType">
+                                <div class="d-inline">
+                                    <span class="fw-600">TCP: </span>
+                                    <span [innerText]="model?.tcpType?.name"></span>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fw-600">Members</td>
+                    <td>
+                        <span class="members">
+                            <ng-container *ngFor="let member of model?.members">
+                                <span [innerText]="member?.name ?? 'N/a'"></span>
+                            </ng-container>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fw-600">Units</td>
+                    <td>
+                        <div class="d-flex gap-3 stack-item-2">
+                            <div class="d-inline">
+                                <span class="fw-600">FT: </span>
+                                <span [innerText]="getUnits(model?.files, 'ft', model)|number"></span>
+                            </div>
+                            <div class="d-inline">
+                                <span class="fw-600">Pages: </span>
+                                <span [innerText]="getUnits(model?.files, 'pages', model)|number"></span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fw-600">Locality</td>
+                    <td><span [innerText]="model?.locality"></span></td>
+                </tr>
+                <tr>
+                    <td class="fw-600">Cons. Layout</td>
+                    <td><span [innerText]="model?.consLayout"></span></td>
+                </tr>
+                <tr>
+                    <td class="fw-600">Deadline</td>
+                    <td><span [innerText]="model?.deadLine?.toDate()|date:'EEE, MMM d, y, h:mm a'"></span></td>
+                </tr>
+                <tr>
+                    <td class="fw-600">Download Link</td>
+                    <td><span [innerText]="model?.link"></span></td>
+                </tr>
+                <tr>
+                    <td class="fw-600">Comments</td>
+                    <td><span [innerText]="model?.comments"></span></td>
+                </tr>
+                <tr>
+                    <td class="fw-600">Details</td>
+                    <td>
+                        <div class="d-flex gap-3 stack-item-2">
+                            <div class="d-inline">
+                                <span class="fw-600">Created at: </span>
+                                <span [innerText]="model?.created?.toDate()|date:'EEE, MMM d, y, h:mm a'"></span>
+                            </div>
+                            <div class="d-inline">
+                                <span class="fw-600">Updated at: </span>
+                                <span [innerText]="model?.updated?.toDate()|date:'EEE, MMM d, y, h:mm a'"></span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fw-600">Members</td>
+                    <td>
+                        <div class="d-flex gap-3 stack-item-2">
+                            <div class="d-inline fw-600">FT</div>
+                            <div class="d-inline fw-600">Pages</div>
+                        </div>
+                    </td>
+                </tr>
+                <ng-container *ngFor="let member of model?.members">
+                    <tr>
+                        <td><span [innerText]="member.name"></span></td>
+                        <td>
+                            <div class="d-flex gap-3 stack-item-2">
+                                <div class="d-inline">
+                                    <span [innerText]="getMemberUnit(member.id, 'FT')|number"></span>
+                                </div>
+                                <div class="d-inline">
+                                    <span [innerText]="getMemberUnit(member.id, 'PAGES')|number"></span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngIf="model?.history?.length !== 0">
+                    <tr>
+                        <td class="fw-600">History</td>
+                        <td>
+                            <div class="d-flex gap-3 stack-item-5">
+                                <div class="d-inline fw-600">Last Updated</div>
+                                <div class="d-inline fw-600">Previous Units</div>
+                                <div class="d-inline fw-600">Comments</div>
+                                <div class="d-inline text-center fw-600">Status</div>
+                                <div class="d-inline fw-600">Action By</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <ng-container *ngFor="let history of model?.history">
+                                <div class="align-items-center d-flex gap-3 stack-item-5">
+                                    <div class="d-inline">
+                                        <span
+                                            [innerText]="history.updated?.toDate()|date:'EEE, MMM d, y, h:mm a'"></span>
+                                    </div>
+                                    <div class="d-inline">
+                                        <div class="units w-100 mb-3">
+                                            <div class="units__ft">
+                                                <div class="total" [innerText]="getUnits(history.files, 'ft')|number">
+                                                </div>
+                                                <div class="title">ft</div>
+                                            </div>
+                                            <div class="units__divider">|</div>
+                                            <div class="units__pages">
+                                                <div class="total"
+                                                    [innerText]="getUnits(history.files, 'pages')|number">
+                                                </div>
+                                                <div class="title">pages</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-inline">
+                                        <span [innerText]="history?.comments ?? 'N/a'"></span>
+                                    </div>
+                                    <div class="d-inline text-center">
+                                        <span [innerText]="history?.status?.name ?? 'N/a'"></span>
+                                    </div>
+                                    <div class="d-inline">
+                                        <span [innerText]="history?.actionBy ?? 'N/a'"></span>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white btn-sm px-4" (click)="modal.close()">
+            <span>Close</span>
+        </button>
+    </div>
+</ng-template>

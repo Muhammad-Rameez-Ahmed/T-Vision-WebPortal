@@ -1,0 +1,66 @@
+.table tbody td.text-name {
+    width: 80% !important;
+}
+
+.table thead th.headingName {
+    width: 80% !important;
+}
+
+td {
+    font-size: 12px !important;
+    font-weight: 600;
+}
+
+
+.table {
+    // width: 99.5% !important;
+    // display: flex;
+
+    thead {
+        overflow: hidden;
+        /* background-color: #fbfbfb; */
+        background-color: white !important;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        height: 3rem !important;
+        box-shadow: 1px 3px 7px rgb(0 0 0 / 10%) !important;
+
+        th {
+            font-weight: 600;
+            // color: #7D8FB3;
+
+            font-size: 0.9rem !important;
+            // background: #F7F8FA;
+            color: black;
+            // color: #0D67B5;
+            // background-color: #F5F3FF;
+        }
+    }
+
+    tbody {
+
+        overflow-y: overlay !important;
+        overflow-x: hidden !important;
+
+        tr {
+            border-radius: 8px;
+            transition: all .2s ease-in-out;
+            height: 2rem !important;
+
+            &:hover {
+                // width: 110% !important;
+                // background-color: aqua !important;
+                // background-color: #F5F3FF !important;
+                background: #F7F8FA !important;
+                transform: scale(1.01);
+                border: 1px soild #0D67B5 !important;
+                box-shadow: 1px 3px 7px rgb(0 0 0 / 10%);
+            }
+        }
+    }
+}
+
+.cursor {
+    cursor: pointer;
+}

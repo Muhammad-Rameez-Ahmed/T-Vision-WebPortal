@@ -1,0 +1,29 @@
+<div class="notification">
+    <ul class="notification__menu">
+        <ng-container *ngFor="let item of list">
+            <li class="menu__item" [class.menu__item-unread]="!item.read"
+                (click)="redirectTo(item); $event.stopPropagation();">
+                <span class="item__image">
+                    <img src="./assets/images/sidebar/submissions.png" [alt]="item.name">
+                </span>
+                <span class="item__content">
+                    <div class="content__title" [innerText]="item.name"></div>
+                    <div class="content__description" [innerText]="item.description"></div>
+                    <div class="content__action">
+                        <div class="action__time">
+                            <span [innerText]="getRelativeTime(item.created)"></span>
+                        </div>
+                        <ng-container *ngIf="!item.read">
+                            <div class="action__button" (click)="maskAsRead(item); $event.stopPropagation()">
+                                <span>Mark as Read</span>
+                            </div>
+                        </ng-container>
+                    </div>
+                </span>
+            </li>
+        </ng-container>
+    </ul>
+    <div class="notification__view border-top" (click)="viewUnread(); $event.stopPropagation();">
+        <span class="view__title" [innerText]="'View all '+ (unread ? '' : 'un-read') +' Notifications'"></span>
+    </div>
+</div>

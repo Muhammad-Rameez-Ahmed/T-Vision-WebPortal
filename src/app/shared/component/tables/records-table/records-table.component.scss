@@ -1,0 +1,86 @@
+.val {
+
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    /* identical to box height */
+
+    color: #000000;
+}
+
+.val-2 {
+
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    /* identical to box height */
+
+    color: #000000;
+}
+
+.label {
+
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+}
+
+.card {
+    min-height: 50% !important;
+
+    height: 50%;
+    border-radius: 0% !important;
+    border: none;
+
+    .card-body {
+        border-bottom: 1px solid #dee2e6;
+        height: 100% !important;
+        box-shadow: 1px 3px 7px rgb(0 0 0 / 10%);
+        transition: all .2s ease-in-out;
+
+
+    }
+
+    &:hover {
+
+        background: #F7F8FA !important;
+        transform: scale(1.01);
+        border: 2px soild #0D67B5 !important;
+        box-shadow: 1px 3px 7px rgb(0 0 0 / 10%);
+    }
+
+
+}
+
+.limitTextHeight {
+    height: 20px;
+    overflow: hidden;
+}
+
+a {
+    color: #0D67B5 !important;
+    text-decoration: underline !important;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+
+.des {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 20px;
+    color: #000000;
+}
+
+
+.hov {
+
+    &:hover {
+        background: #F7F8FA !important;
+        transform: scale(1.01);
+        border: 2px soild #0D67B5 !important;
+        box-shadow: 1px 3px 7px rgb(0 0 0 / 10%);
+    }
+}

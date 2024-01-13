@@ -1,0 +1,85 @@
+<div class="d-flex justify-content-lg-between mb-3">
+    <!-- 
+    <div class="heading">
+        <h1>overview</h1>
+        <h2>projects</h2>
+    </div> -->
+
+    <input type="text" name="search" [(ngModel)]="inputValue" (keyup)="Search()" placeholder="Search Clinic">
+    <button class="add-btn" (click)="show()">
+        <span class="fw-600">Add clinic</span>
+    </button>
+
+</div>
+
+
+
+
+<div class="d-flex justify-content-center">
+    <div *ngIf="notfound" class="name">No Record Found</div>
+    <div *ngIf="loading" class="name"><span class="spinner-border spinner-border-sm me-2" role="status "
+            aria-hidden="true"></span> Loading...</div>
+</div>
+<div class="row" *ngIf="!loading">
+    <div class="col-md-3 p-2" *ngFor="let item of list,let i = index;">
+        <div class="card rounded-0 shadow border-0">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div class="">
+                        <img src="../../../assets/images/clinic.png" alt="">
+                    </div>
+                    <div class=" d-flex justify-content-center align-items-center">
+                        <div class="details">
+                            <div class="name">{{item.clinicName}}</div>
+                            <div class="des" [innerText]="item.clinicIsActive ? 'Active' : 'InActive'"></div>
+                        </div>
+                    </div>
+                    <div class="  d-flex justify-content-center align-items-center">
+                        <div class="details">
+                            <!-- <div class="cursor" (click)="delete(item.clinicId)">
+                                <img src="./assets/images/delete2.png" alt="View">
+                            </div> -->
+                            <mat-slide-toggle color="primary" [(ngModel)]="item.clinicIsActive"
+                                (change)="delete(item.clinicId, i, $event)"></mat-slide-toggle>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="col-md-4">
+    <div class="card rounded-0">
+
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="card rounded-0">
+
+    </div>
+</div> -->
+</div>
+
+
+
+
+<!-- <div class="d-flex justify-content-center mt-2">
+    <ngb-pagination [collectionSize]="list.length" [(page)]="page" [maxSize]="5" [rotate]="true" [pageSize]="size"
+        [boundaryLinks]="true" size="sm" (pageChange)=" field = 'index'; pageChange($event)">
+    </ngb-pagination>
+</div> -->
+
+<!-- MODAL -->
+<ng-template let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+        <button type="button" class="btn-close" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark">Save</button>
+    </div>
+</ng-template>

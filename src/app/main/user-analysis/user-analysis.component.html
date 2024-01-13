@@ -1,0 +1,30 @@
+<canvas
+  baseChart
+  class="chart"
+  [data]="lineChartData"
+  [options]="lineChartOptions"
+  [type]="lineChartType"
+  (chartHover)="chartHovered($event)"
+  (chartClick)="chartClicked($event)"
+  style="width: 900px; height: 480px;" 
+></canvas>
+<!-- <table>
+  <tr>
+    <th *ngFor="let label of lineChartData.labels">{{ label }}</th>
+  </tr>
+  <tr
+    *ngFor="let d of lineChartData.datasets; let i = index"
+    [class]="'line-' + i"
+  >
+    <td *ngFor="let label of lineChartData.labels; let j = index">
+      {{ d && d.data[j] }}
+    </td>
+  </tr>
+</table> -->
+
+
+
+ 
+<!--   
+  <button   type="button" class="btn btn-primary m-2" (click)="changeColor()">Recolor</button>
+  -->

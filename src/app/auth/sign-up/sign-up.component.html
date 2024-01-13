@@ -1,0 +1,211 @@
+<!-- <form #form="ngForm" class="d-flex justify-content-center" autocomplete=" off">
+    <fieldset class="d-flex justify-content-center" [disabled]="loading">
+        <div class="row mb-1 g-3 w-75">
+            <div class="col-md-6 m-0">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" [(ngModel)]="model.email" name="name" id="name" maxlength="32"
+                    placeholder="Enter Name" required>
+            </div>
+            <div class="col-md-6 m-0">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" [(ngModel)]="model.email" name="email" id="email"
+                    maxlength="32" [pattern]="'[^@ \t\r\n]+@[^@ . \t\r\n]+\.[^@. \t\r\n][^@ \t\r\n]+'"
+                    placeholder="Enter email address here" required>
+            </div>
+            <div class="col-md-12 position-relative">
+                <label for="password" class="form-label">Password</label>
+                <input [type]="visibility ? 'text' : 'password'" class="form-control" [(ngModel)]="model.password"
+                    name="password" id="password" placeholder="Type password" required>
+                <img class="password__visibility" (click)="visibility = !visibility"
+                    [src]="'./assets/images/utilities/visibility_'+ (visibility ? 'on' : 'off') + '.png'"
+                    [alt]="visibility ? 'visible' : 'hidden'">
+            </div>
+            <div class="col-md-12 position-relative">
+                <label for="password" class="form-label">Confirm Password</label>
+                <input [type]="visibility ? 'text' : 'password'" class="form-control" [(ngModel)]="model.password"
+                    name="password" id="password" placeholder="Confirm Password" required>
+                <img class="password__visibility" (click)="visibility = !visibility"
+                    [src]="'./assets/images/utilities/visibility_'+ (visibility ? 'on' : 'off') + '.png'"
+                    [alt]="visibility ? 'visible' : 'hidden'">
+            </div>
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary btn-sm w-100 p-3" (click)="onSubmit()">
+                    <ng-container *ngIf="loading">
+                        <span class="spinner-border spinner-border-sm me-2" role="status " aria-hidden="true"></span>
+                    </ng-container>
+                    <span [innerText]="loading ? 'Loading...' : 'Login'"></span>
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</form> -->
+<!-- {{"here "+step.interacted}} -->
+<mat-stepper linear #stepper>
+
+
+    <mat-step [stepControl]="infoForm" label=" Fill out basic info">
+        <form class="mt-0" [formGroup]="infoForm">
+            <div class="mhs">
+                <ng-container *ngIf="image">
+                    <img class="profile-image mb-1" src="{{image? image: '../../../assets/images/icons8-plus-64.png'}}"
+                        alt="" (click)="getFile()">
+
+                </ng-container>
+                <ng-container *ngIf="!image">
+                    <span class="add-image mb-1" (click)="getFile()">+</span>
+                </ng-container>
+                <input class="mt-2" type="file" hero nbInput name="file1" id="userimage" accept="image/*"
+                    (change)="InputImage($event)" hidden required formControlName="profile" />
+
+            </div>
+
+            <label class="mhs form-label mb-0">Doctor Profile Picture</label>
+
+            <mat-error class="mhs"
+                *ngIf="infoForm.controls['profile'].hasError('required') && infoForm.controls['profile'].touched">Doctor
+                Profile Picture is Required</mat-error>
+            <div class="row mb-1">
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Name</label>
+                    <input class="form-control" placeholder="Last name, First name" name="name" id="name"
+                        formControlName="name" required>
+                    <mat-error
+                        *ngIf="infoForm.controls['name'].hasError('required') && infoForm.controls['name'].touched">Name
+                        is Required</mat-error>
+                </div>
+                <div class="col-md-6">
+                    <label for="contact" class="form-label">Contact No.</label>
+                    <input class="form-control" [pattern]="'([0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9])'"
+                        placeholder="0213123123" name="contact" id="contact" formControlName="contact" required>
+                    <mat-error
+                        *ngIf="infoForm.controls['contact'].hasError('required') && infoForm.controls['contact'].touched">Contact
+                        is Required</mat-error>
+                    <mat-error
+                        *ngIf="infoForm.controls['contact'].hasError('pattern') && infoForm.controls['contact'].touched">Contact
+                        Number is Invalid</mat-error>
+                </div>
+            </div>
+
+
+            <div class="row mb-1">
+                <div class="col-md-12">
+                    <label for="address" class="form-label">Address</label>
+                    <input class="form-control" placeholder="123 street" name="address" id="address"
+                        formControlName="address" required>
+                    <mat-error
+                        *ngIf="infoForm.controls['address'].hasError('required') && infoForm.controls['address'].touched">Address
+                        is Required</mat-error>
+
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-md-6">
+                    <label for="gender" class="form-label">Gender</label>
+                    <mat-select class="form-control" formControlName="gender" placeholder="gender" required>
+                        <mat-option value="1">Male</mat-option>
+                        <mat-option value="0">Female</mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="infoForm.controls['gender'].hasError('required') && infoForm.controls['gender'].touched">Gender
+                        is Required</mat-error>
+                </div>
+                <div class="col-md-6">
+                    <label for="category" class="form-label">Category</label>
+                    <mat-select class="form-control" placeholder="category" name="category" id="category"
+                        formControlName="category" required>
+                        <mat-option *ngFor="let item of categories" [value]="item.docCategoryId">
+                            {{item.docCategoryName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="infoForm.controls['category'].hasError('required') && infoForm.controls['category'].touched">Category
+                        is Required</mat-error>
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-md-12">
+                    <label for="belongs" class="form-label">Belongs To</label>
+                    <mat-select class="form-control" placeholder="belongs" name="belongs" id="belongs"
+                        formControlName="belongs" required>
+                        <mat-option *ngFor="let item of sites" [value]="item.siteId">
+                            {{item.siteName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="infoForm.controls['belongs'].hasError('required') && infoForm.controls['belongs'].touched">Belongs
+                        to is Required</mat-error>
+                </div>
+            </div>
+
+            <div class=" mt-1 d-flex flex-md-row flex-sm-column justify-content-between  gap-1">
+                <!-- <div class=""> -->
+                <button type="submit" class="btn btn-white btn-sm w-100 px-4" (click)="login()">
+                    <span [innerText]="'Login'"></span>
+                </button>
+                <!-- </div>
+                <div class=""> -->
+                <button type="submit" class="btn btn-primary btn-sm w-100 px-4" (click)="formError('info')"
+                    [disabled]="loading" matStepperNext>
+                    <span [innerText]="loading ? 'Loading...' : 'Next'"></span>
+                </button>
+                <!-- </div> -->
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="codeForm" label="Fill out your Credentials">
+        <form [formGroup]="codeForm">
+
+            <div class="row mb-1">
+                <div class="col-md-12">
+                    <label for="email" class="form-label">Email</label>
+                    <input class="form-control" maxlength="32"
+                        [pattern]="'[^@ \t\r\n]+@[^@ . \t\r\n]+\.[^@. \t\r\n][^@ \t\r\n]+'"
+                        placeholder="Enter email address here" type="email" name="email" id="email"
+                        formControlName="email" required>
+                    <mat-error
+                        *ngIf="codeForm.controls['email'].hasError('required') && codeForm.controls['email'].touched">Email
+                        is Required</mat-error>
+                    <mat-error
+                        *ngIf="codeForm.controls['email'].hasError('pattern') && codeForm.controls['email'].touched">Email
+                        is Invalid</mat-error>
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-md-6">
+                    <label for="password" class="form-label">Password</label>
+                    <input class="form-control" placeholder="Type your password here" type="password" name="password"
+                        id="password" formControlName="password" required>
+                    <mat-error
+                        *ngIf="codeForm.controls['password'].hasError('required') && codeForm.controls['password'].touched">Password
+                        is Required</mat-error>
+                </div>
+                <div class="col-md-6">
+                    <label for="confirmpassword" class="form-label">Confirm Password</label>
+                    <input class="form-control" placeholder="Confirem password here" type="password"
+                        name="confirmpassword" id="confirmpassword" formControlName="confirmPassword" required>
+                    <mat-error
+                        *ngIf="codeForm.controls['confirmPassword'].value !== codeForm.controls['password'].value && codeForm.controls['confirmPassword'].touched">Password
+                        does not match</mat-error>
+                    <mat-error
+                        *ngIf="codeForm.controls['confirmPassword'].hasError('required') && codeForm.controls['confirmPassword'].touched">Password
+                        is Required</mat-error>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-6 order-md-1 order-sm-2 ">
+                    <button type="submit" class="btn btn-white btn-sm w-100 px-4" matStepperPrevious>
+                        <span [innerText]="'Back'"></span>
+                    </button>
+                </div>
+                <div class="col-md-6 order-md-2 order-sm-1  mb-sm-1">
+                    <button type="submit" class="btn btn-primary btn-sm w-100 px-4" (click)="onSubmit()">
+                        <span [innerText]="loading ? 'Loading...' : 'Sign up'"></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </mat-step>
+</mat-stepper>

@@ -1,0 +1,17 @@
+<ng-container *ngFor="let item of notesList, let i = index">
+    <div class="card">
+        <div class="card-body">
+            <div class="note">{{'"'+item.note+'"'}}
+            </div>
+            <!-- <a (click)="showText(i)" class="badge badge-secondary">
+                {{ isReadMore[i] ? 'Read More': 'Read Less' }}
+            </a> -->
+            <div class="date">{{item.date}}</div>
+            <div class="doctor">{{'- '+item.doctor}}</div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="notesList.length === 0">
+    <div class="d-flex justify-content-center mt-2">No Notes to display</div>
+</ng-container>

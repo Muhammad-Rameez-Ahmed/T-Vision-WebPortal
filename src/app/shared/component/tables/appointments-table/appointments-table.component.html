@@ -1,0 +1,26 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th class="headingName">Name</th>
+            <!-- <th colspan="1" class="text-center">Action</th> -->
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let item of list; let i = index;">
+            <tr>
+                <td><span [innerText]="i+1"></span></td>
+                <td class="text-name">
+                    <span class="name"
+                        [innerText]="item.appointmentPatient.patientBelongsToSite.siteName">asdaasd</span>
+                    <span class="time" [innerText]="item.appointmentDate">1/11/1111 9:00 pm</span>
+                </td>
+                <!-- <td colspan="1" class="text-center">
+                    <div class="cursor" [routerLink]="'/dashboard/patients/view'">
+                        <img src="./assets/images/Show.png" alt="View">
+                    </div>
+                </td> -->
+            </tr>
+        </ng-container>
+    </tbody>
+</table>

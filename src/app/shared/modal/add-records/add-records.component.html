@@ -1,0 +1,88 @@
+<!-- <div class="txt_field">
+    <input type="text" required>
+    <span></span>
+    <label>Username</label>
+</div> -->
+
+<div class="card">
+    <div class="card-header">Add Patient Information</div>
+    <div class="card-body">
+
+        <!-- <img class="profile-image-medium mx-md-auto rounded-circle profile" src="{{image}}" alt="">
+        <div>Upload Image</div> -->
+        <div class="row border-bottom">
+            <div class="col-lg-12">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Record</mat-label>
+                    <mat-select [(value)]="selected" (valueChange)="recordTypeSelected()" appearance="fill" required>
+                        <mat-option *ngFor="let item of recordTypes" [value]="item">
+                            {{item}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="card shadow form-card mt-2">
+            <div class="card-header">
+                {{selected}}
+            </div>
+            <div class="card-body">
+                <div class="row border-bottom">
+                    <div class="col-lg-6" *ngIf="selected === 'Medication'">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>{{selected}}</mat-label>
+                            <mat-select [(value)]="record" (valueChange)="test()" appearance="fill" multiple>
+                                <mat-option *ngFor="let item of medicationList" [value]="item">
+                                    {{item.medicineName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-6" *ngIf="selected === 'Allergies'">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>{{selected}}</mat-label>
+                            <mat-select [(value)]="record" (valueChange)="test()" appearance="fill" multiple>
+                                <mat-option *ngFor="let item of allergiesList" [value]="item">
+                                    {{item.allergyName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class=" w-100" *ngIf="selected === 'Allergies'">
+                    <div class="row p-2 border-bottom" *ngFor="let item of record">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="label">Name</div>
+                                <div class="val">{{item.allergyName}}</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="label">Triggers</div>
+                                <div class="val">{{item.allergyTriggers}}</div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="label">Symptoms</div>
+                                <div class="val">{{item.allergySymptoms}}</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="label">Treatment</div>
+                                <div class="val">{{item.allergyTreatment}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <textarea name="" id="" cols="100%" rows="10" placeholder="Value"></textarea> -->
+    </div>
+    <div class="card-footer">
+        <button class="add-btn-submit">
+            <span class=" fw-600">Submit</span>
+        </button>
+    </div>
+</div>

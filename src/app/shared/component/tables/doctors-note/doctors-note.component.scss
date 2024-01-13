@@ -1,0 +1,51 @@
+.card {
+    // min-height: 6rem !important;
+
+    min-height: 35% !important;
+    border-radius: 0%;
+
+    .card-body {
+
+        height: 100% !important;
+
+        .note {
+            font-style: italic;
+            font-size: 14px;
+            font-weight: 600;
+            color: black;
+        }
+
+        .date {
+            font-size: small;
+        }
+
+        .doctor {
+            text-align: end;
+            font-size: small;
+            color: darkgrey;
+        }
+    }
+
+    &:hover {
+
+        background: #F7F8FA !important;
+        transform: scale(1.01);
+        border: 2px soild #0D67B5 !important;
+        box-shadow: 1px 3px 7px rgb(0 0 0 / 10%);
+    }
+}
+
+
+// .limitTextHeight {
+//     height: 20px;
+//     overflow: hidden;
+// }
+
+a {
+    color: #0D67B5 !important;
+    text-decoration: underline !important;
+
+    &:hover {
+        cursor: pointer;
+    }
+}

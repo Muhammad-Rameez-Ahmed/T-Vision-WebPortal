@@ -1,0 +1,84 @@
+<!-- <div class="card appointment">
+    <div class="stick">
+        <ul ngbNav #nav="ngbNav" class="nav-tabs m-0">
+            <li>
+                <div class="head">Appointments:</div>
+            </li>
+            <li [ngbNavItem]="1">
+                <a ngbNavLink>Scheduled</a>
+                <ng-template ngbNavContent>
+                    <app-appointments-table inputValue="upcoming"></app-appointments-table>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="2">
+                <a ngbNavLink>Completed</a>
+                <ng-template ngbNavContent>
+                    <app-appointments-table inputValue="history"></app-appointments-table>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="3">
+                <a ngbNavLink>Canceled</a>
+                <ng-template ngbNavContent>
+                    <app-appointments-table inputValue="history"></app-appointments-table>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="4">
+                <a ngbNavLink>Free Slots
+                </a>
+                <ng-template ngbNavContent>
+                    <app-appointments-table inputValue="history"></app-appointments-table>
+                </ng-template>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body p-0">
+        <div [ngbNavOutlet]="nav" class=""></div>
+    </div>
+</div> -->
+
+
+<div class="card">
+    <div class="card-header">
+        Appointments
+
+        <input type="date" class="date">
+    </div>
+    <div class="card-body">
+
+        <div class="p-2 mt-2">
+            <div class="row align-items-end" *ngFor="let appointments of timings">
+                <div class="col-sm-2 p-0">
+                    <span class="align-bottom des">{{appointments.time}}</span>
+                </div>
+                <div class="col-sm-10 p-0 border-bottom mb-2">
+                    <button type="button" class="pill-btn" *ngIf="appointments.booked">Appointments
+                        Open+</button>
+                    <div class="w-100" *ngIf="!appointments.booked">
+                        <div class="card-sm mb-3 mr-2">
+                            <div class="id p-2">ID: 12312312</div>
+                            <div class="row align-items-center">
+                                <div class="col-md-3 d-flex">
+                                    <img class="image-size profile-image-small mx-md-auto rounded-circle p-2"
+                                        src="../../../assets/images/Group 3465065.png" alt="">
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="name text-muted h-6">{{appointments.patientName}}</div>
+                                    <div class="des">{{appointments.reason}}</div>
+                                </div>
+                                <div class="col-md-2 p-0">
+
+                                    <span *ngIf="appointments.status === 'Canceled'"
+                                        class="badge badge-danger">Canceled</span>
+                                    <span *ngIf="appointments.status === 'Completed'"
+                                        class="badge badge-success">Completed</span>
+                                    <span *ngIf="appointments.status === 'Scheduled'"
+                                        class="badge badge-primary">Scheduled</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="card">
+    <div class="card-header">Complain</div>
+    <div class="card-body d-flex flex-column gap-4">
+        <div class="row">
+
+            <div class="d-flex flex-column col-md-6">
+
+                <span class="heading">Complainee Name</span>
+                <span>{{inputValue.patientId.patientUserName + " " + inputValue.patientId.patientLastName}}</span>
+            </div>
+
+            <div class="d-flex flex-column col-md-6">
+
+                <span class="heading">Complain Date</span>
+                <span>{{inputValue.complainUpdatedAt | date}}</span>
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="d-flex flex-column col-md-12">
+
+                <span class="heading">Complain</span>
+                <span>{{inputValue.complainDescription}}</span>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="d-flex flex-column col-md-12">
+
+                <span class="heading">Respond With</span>
+
+                <textarea [(ngModel)]="notes" class="ta" name="" id="" cols="28" rows="10"
+                    placeholder="Type response here..." required></textarea>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end gap-1">
+            <button class="close-btn" (click)="close()" type="close">
+                <span class=" fw-600">Close</span>
+            </button>
+            <button class="add-btn-submit" type="submit" [disabled]="loading || notes === ''" (click)="submit()">
+
+                <ng-container *ngIf=" loading">
+                    <span class="spinner-border spinner-border-sm me-2" role="status " aria-hidden="true"></span>
+                </ng-container>
+                <span class=" fw-600" [innerText]="loading ? 'Submitting' : 'Submit'">Submit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+@import '../../scss/tables/tables.scss';
+@import '../../scss/paginator/paginator.scss';
+
+.text-name {
+    width: 2px !important;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.name {
+    // font-family: sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+
+    color: #6B7A99;
+
+    /* Grey Blue 60 */
+}

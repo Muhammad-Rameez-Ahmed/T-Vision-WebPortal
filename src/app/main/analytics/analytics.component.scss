@@ -1,0 +1,64 @@
+.content {
+    overflow-y: overlay;
+}
+
+.stats {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+
+    .card {
+        max-width: 20rem;
+        min-height: 4.8rem;
+        width: calc(100% / 5);
+
+        .card-body {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .counts {
+                text-align: center;
+
+                .title {
+                    font-size: 10px;
+                    font-weight: 600;
+                    opacity: 0.7;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+
+}
+
+.card {
+    min-height: 24rem;
+}
+
+.text-name {
+    width: 64%;
+}
+
+.w-30 {
+    width: 30%;
+}
+
+// .units {
+//     align-items: center;
+//     display: flex;
+//     gap: 1rem;
+//     justify-content: space-between;
+
+//     .units__ft,
+//     .units__pages {
+//         text-align: center;
+
+//         .title {
+//             font-size: 10px;
+//             font-weight: 600;
+//             text-transform: uppercase;
+//             opacity: 0.7;
+//         }
+//     }
+// }

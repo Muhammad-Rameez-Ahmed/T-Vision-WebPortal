@@ -1,0 +1,62 @@
+.card {
+    min-height: 34rem;
+}
+
+.mhs {
+    font-weight: 600;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+
+.cursor {
+    cursor: pointer;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label,
+input.ng-valid+span.mat-form-field-label-wrapper .mat-form-field-label {
+    display: none !important;
+}
+
+.add-more {
+    border-top: 2px solid #0D67B5;
+    display: flex;
+    justify-content: end;
+}
+
+.droplet {
+    background-color: #0D67B5;
+    color: white;
+
+    padding: 0 0.5rem 0.5rem 0.5rem;
+    border-bottom-left-radius: 2rem;
+    cursor: pointer;
+    font-weight: 600;
+    // border-bottom-right-radius: 2rem;
+}
+
+.bolder {
+    font-weight: 600;
+}
+
+.up-size {
+    &:hover {
+        background: #F7F8FA !important;
+        transform: scale(1.01);
+        box-shadow: 1px 4px 7px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.sh {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    box-shadow: 1px 4px 7px rgba(0, 0, 0, 0.1);
+}

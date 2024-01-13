@@ -1,0 +1,84 @@
+<div class="form-container">
+    <div class="row g-0">
+        <div class="col-md-6 offset-md-3 border-bottom mt-4 mb-3 pb-3 px-0">
+            <div class="heading">
+                <img src="./assets/images/utilities/back.png" alt="back" [routerLink]="'/projects'">
+                <!-- <h1>overview / projects</h1> -->
+                <h2>{{formType}} Doctor</h2>
+            </div>
+        </div>
+        <div class="col-md-6 offset-md-3 mb-5 pb-3">
+            <form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit()">
+                <fieldset [disabled]="loading">
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="model.name" name="name" id="name"
+                                maxlength="32" placeholder="Enter full name here" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Description</label>
+                            <input type="description" class="form-control" [(ngModel)]="model.description"
+                                name="description" id="description" maxlength="32"
+                                placeholder="Enter description address here" required>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label for="team" class="form-label">Team</label>
+                            <ng-select [items]="teamsList" bindLabel="name" [(ngModel)]="model.team" name="team"
+                                id="team" placeholder="Select team from dropdown" [loading]="optLoading[0]"
+                                [disabled]="loading">
+                            </ng-select>
+                            <span class="x-small fw-light fst-italic pointer" [routerLink]="'/teams/form/new'">
+                                <span class="action-link d-inline">Click here to create new team record</span>
+                            </span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="client" class="form-label">Client</label>
+                            <ng-select [items]="clientsList" bindLabel="name" [(ngModel)]="model.client" name="client"
+                                id="client" placeholder="Select client from dropdown" [loading]="optLoading[1]"
+                                [disabled]="loading">
+                            </ng-select>
+                            <span class="x-small fw-light fst-italic pointer" [routerLink]="'/clients/form/new'">
+                                <span class="action-link d-inline">Click here to create new client record</span>
+                            </span>
+                        </div>
+
+                        <div class="col-md-12 mt-4">
+                            <span class="x-small border-top d-block w-100 pt-3">
+                                Here {{formType}} project will be assigned to designated status.<br />
+                                By default new project will be set as active status.
+                            </span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="status" class="form-label">Status</label>
+                            <ng-select [items]="statusList" bindLabel="name" [(ngModel)]="model.status" name="status"
+                                id="status" placeholder="Select status from dropdown" [disabled]="loading" required>
+                            </ng-select>
+                        </div>
+
+                        <div class="col-md-12 mt-5">
+                            <div class="d-flex justify-content-end gap-3">
+                                <button type="button" class="btn btn-link text-dark text-decoration-none fw-600"
+                                    [class.d-none]="formType === 'update'" [disabled]="form.untouched"
+                                    (click)="onReset(form)">Reset</button>
+                                <button type="submit" class="btn btn-dark px-4" [disabled]="form.invalid || loading">
+                                    <ng-container *ngIf="loading">
+                                        <span class="spinner-border spinner-border-sm me-2" role="status "
+                                            aria-hidden="true"></span>
+                                    </ng-container>
+                                    <span [innerText]="loading ? 'Loading...' : 'Continue'">Continue</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

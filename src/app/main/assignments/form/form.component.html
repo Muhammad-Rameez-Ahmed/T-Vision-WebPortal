@@ -1,0 +1,247 @@
+<div class="form-container">
+    <div class="row g-0">
+        <div class="col-md-6 offset-md-3 border-bottom mt-4 mb-3 pb-3 px-0">
+            <div class="heading">
+                <img src="./assets/images/utilities/back.png" alt="back"
+                    [routerLink]="isRevision ? '/submissions' : '/assignments'">
+                <h1>overview / assignments</h1>
+                <h2>{{formType}} assignment</h2>
+            </div>
+        </div>
+        <div class="col-md-6 offset-md-3 mb-5 pb-3">
+            <form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)">
+                <fieldset [disabled]="loading">
+                    <div class="row g-3">
+
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="model.name" name="name" id="name"
+                                maxlength="32" placeholder="Enter full name here"
+                                [disabled]="getPermissions(role.admin).id !== userRole?.id && getPermissions(role.team_lead).id !== userRole?.id"
+                                required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="locality" class="form-label">Locality</label>
+                            <input type="text" class="form-control" [(ngModel)]="model.locality" name="locality"
+                                id="locality" maxlength="32" placeholder="Enter full locality here"
+                                [disabled]="getPermissions(role.admin).id !== userRole?.id && getPermissions(role.team_lead).id !== userRole?.id"
+                                required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="link" class="form-label">link</label>
+                            <div class="input-group pointer">
+                                <input type="text" class="form-control" [(ngModel)]="model.link" name="link" id="link"
+                                    placeholder="Past link here" #copy
+                                    [disabled]="getPermissions(role.admin).id !== userRole?.id && getPermissions(role.team_lead).id !== userRole?.id">
+                                <span class="input-group-text copy__icon" id="password"
+                                    (click)="copyToClipboard(copy)"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="consLayout" class="form-label">cons. layout</label>
+                            <input type="text" class="form-control" [(ngModel)]="model.consLayout" name="consLayout"
+                                id="consLayout" placeholder="Enter cons. layout here"
+                                [disabled]="getPermissions(role.admin).id !== userRole?.id && getPermissions(role.team_lead).id !== userRole?.id"
+                                required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="jobType" class="form-label">Job Type</label>
+                            <ng-select [items]="jobTypesList" bindLabel="name" [(ngModel)]="model.jobType"
+                                name="jobType" id="jobType" placeholder="Select job type from dropdown"
+                                [disabled]="loading || (getPermissions(role.admin).id !== userRole?.id && getPermissions(role.team_lead).id !== userRole?.id)"
+                                required>
+                            </ng-select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="workType" class="form-label">Work Type</label>
+                            <ng-select [items]="workTypesList" bindLabel="name" [(ngModel)]="model.workType"
+                                name="workType" id="workType" placeholder="Select work type from dropdown"
+                                [disabled]="loading || (getPermissions(role.admin).id !== userRole?.id && getPermissions(role.team_lead).id !== userRole?.id)"
+                                required>
+                            </ng-select>
+                        </div>
+
+                        <ng-container *ngIf="this.model.workType?.id === 'tcp'">
+                            <div class="col-md-4">
+                                <label for="tcpType" class="form-label">TCP Type</label>
+                                <ng-select [items]="tcpTypesList" bindLabel="name" [(ngModel)]="model.tcpType"
+                                    name="tcpType" id="tcpType" placeholder="Select TCP type from dropdown"
+                                    [disabled]="loading || (getPermissions(role.admin).id !== userRole?.id && getPermissions(role.team_lead).id !== userRole?.id)"
+                                    required>
+                                </ng-select>
+                            </div>
+                        </ng-container>
+                        <!-- {{history|json}} -->
+                        <ng-container *ngIf="formType !== 'new'">
+                            <ng-container *ngFor="let item of model.files">
+                                <ng-container
+                                    *ngIf="item.memberID === userID || getPermissions(role.admin).id === userRole?.id || getPermissions(role.team_lead).id === userRole?.id || getPermissions(role.executive).id === userRole?.id || getPermissions(role.qc).id === userRole?.id">
+                                    <div class="col-md-12">
+                                        <label for="units" class="form-label">Units <i>(FT/PAGE/MEMBER)</i></label>
+                                        <div class="input-group pointer">
+                                            <!-- [disabled]="getPermissions(role.qc).id === userRole?.id" -->
+                                            <input type="text" class="form-control" [(ngModel)]="item.units.ft"
+                                                name="units.ft" id="units" placeholder="FT units"
+                                                (keypress)="isNumber($event)"
+                                                [required]="!item.units.ft && !item.units.pages && !isEdit">
+                                            <input type="text" class="form-control" [(ngModel)]="item.units.pages"
+                                                name="units.pages" id="units" placeholder="Pages unit"
+                                                (keypress)="isNumber($event)"
+                                                [required]="!item.units.ft && !item.units.pages && !isEdit">
+                                            <input type="text" class="form-control" [value]="item.memberName" readonly>
+                                            <!-- getMember(item.memberID) -->
+                                        </div>
+                                        <ng-container *ngIf="model.history.length !== 0">
+                                            <span class="x-small fw-light fst-italic pointer"
+                                                (click)="openModal(historyModal)">
+                                                <span class="action-link d-inline">Click here to view previous
+                                                    version</span>
+                                            </span>
+                                        </ng-container>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
+
+                        <div [ngClass]="this.model.workType?.id === 'tcp' ? 'col-md-4' : 'col-md-6'">
+                            <label for="projects" class="form-label">Project</label>
+                            <ng-select [items]="projectsList" bindLabel="name" [(ngModel)]="model.project"
+                                name="projects" id="projects" placeholder="Select projects from dropdown"
+                                [loading]="optLoading[0]" [disabled]="loading" (change)="getMembers()"
+                                [disabled]="getPermissions(role.admin).id !== userRole?.id && getPermissions(role.team_lead).id !== userRole?.id"
+                                required>
+                            </ng-select>
+                            <span class="x-small fw-light fst-italic pointer" [routerLink]="'/projects/form/new'">
+                                <span class="action-link d-inline">Click here to create new project record</span>
+                            </span>
+                        </div>
+
+                        <ng-container *ngIf="model.project">
+                            <div [ngClass]="this.model.workType?.id === 'tcp' ? 'col-md-4' : 'col-md-6'">
+                                <label for="team" class="form-label">Team</label>
+                                <ng-select [items]="[]" bindLabel="name" [(ngModel)]="model.project.team" name="team"
+                                    id="team" placeholder="Select team from dropdown" [readonly]="true">
+                                </ng-select>
+                                <span class="x-small fw-light fst-italic pointer"
+                                    [routerLink]="'/projects/form/' + model.project.id">
+                                    <span class="action-link d-inline">Click here to update project team
+                                        record</span>
+                                </span>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="members" class="form-label">Members</label>
+                                <ng-select [items]="membersList" bindLabel="name" [(ngModel)]="model.members"
+                                    name="members" id="members" placeholder="Select members from dropdown"
+                                    [multiple]="true"
+                                    [disabled]="getPermissions(role.admin).id !== userRole?.id && getPermissions(role.team_lead).id !== userRole?.id">
+                                </ng-select>
+                                <span class="x-small fw-light fst-italic pointer" [routerLink]="'/members/form/new'">
+                                    <span class="action-link d-inline">Click here to create new member record</span>
+                                </span>
+                            </div>
+                        </ng-container>
+
+                        <div class="col-md-12">
+                            <label for="comments" class="form-label">Comments</label>
+                            <textarea class="form-control" id="comments" rows="4" [(ngModel)]="model.comments"
+                                name="comments" placeholder="Comments goes here..." maxlength="256"></textarea>
+                            <span class="x-small fw-light text-end d-block"
+                                [class.text-danger]="model.comments.length > 200"
+                                [innerText]="256 - model.comments.length"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="status" class="form-label">Status</label>
+                            <ng-select [items]="statusList" bindLabel="name" [(ngModel)]="model.status" name="status"
+                                id="status" placeholder="Select status from dropdown" [disabled]="loading" required>
+                            </ng-select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="deadLine" class="form-label">Deadline</label>
+                            <input type="text" class="form-control datepicker" autocomplete="off"
+                                placeholder="Select deadline" [(ngModel)]="model.deadLine" name="deadLine" id="deadLine"
+                                [maxDate]="toDate ?? {year:9999, month: 0, day: 0}" ngbDatepicker #dl="ngbDatepicker"
+                                (click)="dl.open()"
+                                [disabled]="getPermissions(role.admin).id !== userRole?.id && getPermissions(role.team_lead).id !== userRole?.id"
+                                required>
+                        </div>
+
+                        <div class="col-md-12 mt-5">
+                            <div class="d-flex justify-content-end gap-3">
+                                <button type="button" class="btn btn-link text-dark text-decoration-none me-auto fw-600"
+                                    [class.d-none]="model.history.length === 0" (click)="openModal(historyModal)">View
+                                    previous version</button>
+                                <button type="button" class="btn btn-link text-dark text-decoration-none fw-600"
+                                    [class.d-none]="formType === 'update'" [disabled]="form.untouched"
+                                    (click)="onReset(form)">Reset</button>
+                                <button type="submit" class="btn btn-dark px-4" [disabled]="loading">
+                                    <ng-container *ngIf="loading">
+                                        <span class="spinner-border spinner-border-sm me-2" role="status "
+                                            aria-hidden="true"></span>
+                                    </ng-container>
+                                    <span [innerText]="loading ? 'Loading...' : 'Continue'">Continue</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+<ng-template #historyModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" [innerText]="model.name"></h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body p-0">
+        <table class="table border-top text-break">
+            <thead>
+                <tr>
+                    <td>Last Updated</td>
+                    <td class="text-center">Previous Units</td>
+                    <td>Comments</td>
+                    <td class="text-center">Status</td>
+                    <td>Action By</td>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let history of model.history">
+                    <tr>
+                        <td><span [innerText]="history.updated?.toDate()|date:'EEE, MMM d, y, h:mm a'"></span></td>
+                        <td class="text-center">
+                            <div class="units">
+                                <div class="units__ft">
+                                    <div class="total" [innerText]="getUnits(history.files, 'ft')|number"></div>
+                                    <div class="title">ft</div>
+                                </div>
+                                <div class="units__divider">|</div>
+                                <div class="units__pages">
+                                    <div class="total" [innerText]="getUnits(history.files, 'pages')|number"></div>
+                                    <div class="title">pages</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span [innerText]="history?.comments ?? 'N/a'"></span></td>
+                        <td class="text-center"><span [innerText]="history?.status?.name ?? 'N/a'"></span></td>
+                        <td><span [innerText]="history?.actionBy ?? 'N/a'"></span></td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white btn-sm px-4" (click)="modal.close()">
+            <span>Close</span>
+        </button>
+    </div>
+</ng-template>

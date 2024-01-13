@@ -1,0 +1,396 @@
+<div class="p-2">
+    <!-- <ng-container *ngFor="let item of list, let i = index">
+        <div class="card">
+            <div class="card-body">
+
+                <div class=" label">Name</div>
+                <div class="val">{{item.name}} </div>
+                <div class="label">{{item.info}} </div>
+                <div class="label mt-2">Description</div>
+                <div class="des" [ngClass]="{'limitTextHeight': isReadMore[i]}" [innerText]="item.des">Lorem ipsum
+                    dolor
+                    sit
+                    amet, consectetur
+                    adipiscing
+                    elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris
+                    nisi
+                    ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum
+                    dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+                    qui
+                    officia
+                    deserunt mollit anim id est laborum.</div>
+                <a (click)="showText(i)" class="badge badge-secondary">
+                    {{ isReadMore[i] ? 'Read More': 'Read Less' }}
+                </a>
+            </div>
+        </div>
+
+    </ng-container> -->
+    <ng-container *ngIf="inputValue === 'allergies'">
+        <ng-container *ngIf="allergies.length === 0">
+            <div class="d-flex justify-content-center">
+                <div class="label">No Allergies Selected</div>
+            </div>
+        </ng-container>
+        <ng-container *ngFor="let item of allergies">
+
+            <div class="border-bottom p-3 pt-0 hov">
+                <div class="row">
+                    <div class="my-2 col-lg-12">
+                        <div class="label">Name</div>
+                        <div class="val">{{item.allergyId.allergyName}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="my-2 col-lg-6">
+                        <div class="label">Symptoms</div>
+                        <div class="val">{{item.allergyId.allergySymptoms}}</div>
+                    </div>
+                    <div class="my-2 col-lg-6">
+                        <div class="label">Triggers</div>
+                        <div class="val">{{item.allergyId.allergyTriggers}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="my-2 col-lg-12">
+                        <div class="label">Treatment</div>
+                        <div class="val">{{item.allergyId.allergyTreatment}}</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="my-2 col-lg-12">
+
+                        <div class="label">Diagnosed On</div>
+                        <div class="val">{{item.diagnosesAllergiesUpdatedAt | date}}</div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="inputValue === 'labs'">
+        <ng-container *ngIf="labs.length === 0">
+            <div class="d-flex justify-content-center">
+                <div class="label">No Tests Selected</div>
+            </div>
+        </ng-container>
+        <ng-container *ngFor="let item of labs">
+
+            <div class="border-bottom p-3 pt-0 hov">
+                <div class="row">
+                    <div class="my-2 col-lg-6">
+                        <div class="label">Name</div>
+                        <div class="val">{{item.testName}}</div>
+                    </div>
+
+                    <div class="my-2 col-lg-6">
+
+                        <div class="label">Recommended On</div>
+                        <div class="val">{{item.testCreatedAt | date}}</div>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="my-2 col-lg-12">
+                        <div class="label">Results</div>
+                        <!-- <div class="val">{{ item.testResult}}</div> -->
+                        <div class="val-2">
+                            <ng-container *ngFor="let i of item.testResult">
+                                <div class="mb-2  border-bottom">
+
+                                    <div class="row">
+                                        <div class=" col-md-6">
+                                            Description
+                                        </div>
+                                        <div class="col-md-6">
+
+                                            {{i.Description}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Result
+                                        </div>
+                                        <div class="col-md-6">
+
+                                            {{i.Result}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Range
+                                        </div>
+                                        <div class="col-md-6">
+
+                                            {{i.NormalRange}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="inputValue === 'medication'">
+
+        <ng-container *ngIf="medication.length === 0">
+            <div class="d-flex justify-content-center">
+                <div class="label">No Medicines Selected</div>
+            </div>
+        </ng-container>
+        <ng-container *ngFor="let item of medication">
+            <div class="border-bottom p-3 pt-0 hov">
+                <div class="row">
+                    <div class="my-2 col-lg-6">
+                        <div class="label">Name</div>
+                        <div class="val">{{item.medicineId.medicineName}}</div>
+                    </div>
+
+                    <div class="my-2 col-lg-6">
+
+                        <div class="label">Prescribed On</div>
+                        <div class="val">{{item.prescribeMedicineUpdatedAt | date}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="my-2 col-lg-6">
+                        <div class="label">Formula</div>
+                        <div class="val">{{item.medicineId.medicineFormula}}</div>
+                    </div>
+                    <div class="my-2 col-lg-6">
+                        <div class="label">Purpose</div>
+                        <div class="val">{{item.medicineId.medicinePurpose}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="my-2 col-lg-12">
+                        <div class="label">Description</div>
+                        <div class="val">{{item.medicineId.medicineDescription}}</div>
+                    </div>
+                </div>
+
+                <!-- <div class="row"> -->
+
+                <div class="row">
+                    <div class="my-2 col-lg-6">
+                        <div class="label">Usage</div>
+                        <div *ngIf="item.prescribeMedicineIsDailyDosage===true">
+                            <!-- <input type="radio" [id]="'repeat'+item.medicineId" disabled
+                                [name]="'fav_language'+item.medicineId" [value]="true"> -->
+                            <label [for]="'repeat'+item.medicineId" class="val">Repeat</label><br>
+                        </div>
+                        <div *ngIf="item.prescribeMedicineIsDailyDosage===false">
+                            <!-- <input type="radio" [id]="'accute'+item.medicineId" disabled
+                                [name]="'fav_language'+item.medicineId" [value]="false"> -->
+                            <label [for]="'accute'+item.medicineId" class="val">Accute</label><br>
+                        </div>
+
+                    </div>
+                    <div class="my-2 col-lg-6">
+
+                        <div class="label">Timings</div>
+                        <div class="" *ngIf="item.prescribeMedicineMorning">
+                            <!-- <input class="-input" disabled type="checkbox" value=""
+                                [id]="'flexCheckDefault'+item.prescribeMedicineMorning"> -->
+                            <label class="val" [for]="'flexCheckDefault'+item.prescribeMedicineMorning">
+                                Morning
+                            </label>
+                        </div>
+                        <div class="" *ngIf="item.prescribeMedicineEvening">
+                            <!-- <input class="-input" disabled type="checkbox" value=""
+                                [id]="'flexCheckChecked'+item.prescribeMedicineEvening"> -->
+                            <label class="val" [for]="'flexCheckChecked'+item.prescribeMedicineEvening">
+                                Evening
+                            </label>
+                        </div>
+                        <div class="" *ngIf="item.prescribeMedicineNight">
+                            <!-- <input class="-input" disabled type="checkbox" value=""
+                                [id]="'flexCheckChecked'+item.prescribeMedicineNight"> -->
+                            <label class="val" [for]="'flexCheckChecked'+item.prescribeMedicineNight">
+                                Night
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="label">Prescription</div>
+                <div class="row">
+                    <div class="my-2 col-lg-6">
+
+                        <div class="label">Dosage</div>
+                        <div class="val">{{item.prescribeMedicineDosage}}</div>
+
+                    </div>
+                    <div class="my-2 col-lg-6">
+
+                        <div class="label">How many days?</div>
+                        <div class="val">{{item.prescribeMedicineTimeTaken}}</div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="item.prescribeMedicineNotes">
+                    <div class="my-2 col-lg-12">
+                        <div class="label">Note</div>
+                        <div class="val">{{item.prescribeMedicineNotes}}</div>
+                    </div>
+                </div>
+
+            </div>
+        </ng-container>
+    </ng-container>
+
+
+    <ng-container *ngIf="inputValue === 'immunization'">
+
+        <ng-container *ngIf="immunization.length === 0">
+            <div class="d-flex justify-content-center">
+                <div class="label">No Medicines Selected</div>
+            </div>
+        </ng-container>
+        <ng-container *ngFor="let item of immunization">
+            <div class="border-bottom p-3 pt-0 hov">
+                <div class="row">
+                    <div class="my-2 col-lg-12">
+                        <div class="label">Name</div>
+                        <div class="val">{{item.medicineId.medicineName}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="my-2 col-lg-6">
+                        <div class="label">Formula</div>
+                        <div class="val">{{item.medicineId.medicineFormula}}</div>
+                    </div>
+                    <div class="my-2 col-lg-6">
+                        <div class="label">Purpose</div>
+                        <div class="val">{{item.medicineId.medicinePurpose}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="my-2 col-lg-12">
+                        <div class="label">Description</div>
+                        <div class="val">{{item.medicineId.medicineDescription}}</div>
+                    </div>
+                </div>
+
+                <!-- <div class="row"> -->
+
+                <div class="row">
+                    <div class="my-2 col-lg-6">
+                        <div class="label">Usage</div>
+                        <div *ngIf="item.prescribeMedicineIsDailyDosage===true">
+                            <!-- <input type="radio" [id]="'repeat'+item.medicineId" disabled
+                                [name]="'fav_language'+item.medicineId" [value]="true"> -->
+                            <label [for]="'repeat'+item.medicineId" class="val">Repeat</label><br>
+                        </div>
+                        <div *ngIf="item.prescribeMedicineIsDailyDosage===false">
+                            <!-- <input type="radio" [id]="'accute'+item.medicineId" disabled
+                                [name]="'fav_language'+item.medicineId" [value]="false"> -->
+                            <label [for]="'accute'+item.medicineId" class="val">Accute</label><br>
+                        </div>
+
+                    </div>
+                    <div class="my-2 col-lg-6">
+
+                        <div class="label">Timings</div>
+                        <div class="" *ngIf="item.prescribeMedicineMorning">
+                            <!-- <input class="-input" disabled type="checkbox" value=""
+                                [id]="'flexCheckDefault'+item.prescribeMedicineMorning"> -->
+                            <label class="val" [for]="'flexCheckDefault'+item.prescribeMedicineMorning">
+                                Morning
+                            </label>
+                        </div>
+                        <div class="" *ngIf="item.prescribeMedicineEvening">
+                            <!-- <input class="-input" disabled type="checkbox" value=""
+                                [id]="'flexCheckChecked'+item.prescribeMedicineEvening"> -->
+                            <label class="val" [for]="'flexCheckChecked'+item.prescribeMedicineEvening">
+                                Evening
+                            </label>
+                        </div>
+                        <div class="" *ngIf="item.prescribeMedicineNight">
+                            <!-- <input class="-input" disabled type="checkbox" value=""
+                                [id]="'flexCheckChecked'+item.prescribeMedicineNight"> -->
+                            <label class="val" [for]="'flexCheckChecked'+item.prescribeMedicineNight">
+                                Night
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="label">Prescription</div>
+                <div class="row">
+                    <div class="my-2 col-lg-6">
+
+                        <div class="label">Dosage</div>
+                        <div class="val">{{item.prescribeMedicineDosage}}</div>
+
+                    </div>
+                    <div class="my-2 col-lg-6">
+
+                        <div class="label">How many days?</div>
+                        <div class="val">{{item.prescribeMedicineTimeTaken}}</div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="item.prescribeMedicineNotes">
+                    <div class="my-2 col-lg-12">
+                        <div class="label">Note</div>
+                        <div class="val">{{item.prescribeMedicineNotes}}</div>
+                    </div>
+                </div>
+
+
+            </div>
+        </ng-container>
+    </ng-container>
+
+
+    <ng-container *ngIf="inputValue ==='problems'">
+        <ng-container *ngIf="problems.length === 0">
+            <div class="d-flex justify-content-center">
+                <div class="label">No Problems Selected</div>
+            </div>
+        </ng-container>
+        <ng-container *ngFor="let item of problems">
+
+
+            <div class="border-bottom p-3 pt-0 hov">
+                <div class="row">
+                    <div class="my-2 col-lg-6">
+                        <div class="label">Name</div>
+                        <div class="val">{{item.diseaseID.diseaseName}}</div>
+                    </div>
+                    <div class="my-2 col-lg-6">
+                        <div class="label">Precautions</div>
+                        <div class="val">{{item.diseaseID.diseaseSymptoms}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="my-2 col-lg-12">
+                        <div class="label">Description</div>
+                        <div class="val">{{item.diseaseID.diseaseDescription}}</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="my-2 col-lg-12">
+
+                        <div class="label">Diagnosed On</div>
+                        <div class="val">{{item.diagnosesDiseaseUpdatedAt | date}}</div>
+                    </div>
+                </div>
+            </div>
+
+        </ng-container>
+    </ng-container>
+</div>

@@ -1,0 +1,193 @@
+<div class="d-flex justify-content-end">
+    <button class="btn btn-primary my-lg-0 my-2 display-left mb-2" (click)="convertToJson()">
+        <span class="fw-600">Exports</span>
+    </button>
+</div>
+<!-- <div class="card mb-2">
+    <div class="card-header">
+        Profile
+    </div>
+    <div class="card-body">
+        <div class="">
+            <div class="d-flex flex-column">
+                <div class="nhs-id mb-2">NHS ID: 123123</div>
+                <div class="w-100 d-flex justify-content-center justify-content-lg-start">
+                    <img [src]="this.patient?.patientUserProfile" alt="icon" class="profile" />
+                </div>
+            </div>
+            <div class="">
+                <button class="add-btn display-left mt-lg-0 mt-2 default">
+                    <span class="fw-600">
+                        import CSV Data
+                    </span>
+                </button>
+            </div>
+        </div>
+        <div class="row pt-2">
+            <div class="col-lg-2">
+                <div class="label">Name</div>
+                <div class="val">{{patient?.patientUserName + ' ' + patient?.patientLastName}}</div>
+            </div>
+            <div class="col-lg-2">
+                <div class="label">Age</div>
+                <div class="val">{{patient?.patientUserAge + ' Years'}}</div>
+            </div>
+            <div class="col-lg-3">
+                <div class="label">Email</div>
+                <div class="val">{{patient?.patientEmail}}</div>
+            </div>
+            <div class="col-lg-3">
+                <div class="label">Phone No.</div>
+                <div class="val">{{patient?.patientUserPhone}}</div>
+            </div>
+            <div class="col-lg-2">
+                <div class="label">Status</div>
+                <div class="val">{{patient?.patientIsActive}}</div>
+            </div>
+        </div>
+
+    </div>
+</div> -->
+<div class="row my-2">
+    <app-patient-details></app-patient-details>
+</div>
+
+<div class="row my-2">
+    <div class="col-lg-4  my-lg-0 my-2">
+        <!-- <div class="mb-2">
+            <button class=" add-btn" (click)="addAppointment()">
+                <span class="fw-600">Add Appointment
+                </span>
+            </button>
+        </div> -->
+        <div class="card appointment">
+            <div class="stick">
+                <ul ngbNav #nav="ngbNav" class="nav-tabs m-0">
+                    <li>
+                        <div class="head">Appointments:</div>
+                    </li>
+                    <li [ngbNavItem]="1">
+                        <a ngbNavLink>Upcoming</a>
+                        <ng-template ngbNavContent>
+                            <app-appointments-table [list]="upcoming"></app-appointments-table>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="2">
+                        <a ngbNavLink>History</a>
+                        <ng-template ngbNavContent>
+                            <app-appointments-table [list]="history"></app-appointments-table>
+                        </ng-template>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body p-0">
+                <div [ngbNavOutlet]="nav" class=""></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8  my-lg-0 my-2 records">
+        <!-- <div class="mb-2"> -->
+        <!-- <div class="d-lg-flex justify-content-end gap-2">
+                <button class=" add-btn my-lg-0 my-2 display-left" (click)="export()">
+                    <span class="fw-600">Add Records
+                    </span>
+                </button> -->
+        <!-- <button class="add-btn my-lg-0 my-2">
+                    <span class="fw-600">Add JSON Records
+                    </span>
+                </button> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <div class="card appointment">
+            <div class="stick">
+                <ul ngbNav #nav2="ngbNav" class="nav-tabs m-0">
+                    <li>
+                        <div class="head">Records:</div>
+                    </li>
+                    <li [ngbNavItem]="1">
+                        <a ngbNavLink>Problems</a>
+                        <ng-template ngbNavContent>
+                            <app-records-table inputValue="problems" [patientId]="patientId"
+                                [inputList]="data"></app-records-table>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="2">
+                        <a ngbNavLink>Allergies</a>
+                        <ng-template ngbNavContent>
+                            <app-records-table inputValue="allergies" [patientId]="patientId"
+                                [inputList]="data"></app-records-table>
+                        </ng-template>
+                    </li>
+                    <!-- <li [ngbNavItem]="3">
+                        <a ngbNavLink>Immunization</a>
+                        <ng-template ngbNavContent>
+                            <app-records-table inputValue="immunization" [patientId]="patientId"></app-records-table>
+                        </ng-template>
+                    </li> -->
+                    <li [ngbNavItem]="3">
+                        <a ngbNavLink>Medication</a>
+                        <ng-template ngbNavContent>
+                            <app-records-table inputValue="medication" [patientId]="patientId"
+                                [inputList]="data"></app-records-table>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="4">
+                        <a ngbNavLink>Labs</a>
+                        <ng-template ngbNavContent>
+                            <app-records-table inputValue="labs" [patientId]="patientId"
+                                [inputList]="sdata"></app-records-table>
+                        </ng-template>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class=" card-body p-0 ">
+
+                <div [ngbNavOutlet]="nav2" class=""></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row my-2">
+    <div class="col-lg-4 my-lg-0 my-2 ">
+        <div class="card appointment">
+            <div class="stick">
+
+                <div class="head border-bottom shadow stick">Proxy Users</div>
+            </div>
+            <div class="card-body p-0">
+                <app-proxy-users></app-proxy-users>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-4 my-lg-0 my-2 ">
+        <div class="card appointment">
+            <div class="stick">
+                <div class="head border-bottom shadow">Doctors Note
+                </div>
+            </div>
+
+            <div class="card-body p-0">
+                <app-doctors-note [notesList]="notesList"></app-doctors-note>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-4 my-lg-0 my-2 ">
+        <div class="card appointment">
+            <div class="stick">
+
+                <div class="head border-bottom shadow">Triage</div>
+            </div>
+            <div class="card-body p-0">
+                <app-trivage></app-trivage>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,166 @@
+<div class="card" [ngClass]="{'card-update': updateValue}">
+    <div class="card-header">{{inputValue}} Doctor</div>
+    <div class="card-body p-4">
+        <form [formGroup]="doctorForm">
+            <div class="mhs">
+                <img class="" src="{{image? image: '../../../assets/images/icons8-plus-64.png'}}" alt=""
+                    (click)="getFile()">
+                <input class="mt-2" type="file" hero nbInput name="file1" id="userimage" accept="image/*"
+                    (change)="InputImage($event)" hidden required />
+
+            </div>
+
+            <label class="mhs">Doctor Profile Picture</label>
+            <!-- <div class="row p-1">
+                <div class="col-md-12">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>NHS ID:</mat-label>
+                        <input matInput placeholder="123123" [(ngModel)]="model.patientNhsId" name="NHSID" required>
+                    </mat-form-field>
+
+                </div>
+            </div> -->
+            <div class="row p-1">
+                <div [ngClass]="{'col-md-6': !updateValue, 'col-md-12': updateValue}">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="John" formControlName="name" name="firstname" required>
+                        <mat-error *ngIf="doctorForm.controls['name'].invalid && doctorForm.controls['name'].touched">
+                            Name is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6" *ngIf="!updateValue">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Category</mat-label>
+                        <mat-select formControlName="category" appearance="fill" required>
+                            <mat-option *ngFor="let item of categories" [value]="item.docCategoryId">
+                                {{item.docCategoryName}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error
+                            *ngIf="doctorForm.controls['category'].hasError('required') && doctorForm.controls['category'].touched">
+                            Category is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <!-- <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput placeholder="Doe" [(ngModel)]="model.patientLastName" name=" lastname" required>
+                    </mat-form-field>
+                </div> -->
+            </div>
+            <!-- <div class="row p-1"> -->
+            <!-- <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Address</mat-label>
+                        <input matInput placeholder="123 street" [(ngModel)]="model.patientUserAddress" name="address"
+                            required>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-3">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Age</mat-label>
+                        <input matInput type="number" min="18" placeholder="25" [(ngModel)]="model.patientUserAge"
+                            name="age" required>
+                    </mat-form-field>
+                </div> -->
+            <!-- </div> -->
+
+            <div class="row p-1" *ngIf="!updateValue">
+                <div [ngClass]="{'col-md-6': !updateValue, 'col-md-12': updateValue}">
+                    <mat-form-field class=" example-full-width">
+                        <mat-label>Email</mat-label>
+                        <input matInput autocomplete="current-password webauthn"
+                            [pattern]="'[^@ \t\r\n]+@[^@ . \t\r\n]+\.[^@. \t\r\n][^@ \t\r\n]+'"
+                            placeholder="john@gmail.com" name="emailnew" formControlName="email" required>
+                        <mat-error
+                            *ngIf="doctorForm.controls['email'].hasError('required') && doctorForm.controls['email'].touched">
+                            Email is required
+                        </mat-error>
+                        <mat-error
+                            *ngIf="doctorForm.controls['email'].hasError('pattern') && doctorForm.controls['email'].touched">
+                            Email is invalid
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6" *ngIf="!updateValue">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Password</mat-label>
+                        <input matInput type="password" placeholder="something" name="passwordnwe"
+                            formControlName="password" required>
+                        <mat-error
+                            *ngIf="doctorForm.controls['password'].hasError('required') && doctorForm.controls['password'].touched">
+                            Password is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row p-1">
+
+                <div [ngClass]="{'col-md-8': !updateValue, 'col-md-12': updateValue}">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Contact</mat-label>
+                        <input matInput [pattern]="'([0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9])'"
+                            placeholder="0213123123" formControlName="contact" name="contact" required>
+                        <mat-error
+                            *ngIf="doctorForm.controls['contact'].hasError('required') && doctorForm.controls['contact'].touched">
+                            Contact is required
+                        </mat-error>
+                        <mat-error
+                            *ngIf="doctorForm.controls['contact'].hasError('pattern') && doctorForm.controls['contact'].touched">
+                            Contact is invalid
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <!-- <div class="col-md-4" *ngIf="!updateValue">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Status</mat-label>
+                        <mat-select [(value)]="model.doctorIsActive" appearance="fill" required>
+                            <mat-option value="ACTIVE">ACTIVE</mat-option>
+                            <mat-option value="INACTIVE">INACTIVE</mat-option>
+                        </mat-select>
+
+                    </mat-form-field>
+                </div> -->
+
+                <div class="col-md-4" *ngIf="!updateValue">
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Gender</mat-label>
+                        <mat-select formControlName="gender" appearance="fill" required>
+                            <mat-option *ngFor="let item of gender" [value]="item.id">
+                                {{item.name}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error
+                            *ngIf="doctorForm.controls['gender'].hasError('required') && doctorForm.controls['gender'].touched">
+                            Gender is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="d-flex flex-reverse justify-content-end">
+
+
+                <button class="close-btn" (click)="close()" type="close">
+                    <span class=" fw-600">Close</span>
+                </button>
+                <button class="add-btn-submit" type="submit" (click)="updateValue? update() : submit()"
+                    [disabled]="loading || doctorForm.invalid">
+
+                    <ng-container *ngIf=" loading">
+                        <span class="spinner-border spinner-border-sm me-2" role="status " aria-hidden="true"></span>
+                    </ng-container>
+                    <span class=" fw-600" [innerText]="loading ? 'Submitting' : 'Submit'">Submit</span>
+                </button>
+
+            </div>
+
+
+        </form>
+    </div>
+</div>

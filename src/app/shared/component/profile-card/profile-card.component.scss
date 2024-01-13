@@ -1,0 +1,75 @@
+.mhs {
+    // min-height: 8rem;
+    display: flex;
+    justify-content: center;
+}
+
+.wid {
+    width: fit-content;
+}
+
+.profiler {
+    display: block;
+    // max-height: 6rem;
+    // object-fit: fill;
+    padding: 0px;
+    background-color: transparent;
+    object-position: center;
+    border-radius: 10rem;
+    // width: 13%;
+    // height: 118%;
+    // min-height: 6rem;
+}
+
+
+.nhs-id {
+
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 21px;
+    /* identical to box height */
+
+
+    color: #9E9D9D;
+}
+
+.val {
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 30px;
+    /* identical to box height */
+
+
+    color: #000000;
+}
+
+.label {
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 30px;
+    text-transform: capitalize;
+}
+
+
+img {
+
+    width: 5rem !important;
+    height: 5rem;
+    object-fit: cover;
+}
+
+.rounder {
+    border-radius: 2rem;
+}
+
+
+.name {
+
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}

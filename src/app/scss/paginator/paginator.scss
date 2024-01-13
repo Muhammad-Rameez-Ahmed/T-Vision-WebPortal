@@ -1,0 +1,33 @@
+::ng-deep .page-item .page-link {
+    margin-left: 1px;
+}
+
+::ng-deep .page-link {
+    background-color: transparent;
+    border-radius: 3rem;
+    border: none;
+    margin: 1px;
+    box-shadow: none !important;
+
+    &:disabled {
+        background-color: transparent !important;
+    }
+}
+
+::ng-deep .pagination {
+
+    --bs-pagination-disabled-bg: transparent !important;
+}
+
+::ng-deep .pagination-sm {
+    --bs-pagination-padding-x: 0.65rem;
+    border-radius: 3rem;
+}
+
+::ng-deep .page-item:last-child .page-link {
+    border-radius: 3rem;
+}
+
+::ng-deep .page-item:first-child .page-link {
+    border-radius: 3rem;
+}

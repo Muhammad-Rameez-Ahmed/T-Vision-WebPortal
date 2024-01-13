@@ -1,0 +1,118 @@
+<div class="d-flex justify-content-between mb-3">
+
+    <div class="heading">
+        <h1>personal / settings</h1>
+        <h2>teams</h2>
+    </div>
+
+    <button class="btn btn-outline-secondary btn-sm px-4" [routerLink]="'/teams/form/new'">
+        <span class="fw-600 text-uppercase">add team</span>
+    </button>
+
+</div>
+
+<div class="d-flex">
+
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <!-- <div class="card-header__datepicker">
+
+                <div class="input-group input-group-sm ml-auto">
+                    <div class="input-group">
+                        <input type="text" class="form-control datepicker" autocomplete="off" placeholder="Start Date"
+                            [(ngModel)]="fromDate" name="fromDate" id="fromDate"
+                            [maxDate]="toDate ?? {year:9999, month: 0, day: 0}" ngbDatepicker #sd="ngbDatepicker"
+                            (click)="sd.open()">
+                        <input type="text" class="form-control datepicker" autocomplete="off" placeholder="End Date"
+                            [(ngModel)]="toDate" name="toDate" id="toDate"
+                            [minDate]="fromDate ?? {year:0, month: 0, day: 0}" ngbDatepicker #ed="ngbDatepicker"
+                            (click)="ed.open()">
+                        <span class="input-group-text datepicker__icon pointer" (click)="fetchData()"></span>
+                    </div>
+                </div>
+
+            </div> -->
+
+            <div class="card-header__reset ms-auto">
+                <span (click)="resetFilter()">reset</span>
+            </div>
+
+            <div class="card-header__search">
+                <input type="search" [(ngModel)]="search" name="search" [disabled]="loading" autocomplete="off"
+                    placeholder="Search..." (keyup.enter)="fetchData()" (change)="search === '' ? fetchData() : ''">
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th class="sort" (click)="sort('name')">name</th>
+                        <th class="sort text-center" (click)="sort('status')">status</th>
+                        <th class="text-end">actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of list; let i = index;">
+                        <tr [ngClass]="getColumnsColors(item.status)" [style.background-color]="getColors(i)">
+                            <td><span [innerText]="i+1"></span></td>
+                            <td class="text-name">
+                                <span class="name" [innerText]="item.name"></span>
+                                <span class="time">
+                                    <span class="time__created"
+                                        [innerText]="'Created at: '+ (item.created?.toDate() | date: 'EEE, MMM d, y, h:mm a')"></span>
+                                    <span class="time__updated"
+                                        [innerText]="'Modified at: '+ (item.updated?.toDate() | date: 'EEE, MMM d, y, h:mm a')"></span>
+                                </span>
+                            </td>
+                            <td class="text-center"><span [innerText]="item.status?.name ?? 'N/a'"></span></td>
+                            <td class="text-end">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-white px-4" [class.d-none]="+item.id === -1"
+                                        [routerLink]="['/teams/form', item.id]">
+                                        <img src="./assets/images/utilities/edit.png" alt="edit">
+                                        <span>Edit</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <ng-container *ngIf="list.length === 0 && !loading">
+                        <tr class="loading border-bottom-0">
+                            <td colspan="4" class="border-bottom-0">
+                                <div class="d-flex justify-content-center my-5">
+                                    <h5 class="text-uppercase text-muted">
+                                        no record found!
+                                    </h5>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <ng-container *ngIf="loading">
+                        <tr class="loading border-bottom-0">
+                            <td colspan="4" class="border-bottom-0">
+                                <div class="d-flex justify-content-center my-5">
+                                    <div class="spinner-border" role="status"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <div class="card-footer__select small">
+                <span>Showing</span>
+                <select (change)="fetchData()" [(ngModel)]="size" [disabled]="loading" name="size" id="size">
+                    <option value="25">25</option>
+                    <option value="250">250</option>
+                    <option value="500">500</option>
+                </select>
+                <span>of {{list.length}} entries</span>
+            </div>
+            <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="size" [boundaryLinks]="true"
+                [disabled]="loading" size="sm" (pageChange)=" field = 'index'; fetchData();"></ngb-pagination>
+        </div>
+    </div>
+
+</div>

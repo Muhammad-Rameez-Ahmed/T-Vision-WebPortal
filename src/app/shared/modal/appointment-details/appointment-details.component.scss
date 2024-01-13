@@ -1,0 +1,696 @@
+.card-modal {
+    border: 1px solid #C5C5C5;
+    min-height: 100%;
+}
+
+.card-patient {
+    margin-top: 0.5rem;
+    border: none;
+    box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.card-body {
+    // overflow: hidden;
+}
+
+.card-header-modal {
+    border-bottom: 1px solid #C5C5C5;
+}
+
+.card {
+    min-height: 91vh;
+    overflow-x: hidden;
+}
+
+.ngb-date {
+    box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+i {
+    position: relative;
+    display: inline-block;
+    font-size: 2.5rem;
+    padding-right: 0.1rem;
+    color: #d3d3d3;
+}
+
+.filled {
+    color: red;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.name {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 22px;
+
+    color: #000000;
+
+}
+
+.details {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 16px;
+
+    color: #757373;
+}
+
+.profile {
+    max-height: 70px;
+    width: auto;
+    border-radius: 100%;
+}
+
+.date {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 20px;
+    /* identical to box height, or 200% */
+
+
+    color: #000000;
+
+}
+
+.btn-pill {
+    background-color: transparent;
+    border: 1px solid #446ACD;
+    border-radius: 25px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    /* identical to box height */
+    margin-right: 5%;
+    margin-top: 2%;
+    text-align: center;
+    justify-content: center;
+    width: 6rem;
+    color: #446ACD;
+    padding: 0.3rem 1rem 0.3rem 1rem;
+
+    .rdio:checked,
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: #446ACD;
+        color: white;
+    }
+
+    &:disabled {
+        color: #CACBCF;
+        border: 1px solid #CACBCF !important;
+        background-color: transparent;
+    }
+}
+
+.btn-group {
+    justify-content: space-between;
+    gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.btn {
+    background-color: transparent;
+    color: #446ACD;
+    border: 1px solid #446ACD !important;
+    border-radius: 25rem !important;
+    width: 6rem;
+    justify-content: center;
+
+
+    &:hover,
+    &:active {
+        background-color: #446ACD !important;
+        color: #ffffff;
+    }
+
+    &:disabled {
+        color: #CACBCF;
+        border: 1px solid #CACBCF !important;
+        background-color: transparent;
+    }
+}
+
+
+.active {
+    background-color: #446ACD !important;
+    color: #ffffff;
+}
+
+.btn-focus-active {
+
+    background-color: #446ACD !important;
+    color: white;
+}
+
+.max {
+    margin-bottom: 10px;
+}
+
+.appointment {
+    // background-image: url('../../../../assets/images/Group 18383.png');
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: 1px solid #446ACD !important;
+    border-radius: 10px;
+    background-position: left 0.5rem center;
+    padding: 1rem 0rem 1rem 4rem;
+    text-align: left;
+    margin-bottom: 0.33333rem;
+    width: 100%;
+
+    &:disabled {
+        opacity: 0.5;
+    }
+}
+
+.type {
+
+    font-weight: 500;
+    font-size: 75%;
+    line-height: 21px;
+    /* identical to box height */
+
+
+    color: #436ACD;
+}
+
+.des {
+
+    font-weight: 500;
+    font-size: 66.67%;
+    line-height: 15px;
+    /* identical to box height */
+
+
+    color: #1B1B1B;
+}
+
+.patient {
+
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    /* identical to box height, or 154% */
+    padding-top: 0.4375rem;
+    padding-bottom: 0.4375rem;
+
+    color: #000000;
+}
+
+::ng-deep .modal-search {
+    float: right;
+
+
+    .ng-select {
+        width: 11.3rem !important;
+        transition: all .2s ease-in-out !important;
+    }
+
+
+    .ng-select .ng-clear-wrapper,
+    .ng-select .ng-arrow-wrapper,
+    .ng-touched .ng-dirty .ng-select .ng-has-value .ng-placeholder,
+    .ng-select-filtered .ng-has-value .ng-placeholder {
+        display: none !important;
+    }
+
+
+    //     {
+    //     display: none !important;
+    // }
+
+    .ng-pristine {
+        .ng-placeholder {
+            display: block !important;
+        }
+    }
+
+    // .ng-select .ng-arrow-wrapper {
+    //     display: none;
+    // }
+
+
+    .ng-select.ng-select-single .ng-select-container,
+    .ng-select.ng-select-opened.ng-select-top>.ng-select-container {
+
+        height: 36px !important;
+        width: 11rem !important;
+        background-image: url("data:image/svg+xml,%3csvg fill='%230D67B5' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3e%3cpath d='M0 0h24v24H0z' fill='none'/%3e%3c/svg%3e") !important;
+        background-position: right 7px center !important;
+        background-repeat: no-repeat !important;
+        font-size: .75rem !important;
+        line-height: 1.5 !important;
+        color: #0D67B5 !important;
+        background-color: #F5F3FF !important;
+        border: none !important;
+        font-weight: 500 !important;
+        border-radius: 25rem !important;
+        padding: 0.4375rem 0.625rem 0.4375rem 0.625rem !important;
+        min-width: 11.25rem !important;
+    }
+
+
+
+
+    // .ng-select.ng-select-opened.ng-select-top>.ng-select-container {
+
+
+    //     height: 36px;
+    //     width: 11rem;
+    //     background-image: url("data:image/svg+xml,%3csvg fill='%230D67B5' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3e%3cpath d='M0 0h24v24H0z' fill='none'/%3e%3c/svg%3e");
+    //     background-position: right 7px center;
+    //     background-repeat: no-repeat;
+    //     font-size: .75rem;
+    //     line-height: 1.5;
+    //     color: #0D67B5;
+    //     background-color: #F5F3FF;
+    //     border: none;
+    //     font-weight: 500;
+    //     border-radius: 25rem;
+    //     padding: 0.4375rem 0.625rem 0.4375rem 0.625rem;
+    //     min-width: 11.25rem;
+    // }
+
+    .ng-select.ng-select-opened.ng-select-bottom>.ng-select-container {
+
+        border-radius: 25rem !important;
+    }
+
+
+    .ng-dropdown-panel.ng-select-bottom,
+    .ng-dropdown-panel.ng-select-top {
+
+        width: 19rem !important;
+        left: -68% !important;
+        box-shadow: 1px 4px 7px rgb(0 0 0 / 10%) !important;
+    }
+
+
+
+    // .ng-dropdown-panel.ng-select-top {
+    //     width: 19rem;
+    //     left: -68%;
+    //     box-shadow: 1px 4px 7px rgb(0 0 0 / 10%);
+    // }
+
+    .ng-select .ng-select-container .ng-value-container .ng-input>input {
+        // padding: 5px;
+        padding-left: 13px !important;
+    }
+
+    // ::ng-deep .ng-dropdown-panel {
+    //     right: -68%;
+    // }
+
+    .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+        // &:hover {
+        background-color: #F7F8FA !important;
+        transform: scale(1.01) !important;
+        border: 1px solid #F7F8FA !important;
+        box-shadow: 1px 4px 7px rgb(0 0 0 / 10%) !important;
+        // }
+    }
+
+    .ng-dropdown-panel .ng-dropdown-panel-items {
+        overflow-y: overlay !important;
+    }
+
+
+
+    .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+        border: 1px solid #F7F8FA !important;
+    }
+
+    .ng-select.ng-select-single .ng-select-container .ng-value-container,
+    .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value,
+    .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
+        padding-left: 10px !important;
+        width: 7rem !important;
+    }
+
+    // .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
+    //     width: 7rem !important;
+    // }
+
+
+    // .ng-select .ng-has-value .ng-placeholder.untouched {
+    //     display: block;
+    // }
+
+    ng-select .ng-value,
+    ng-select .ng-placeholder {
+        padding-left: 10px !important;
+        font-weight: 500 !important;
+    }
+
+    .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
+        top: 8px !important;
+        left: 0 !important;
+        padding-left: 17px !important;
+        padding-right: 50px !important;
+    }
+
+    // input {
+    //     font-size: .75rem !important;
+    //     line-height: 1.5 !important;
+    //     color: #0D67B5 !important;
+    //     background-color: #F5F3FF !important;
+    //     border: none !important;
+    //     font-weight: 500 !important;
+    //     border-radius: 25rem !important;
+    //     padding: 0.4375rem 0.625rem 0.4375rem 0.625rem !important;
+    //     min-width: 11.25rem !important;
+    //     // background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjQ0FDRURCIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gICAgPHBhdGggZD0iTTE1LjUgMTRoLS43OWwtLjI4LS4yN0MxNS40MSAxMi41OSAxNiAxMS4xMSAxNiA5LjUgMTYgNS45MSAxMy4wOSAzIDkuNSAzUzMgNS45MSAzIDkuNSA1LjkxIDE2IDkuNSAxNmMxLjYxIDAgMy4wOS0uNTkgNC4yMy0xLjU3bC4yNy4yOHYuNzlsNSA0Ljk5TDIwLjQ5IDE5bC00Ljk5LTV6bS02IDBDNy4wMSAxNCA1IDExLjk5IDUgOS41UzcuMDEgNSA5LjUgNSAxNCA3LjAxIDE0IDkuNSAxMS45OSAxNCA5LjUgMTR6Ii8+ICAgIDxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48L3N2Zz4=);
+    //     background-image: url("data:image/svg+xml,%3csvg fill='%230D67B5' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3e%3cpath d='M0 0h24v24H0z' fill='none'/%3e%3c/svg%3e") !important;
+    //     background-position: right 7px center !important;
+    //     background-repeat: no-repeat !important;
+    //     background-size: 1.25rem !important;
+    // }
+
+    .drop {
+        width: 30rem;
+        overflow: scroll;
+        background-color: white;
+        z-index: 10;
+        position: fixed;
+        box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.1);
+        padding: 0% !important;
+
+        .item {
+            &:hover {
+                background: #F7F8FA !important;
+                transform: scale(1.01);
+                border: 1px soild #0D67B5 !important;
+
+                box-shadow: 1px 4px 7px rgb(0 0 0 / 10%);
+            }
+        }
+    }
+}
+
+input::placeholder {
+    color: #0D67B5;
+    font-weight: 500;
+}
+
+.patientName {
+
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    /* identical to box height */
+
+
+    color: #000000;
+}
+
+.patientNum {
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    /* identical to box height */
+
+
+    color: #9E9D9D;
+
+}
+
+
+.label {
+
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 21px;
+
+    color: rgba(51, 51, 51, 0.64);
+}
+
+.text-area {
+
+    border: 1px solid #E2E2E2;
+}
+
+.submit {
+
+    background: linear-gradient(0deg, #446ACD, #446ACD), #F1F1F1;
+    border-radius: 10px !important;
+    border: none !important;
+    color: white;
+    padding: 0.437rem 5rem 0.437rem 5rem;
+    width: 100%;
+    margin-top: 0.5rem;
+
+    &:disabled {
+        opacity: 0.8;
+    }
+}
+
+textarea::placeholder {
+
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    /* identical to box height */
+
+
+    color: #A6A6A6;
+}
+
+::ng-deep .ngb-dp-header {
+    background-color: #446ACD !important;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem;
+
+    border-radius: 8px 8px 0px 0px !important;
+
+    button:not(:disabled),
+    [type=button]:not(:disabled),
+    [type=reset]:not(:disabled),
+    [type=submit]:not(:disabled) {
+        cursor: pointer;
+        border: 2px solid white !important;
+        border-radius: 1rem !important;
+    }
+
+}
+
+::ng-deep .btn-link {
+    color: white;
+    --bs-btn-hover-color: white;
+    --bs-btn-active-color: white;
+}
+
+
+::ng-deep .ngb-dp-month {
+    width: -webkit-fill-available !important;
+
+    .ngb-dp-day,
+    .ngb-dp-weekday,
+    .ngb-dp-week-number {
+        width: -webkit-fill-available !important;
+
+    }
+}
+
+::ng-deep .ngb-dp-month:first-child .ngb-dp-week {
+    background-color: transparent;
+    border: none;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 130%;
+    /* or 13px */
+
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 130%;
+    /* or 13px */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    /* lite/text/grey */
+
+    color: #2C3339;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    /* lite/text/grey */
+
+    color: #898989;
+}
+
+::ng-deep .ngb-dp-months {
+    display: grid;
+}
+
+
+::ng-deep [ngbDatepickerDayView] {
+    border-radius: 1rem !important;
+    font-weight: 600;
+}
+
+::ng-deep .bg-primary {
+    --bs-bg-opacity: 1;
+    // background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+    background-color: #436ACD !important;
+    color: white !important;
+}
+
+::ng-deep .ngb-dp-weekday {
+    color: #898989 !important;
+    font-style: normal !important;
+}
+
+
+::ng-deep ngb-datepicker-navigation-select>.form-select {
+    flex: 1 1 auto;
+    padding: 0 0.5rem;
+    font-size: .875rem;
+    height: 1.85rem;
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+
+::ng-deep option {
+    font-weight: normal;
+    display: block;
+    white-space: nowrap;
+    min-height: 1.2em;
+    padding: 0px 2px 1px;
+    color: #000000 !important;
+    display: none !important;
+}
+
+::ng-deep .form-select {
+    background-image: none;
+}
+
+
+::ng-deep .ngb-dp-month-name {
+    height: 2rem;
+    text-align: center;
+    background-color: #436ACD !important;
+    color: white !important;
+
+    font-weight: 600 !important;
+    font-size: 14px !important;
+}
+
+
+::ng-deep .ngb-dp-arrow-btn {
+    padding: 0 0.25rem;
+    margin: 0 0.2rem !important;
+    border: none;
+    background-color: transparent;
+    z-index: 1;
+}
+
+::ng-deep .ngb-dp-navigation-chevron {
+    border-style: solid;
+    border-width: 2px 2px 0 0 !important;
+    display: flex !important;
+    width: 0.5em !important;
+    height: 0.5em !important;
+    margin-left: 0.25em;
+    margin-right: 0.15em;
+    transform: rotate(-135deg);
+
+}
+
+::ng-deep .ngb-dp-arrow {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 1.5rem !important;
+    height: 1.55rem !important;
+    justify-content: end;
+}
+
+::ng-deep .ngb-dp-arrow.right {
+    justify-content: initial !important;
+}
+
+
+
+
+
+// ::ng-deep .ng-select.ng-select-opened.ng-select-bottom>.ng-select-container {
+//     width: 11rem;
+//     background-image: url("data:image/svg+xml,%3csvg fill='%230D67B5' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3e%3cpath d='M0 0h24v24H0z' fill='none'/%3e%3c/svg%3e");
+//     background-position: right 7px center;
+//     background-repeat: no-repeat;
+//     font-size: .75rem;
+//     line-height: 1.5;
+//     color: #0D67B5;
+//     background-color: #F5F3FF;
+//     border: none;
+//     font-weight: 500;
+//     border-radius: 25rem;
+//     padding: 0.4375rem 0.625rem 0.4375rem 0.625rem;
+//     min-width: 11.25rem;
+// }
+
+
+
+// :ng-deep .ng-select.ng-select-single .ng-select-container {
+//     width: 11rem;
+//     background-image: url("data:image/svg+xml,%3csvg fill='%230D67B5' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3e%3cpath d='M0 0h24v24H0z' fill='none'/%3e%3c/svg%3e");
+//     background-position: right 7px center;
+//     background-repeat: no-repeat;
+//     font-size: .75rem;
+//     line-height: 1.5;
+//     color: #0D67B5;
+//     background-color: #F5F3FF;
+//     border: none;
+//     font-weight: 500;
+//     border-radius: 25rem;
+//     padding: 0.4375rem 0.625rem 0.4375rem 0.625rem;
+//     min-width: 11.25rem;
+// }
+
+// ::ng-deep .ng-select.ng-select-single .ng-select-container {
+
+//     height: 36px;
+//     width: 11rem;
+//     background-image: url("data:image/svg+xml,%3csvg fill='%230D67B5' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3e%3cpath d='M0 0h24v24H0z' fill='none'/%3e%3c/svg%3e");
+//     background-position: right 7px center;
+//     background-repeat: no-repeat;
+//     font-size: .75rem;
+//     line-height: 1.5;
+//     color: #0D67B5;
+//     background-color: #F5F3FF;
+//     border: none;
+//     font-weight: 500;
+//     border-radius: 25rem;
+//     padding: 0.4375rem 0.625rem 0.4375rem 0.625rem;
+//     min-width: 11.25rem;
+// }
+
+// ::ng-deep 
+
+
+::ng-deep .modal-content {
+    background-color: transparent !important;
+    border: none;
+}
+
+.close-btn {
+    background-color: #E2E2E2;
+    border-radius: 25rem;
+}

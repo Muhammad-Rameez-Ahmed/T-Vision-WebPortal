@@ -1,0 +1,74 @@
+.image-size {
+    // height: 126px;
+    object-fit: cover;
+    // width: 100%;
+}
+
+.p-img {
+    width: 8rem;
+    height: 8rem;
+}
+
+
+.card {
+    // min-height: 31rem;
+
+    .card-body {
+        // overflow: hidden;
+        height: auto;
+    }
+
+}
+
+.info {
+    width: 80%;
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 40px;
+    /* identical to box height, or 143% */
+
+
+    /* Grey Blue 60 */
+
+    color: #6B7A99;
+}
+
+.info-des {
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 40px;
+    /* identical to box height */
+
+
+    color: #9B9B9B;
+}
+
+.pointer {
+    cursor: pointer;
+    padding: 2rem;
+}
+
+
+.cancel {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxUlEQVR4nO2WMQ7CMAxFvUC5YGdihmwcgEsBHSjH+8gqAVqh4NA4WfKlbvn/xa2dhqipqbiO6MjhRD22yV7xiFcy/jAOxAAxbkkBHhtiXJ7eO+2x04Nlt5MxPFdV5bJG1n56JStp1w7nBTxe+bxSnWc1PBs0BZ4dqoGbQWPwA0biV+cbQOOVG0ODplc7H5cwr2bQN3goC/ZfG6nA9+UF1Ly5fGRkTGeYfwSbnFqsDMx6TnNiUBa4q/Vb7GtdBKpdfZqaaL0emgHJfXWRPXAAAAAASUVORK5CYII=');
+
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 4rem;
+}
+
+.walkin {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAACM0lEQVR4nNWXv2sUURDHv5AYgoWCJIFTtBBFiAghIhZaaBUtFCyuMmZn9nCrECJoKQF/EUL+gJSmSUAEoyCCiIU2ooKFCNpokVQ2IUERDMk3vJcNefsjm93buxMHBu5u35vPzcybmbfAfyNVdkDYD48nC+sQj9cPFl6Ccg1K1qm9aLkoaT0vYeAwlA8hfA2ftzDG9uaDA+6FciESPuFk88HKK4m8CX8m1nk8g0H2NA4sHEg5MD9S1k1D+BUBK40Bm3wK3znQNXi8nljnsRPKFxbuc39+cI37oByEMnC0BuVFBOyCcBjCCfg873j5NLWEhI/zgQPugvJTRi3+gvI2qmyL7atEGobxWLkI4al8YOHNnM1gznaydBt3ItAdwUM8AOGyY/w5hDMZ8GepcJOaOESzwMopJzdfwrDXMj03ud0M7+ZBSrfNLPBsaGwVHs+Fv71Jgb3d5k+s2H5eGBywAuU4fF6232s8khgKpmFslMv9baIwXhwcF+XdFMMPnOejYV1/DHXOnpPSYOHnRCiv8VC+zeXAH2LePqkLmhtsSkR5Fh4v2IO25fF3BNyNpoGVAYTzUHZDeC8W7onGgMfYbhuB69mWvgxr+VUkzx77yoN9HstoEH9siZnZGr0AvE/06sLgKttsGSQ9XrIhd4e78K/zfKQcuIgobzghX4bwYCsve48iQ6Rl4KvcA+U3B366NWAjwhPhvP0N4dECF/1eu7+UbFyPuu1nU3I7vdr8k7eImKwDYTLaFcU5XucAAAAASUVORK5CYII=');
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 4rem;
+}
+
+
+.card-body {
+    padding: 0;
+}

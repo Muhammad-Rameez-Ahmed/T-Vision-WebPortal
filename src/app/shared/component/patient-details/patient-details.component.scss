@@ -1,0 +1,191 @@
+.card {
+
+    font-family: 'work sans';
+    min-height: 17rem;
+    overflow: hidden !important;
+
+    .card-body {
+        overflow-x: hidden !important;
+        overflow-y: overlay !important;
+        height: auto;
+    }
+
+    .card-header {
+        font-weight: 500 !important;
+    }
+}
+
+.nhs-id {
+
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 21px;
+    /* identical to box height */
+
+
+    color: #9E9D9D;
+}
+
+.val {
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 30px;
+    /* identical to box height */
+
+
+    color: #000000;
+}
+
+.label {
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.appointment {
+    // width: 33.33% !important;
+    // min-height: 50vh !important;
+    min-height: 23.5rem;
+    height: 10rem;
+    overflow: hidden;
+}
+
+.head {
+    font-weight: 500 !important;
+    font-size: 14px;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+
+    color: #000000;
+}
+
+::ng-deep .nav-tabs .nav-link.active,
+.nav-tabs .nav-link.hover,
+.nav-tabs .nav-item.show .nav-link {
+    color: var(--bs-nav-tabs-link-active-color);
+    background-color: var(--bs-nav-tabs-link-active-bg);
+    border-color: var(--bs-nav-tabs-link-active-border-color);
+    border-bottom: 2px solid #0D67B5 !important;
+    border-top: none !important;
+    border-right: none !important;
+    border-left: none !important;
+}
+
+::ng-deep .nav-link {
+    display: block;
+    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    // font-size: var(--bs-nav-link-font-size);
+    font-size: 13px;
+    font-weight: var(--bs-nav-link-font-weight);
+    color: black;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+
+    &:hover {
+        // background: #000000;
+        border-bottom: 2px solid #0D67B5 !important;
+        border-top: none !important;
+        border-right: none !important;
+        border-left: none !important;
+    }
+}
+
+
+
+// ::ng-deep .nav-tabs .nav-link.active,
+// .nav-tabs .nav-item.show .nav-link {
+//     border: none;
+//     padding: 0.5rem 1rem 0.5rem 1rem;
+
+// }
+
+
+
+
+::ng-deep .nav-tabs {
+    --bs-nav-tabs-border-width: 1px;
+    --bs-nav-tabs-border-color: #dee2e6;
+    --bs-nav-tabs-border-radius: none;
+    --bs-nav-tabs-link-hover-border-color: transparent transparent #0D67B5 transparent !important;
+    --bs-nav-tabs-link-active-color: #495057;
+    --bs-nav-tabs-link-active-bg: #fff;
+    // --bs-nav-tabs-link-active-border-color: #dee2e6 #dee2e6 #fff;
+    border-bottom: var(--bs-nav-tabs-border-width) solid var(--bs-nav-tabs-border-color);
+
+    box-shadow: 1px 3px 7px rgb(0 0 0 / 10%) !important;
+}
+
+.records {
+    // padding-left: 0% !important;
+    min-height: 50vh !important;
+}
+
+.stick {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: #fff;
+}
+
+.shadow {
+
+    box-shadow: 1px 3px 7px rgb(0 0 0 / 10%) !important;
+}
+
+.profile {
+    max-height: 6rem !important;
+    width: auto !important;
+    border-radius: 100% !important;
+}
+
+.round {
+    // border-radius: 100%;
+    // border: 2px solid blue;
+    // border-radius: 10px !important;
+    float: right;
+    border-radius: 100% !important;
+    border: 2px solid #0D67B5 !important;
+    background-color: transparent;
+    color: #0D67B5;
+    padding: 0rem 0.4rem 0rem 0.4rem;
+    margin-top: 0.4rem;
+    text-decoration: none;
+    height: 1.7rem;
+    width: 1.7rem;
+    background-image: url("data:image/svg+xml,%3csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M6 12H18' stroke='%230D67B5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3cpath d='M12 18L12 6' stroke='%230D67B5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+
+    &:active,
+    &:hover {
+        cursor: pointer;
+        border: 2px solid #0D67B5 !important;
+        background-color: #0D67B5;
+        color: #fff;
+
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M6 12H18' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' /%3e%3cpath d='M12 18L12 6' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' /%3e%3c/svg%3e");
+    }
+}
+
+.add-btn {
+    font-size: 12px;
+    padding: 0.5rem 1rem 0.5rem 3rem;
+    background-position: left 1rem center;
+
+}
+
+.display-left {
+    float: right;
+}
+
+.default {
+    background-image: none !important;
+
+    padding: 0.5rem 1rem 0.5rem 1rem !important;
+}
+
+.p-imges {
+    width: 6rem !important;
+    height: 10rem;
+    object-fit: cover;
+}

@@ -1,0 +1,139 @@
+<form #form="ngForm" class="d-flex justify-content-center" autocomplete=" off">
+    <fieldset class="d-flex justify-content-center" >
+
+
+        <div class="row g-3 width-resp">
+            <div class="d-flex justify-content-center align-items-center mb-2">
+                <div class="d-flex flex-column justify-content-center text-center type" (click)="settype('staff')">
+                    <!-- <button class=" btn-select mx-2"></button> -->
+                    <div class="type-box" [ngClass]="this.userType === 'staff' ? 'clicked' : ''">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            width="150px" height="150px" viewBox="0,0,256,256">
+                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                                stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                                font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                                style="mix-blend-mode: normal">
+                                <g transform="scale(5.33333,5.33333)">
+                                    <path d="M29,33v0h-10c0,0 -11,1.986 -11,13h32c0,-10.975 -11,-13 -11,-13"
+                                        fill="#0d67b5">
+                                    </path>
+                                    <path d="M24,39l-5,-6v-6h10v6z" fill="#ffcc80"></path>
+                                    <path
+                                        d="M35,21c0,1.105 -0.896,2 -2,2c-1.105,0 -2,-0.895 -2,-2c0,-1.105 0.895,-2 2,-2c1.104,0 2,0.895 2,2M17,21c0,-1.105 -0.896,-2 -2,-2c-1.106,0 -2,0.895 -2,2c0,1.105 0.894,2 2,2c1.104,0 2,-0.895 2,-2"
+                                        fill="#ffcc80"></path>
+                                    <path
+                                        d="M33,15c0,-7.635 -18,-4.971 -18,0v7c0,4.971 4.028,9 9,9c4.971,0 9,-4.029 9,-9z"
+                                        fill="#ffe0b2"></path>
+                                    <path
+                                        d="M24,6c-6.075,0 -10,4.926 -10,11v2.286l2,1.714v-5l12,-4l4,4v5l2,-1.742v-2.258c0,-4.025 -1.038,-8.016 -6,-9l-1,-2z"
+                                        fill="#060302"></path>
+                                    <path
+                                        d="M27,21c0,-0.551 0.448,-1 1,-1c0.552,0 1,0.449 1,1c0,0.551 -0.448,1 -1,1c-0.552,0 -1,-0.449 -1,-1M19,21c0,0.551 0.448,1 1,1c0.552,0 1,-0.449 1,-1c0,-0.551 -0.448,-1 -1,-1c-0.552,0 -1,0.449 -1,1"
+                                        fill="#784719"></path>
+                                    <path
+                                        d="M29,33l-5,6l-5,-6c0,0 -0.88,0.161 -2.141,0.637l0.603,0.645l5,6l0.538,0.643v5.075h2v-5.075l0.536,-0.643l5,-6l0.539,-0.664c-1.225,-0.462 -2.075,-0.618 -2.075,-0.618z"
+                                        fill="#0061ff"></path>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span>Admin</span>
+                </div>
+                <!-- <div class="line"></div> -->
+                <!-- <div class="d-flex flex-column justify-content-center text-center type" (click)="settype('doctor')">
+                    <div class="type-box" [ngClass]="this.userType === 'doctor' ? 'clicked' : ''">
+
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            width="150px" height="150px" viewBox="0,0,256,256">
+                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                                stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                                font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                                style="mix-blend-mode: normal">
+                                <g transform="scale(5.33333,5.33333)">
+                                    <path d="M19,27h10v16h-10z" fill="#ffcc80"></path>
+                                    <path d="M40,46h-32c0,-11.014 11,-13 11,-13l5,9l5,-9c0,0 11,2.025 11,13z"
+                                        fill="#0d67b5">
+                                    </path>
+                                    <path
+                                        d="M17,39c-1.657,0 -3,1.343 -3,3c0,1.657 1.343,3 3,3c1.657,0 3,-1.343 3,-3c0,-1.657 -1.343,-3 -3,-3z"
+                                        fill="#263238"></path>
+                                    <path
+                                        d="M16,42c0,-0.553 0.447,-1 1,-1c0.552,0 1,0.447 1,1c0,0.553 -0.448,1 -1,1c-0.553,0 -1,-0.447 -1,-1zM29,44h-2v2h2zM35,44h-2v2h2z"
+                                        fill="#cfd8dc"></path>
+                                    <path
+                                        d="M19,33v-3.363c-1.081,1.294 -1.792,2.577 -1.949,3.046c-0.516,1.551 -1.051,3.155 -1.051,7.317c0,0.553 0.448,1 1,1c0.552,0 1,-0.447 1,-1c0,-3.838 0.461,-5.22 0.949,-6.684c0.02,-0.06 0.055,-0.14 0.099,-0.231zM31.984,39.124c-0.126,-3.667 -0.996,-6.324 -1.05,-6.482c-0.579,-1.51 -1.227,-2.737 -1.934,-3.71v4.068l-0.043,0.078c0.032,0.08 0.064,0.16 0.095,0.238c0.009,0.026 0.806,2.462 0.931,5.815c-2.329,0.619 -2.983,3.343 -2.983,4.869l2,0.003c0.001,-0.122 0.042,-3.003 2,-3.003c1.958,0 1.999,2.881 2,3h2c0,-1.534 -0.661,-4.274 -3.016,-4.876z"
+                                        fill="#37474f"></path>
+                                    <path
+                                        d="M17,21c0,1.106 -0.895,2 -2,2c-1.105,0 -2,-0.894 -2,-2c0,-1.105 0.894,-2 2,-2c1.106,0 2,0.895 2,2M35,21c0,-1.105 -0.895,-2 -2,-2c-1.105,0 -2,0.895 -2,2c0,1.106 0.895,2 2,2c1.105,0 2,-0.894 2,-2"
+                                        fill="#ffcc80"></path>
+                                    <path
+                                        d="M33,15c0,-7.635 -18,-4.971 -18,0v7c0,4.971 4.029,9 9,9c4.971,0 9,-4.029 9,-9z"
+                                        fill="#ffe0b2"></path>
+                                    <path
+                                        d="M27,21c0,-0.551 0.448,-1 1,-1c0.552,0 1,0.449 1,1c0,0.551 -0.448,1 -1,1c-0.552,0 -1,-0.449 -1,-1M19,21c0,0.551 0.448,1 1,1c0.552,0 1,-0.449 1,-1c0,-0.551 -0.448,-1 -1,-1c-0.552,0 -1,0.449 -1,1"
+                                        fill="#784719"></path>
+                                    <path
+                                        d="M24,6c-6.075,0 -10,4.926 -10,11v2.286l2,1.714v-5l12,-4l4,4v5l2,-1.742v-2.258c0,-4.025 -1.038,-8.016 -6,-9l-1,-2z"
+                                        fill="#ff5722"></path>
+                                    <path
+                                        d="M33,7c0,0 -1.875,-2 -8.75,-2c-6.874,0 -9.25,2 -9.25,2c0,0 -1,6 -1,10c0,0 5,-1 10,-1c5,0 10,1 10,1c0,-4 -1,-10 -1,-10z"
+                                        fill="#0d67b5"></path>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span>Doctor</span>
+                </div> -->
+            </div>
+            <div class="col-md-12 m-0">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" [(ngModel)]="model.email" name="email" id="email"
+                    maxlength="32" [pattern]="'[^@ \t\r\n]+@[^@ . \t\r\n]+\.[^@. \t\r\n][^@ \t\r\n]+'"
+                    placeholder="Enter email address here" required>
+            </div>
+            <div class="col-md-12 position-relative">
+                <label for="password" class="form-label">Password</label>
+                <input [type]="visibility ? 'text' : 'password'" class="form-control" [(ngModel)]="model.password"
+                    name="password" id="password" placeholder="Type your password here" required>
+
+               
+                <img class="password__visibility" (click)="visibility = !visibility"
+                    [src]="'./assets/images/utilities/visibility_'+ (visibility ? 'on' : 'off') + '.png'"
+                    [alt]="visibility ? 'visible' : 'hidden'">
+            </div>
+           
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary btn-sm w-100 p-3" (click)="onSubmit()">
+                    <ng-container *ngIf="loadings">
+                        <span class="spinner-border spinner-border-sm me-2" role="status " aria-hidden="true"></span>
+                    </ng-container>
+                    <span [innerText]="loadings ? 'Loading...' : 'Login'"></span>
+                </button>
+                <!-- <span class="action-link mt-3" (click)="register()">Don't have an account? Click here to
+                    Register.</span> -->
+            </div>
+        </div>
+        <!-- <div class="form-floating mb-3">
+            <input type="email" class="form-control" [(ngModel)]="model.email" name="email" id="email"
+                placeholder="name@example.com">
+            <label for="email">Email address</label>
+        </div>
+        <div class="form-floating password">
+            <input [type]="visibility ? 'text' : 'password'" class="form-control password__input"
+                [(ngModel)]="model.password" name="password" id="password" placeholder="Password">
+            <label for="password">Password</label>
+            <img class="password__visibility" (click)="visibility = !visibility"
+                [src]="'./assets/images/utilities/visibility_'+ (visibility ? 'on' : 'off') + '.png'"
+                [alt]="visibility ? 'visible' : 'hidden'">
+        </div>
+        <div class="mt-5">
+            <button type="submit" class="btn btn-primary px-4">
+                <ng-container *ngIf="loading">
+                    <span class="spinner-border spinner-border-sm me-2" role="status "
+                        aria-hidden="true"></span>
+                </ng-container>
+                <span [innerText]="loading ? 'Loading...' : 'Login'"></span>
+            </button>
+        </div> -->
+    </fieldset>
+</form>

@@ -1,0 +1,53 @@
+<form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit()">
+    <fieldset [disabled]="loading">
+        <div class="row g-3">
+            <div class="col-md-12 m-0">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" [(ngModel)]="model.email" name="email" id="email"
+                    maxlength="32" [pattern]="'[^@ \t\r\n]+@[^@ . \t\r\n]+\.[^@. \t\r\n][^@ \t\r\n]+'"
+                    placeholder="Enter email address here" required>
+            </div>
+            <div class="col-md-12 position-relative">
+                <label for="password" class="form-label">Password</label>
+                <input [type]="visibility ? 'text' : 'password'" class="form-control" [(ngModel)]="model.password"
+                    name="password" id="password" placeholder="Type your password here" required>
+
+                <!-- [pattern]="'^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$'" minlength="8" -->
+                <img class="password__visibility" (click)="visibility = !visibility"
+                    [src]="'./assets/images/utilities/visibility_'+ (visibility ? 'on' : 'off') + '.png'"
+                    [alt]="visibility ? 'visible' : 'hidden'">
+            </div>
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary btn-sm w-100 px-4">
+                    <ng-container *ngIf="loading">
+                        <span class="spinner-border spinner-border-sm me-2" role="status " aria-hidden="true"></span>
+                    </ng-container>
+                    <span [innerText]="loading ? 'Loading...' : 'Login'"></span>
+                </button>
+                <!-- <span class="action-link mt-3">Forgot password? Click here to reset.</span> -->
+            </div>
+        </div>
+        <!-- <div class="form-floating mb-3">
+            <input type="email" class="form-control" [(ngModel)]="model.email" name="email" id="email"
+                placeholder="name@example.com">
+            <label for="email">Email address</label>
+        </div>
+        <div class="form-floating password">
+            <input [type]="visibility ? 'text' : 'password'" class="form-control password__input"
+                [(ngModel)]="model.password" name="password" id="password" placeholder="Password">
+            <label for="password">Password</label>
+            <img class="password__visibility" (click)="visibility = !visibility"
+                [src]="'./assets/images/utilities/visibility_'+ (visibility ? 'on' : 'off') + '.png'"
+                [alt]="visibility ? 'visible' : 'hidden'">
+        </div>
+        <div class="mt-5">
+            <button type="submit" class="btn btn-primary px-4">
+                <ng-container *ngIf="loading">
+                    <span class="spinner-border spinner-border-sm me-2" role="status "
+                        aria-hidden="true"></span>
+                </ng-container>
+                <span [innerText]="loading ? 'Loading...' : 'Login'"></span>
+            </button>
+        </div> -->
+    </fieldset>
+</form>

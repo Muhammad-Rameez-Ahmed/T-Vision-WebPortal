@@ -1,0 +1,120 @@
+<div class="d-flex  width-view justify-content-lg-end">
+    <mat-form-field>
+        <mat-label>Select Date</mat-label>
+        <input matInput [matDatepicker]="dt" [(ngModel)]="date" (dateChange)="dateChange()" [min]="minDate">
+        <mat-datepicker-toggle matSuffix [for]="dt"></mat-datepicker-toggle>
+        <mat-datepicker #dt></mat-datepicker>
+    </mat-form-field>
+</div>
+
+<ng-container *ngIf="loading">
+    <div class="d-flex justify-content-center">
+        <span class="spinner-border spinner-border-lg me-2 d-block" role="status " aria-hidden="true"></span>
+    </div>
+    <div class="d-flex justify-content-center">
+        <span class="name">Loading...</span>
+    </div>
+</ng-container>
+<div *ngIf="model.length === 0 && !loading" class="d-flex justify-content-center">
+    <span class="name">No Available Clinics for appointment booking</span>
+</div>
+<div cdkDropListGroup *ngIf="!loading">
+    <div class="row">
+        <div class="column p-2" *ngFor="let item of model">
+            <div class="card rounded-0 shadow border-0">
+
+                <div class="card-header m-1 mb-0">
+                    <div>{{item.clinic.clinicName}}</div>
+                </div>
+                <div class="card-body">
+                    <div class=" pt-0" *ngFor="let doctor of item.slots">
+                        <div class="">
+                            <div class="row pl-0 bg-white pt-0">
+                                <div class=" col-md-2 p-2">
+                                    <img class="image-size profile-image-small mx-md-auto rounded-circle"
+                                        src="../../../assets/images/Group 1.png" alt="">
+                                </div>
+                                <div class="col-md-10 p-2 align-self-left">
+                                    <div class="name">{{doctor.slotDoctorId.doctorName}}</div>
+                                    <div class="des">{{doctor.slotDoctorId.doctorCategory.docCategoryName}}</div>
+                                    <div class="des"><svg width="6" height="8" viewBox="0 0 6 8" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M2.69169 7.83859C0.421406 4.54736 0 4.20958 0 3C0 1.34314 1.34314 0 3 0C4.65686 0 6 1.34314 6 3C6 4.20958 5.57859 4.54736 3.30831 7.83859C3.15933 8.05381 2.84066 8.0538 2.69169 7.83859ZM3 4.25C3.69036 4.25 4.25 3.69036 4.25 3C4.25 2.30964 3.69036 1.75 3 1.75C2.30964 1.75 1.75 2.30964 1.75 3C1.75 3.69036 2.30964 4.25 3 4.25Z"
+                                                fill="#446ACD" />
+                                        </svg>
+                                        {{doctor.slotDoctorId.doctorBelongsTo.siteAddress}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 mt-3" cdkDropList [cdkDropListData]="doctor.sessions" class="example-list"
+                            (cdkDropListDropped)="drop($event)">
+                            <div class="row align-items-end" [ngClass]="!appointments.sessionDetail ? 'mt-3': ''"
+                                *ngFor="let appointments of doctor.sessions">
+                                <div class="col-sm-2 p-0 pl-2 d-flex justify-content-center">
+                                    <span class="align-bottom des">{{appointments.sessionStartTime}}</span>
+                                </div>
+                                <div class="col-sm-10 p-0 border-bottom justify-content-center mb-2">
+                                    <div cdkDrag [cdkDragDisabled]="!appointments.sessionDetail">
+                                        <button type="button" class="pill-btn"
+                                            *ngIf="!appointments.sessionDetail || !appointments.sessionDetail.patient"
+                                            (click)="openModal(doctor)">Appointments
+                                            Open+</button>
+                                        <div class="w-100"
+                                            *ngIf="appointments.sessionDetail && appointments.sessionDetail.patient">
+                                            <div class=" card-sm mb-1 mr-2">
+                                                <div class="row pointer align-items-center p-2"
+                                                    (click)="viewDetails(appointments.sessionDetail)">
+                                                    <div class="col-md-3 d-flex">
+                                                        <img class="p-img image-size profile-image-small mx-md-auto rounded-circle p-2"
+                                                            [src]="appointments.sessionDetail.patient.patientUserProfile ? appointments.sessionDetail.patient.patientUserProfile : '../../../assets/images/Group 3465065.png'"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <div class="des text-muted h-6">
+                                                            {{appointments.sessionDetail.patient.patientUserName + ' ' +
+                                                            appointments.sessionDetail.patient.patientLastName}}
+                                                        </div>
+                                                        <div class="des">
+                                                            Reason: {{appointments.sessionDetail.specialDescription}}
+                                                        </div>
+                                                        <div class="des">
+                                                            <span
+                                                                *ngIf="appointments.sessionDetail.appointmentStatus.id === 2"
+                                                                class="badge badge-danger">{{appointments.sessionDetail.appointmentStatus.status}}</span>
+                                                            <span
+                                                                *ngIf="appointments.sessionDetail.appointmentStatus.id === 3"
+                                                                class="badge badge-success">{{appointments.sessionDetail.appointmentStatus.status}}</span>
+                                                            <span
+                                                                *ngIf="appointments.sessionDetail.appointmentStatus.id === 0"
+                                                                class="badge badge-primary">{{appointments.sessionDetail.appointmentStatus.status}}</span>
+
+                                                            <span
+                                                                *ngIf="appointments.sessionDetail.appointmentStatus.id === 1"
+                                                                class="badge badge-warning">{{appointments.sessionDetail.appointmentStatus.status}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <ng-container *ngIf="role === 'staff'">
+    <app-appointments-staff></app-appointments-staff>
+</ng-container>
+
+
+<ng-container *ngIf="role === 'doctor'">
+    <app-appointments-doctor></app-appointments-doctor>
+</ng-container> -->

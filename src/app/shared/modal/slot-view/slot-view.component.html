@@ -1,0 +1,151 @@
+<!-- <div class="card appointment">
+    <div class="stick">
+        <ul ngbNav #nav="ngbNav" class="nav-tabs m-0">
+            <li>
+                <div class="head">Appointments:</div>
+            </li>
+            <li [ngbNavItem]="1">
+                <a ngbNavLink>Scheduled</a>
+                <ng-template ngbNavContent>
+                    <app-appointments-table inputValue="upcoming"></app-appointments-table>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="2">
+                <a ngbNavLink>Completed</a>
+                <ng-template ngbNavContent>
+                    <app-appointments-table inputValue="history"></app-appointments-table>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="3">
+                <a ngbNavLink>Canceled</a>
+                <ng-template ngbNavContent>
+                    <app-appointments-table inputValue="history"></app-appointments-table>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="4">
+                <a ngbNavLink>Free Slots
+                </a>
+                <ng-template ngbNavContent>
+                    <app-appointments-table inputValue="history"></app-appointments-table>
+                </ng-template>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body p-0">
+        <div [ngbNavOutlet]="nav" class=""></div>
+    </div>
+</div> -->
+<!-- <div class="">x</div> -->
+<div class="card pb-2">
+    <div class="card-header">
+        Slots
+
+        <!-- <input type="date" class="date"> -->
+    </div>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <!-- <th>#</th> -->
+                <th class="text-center">Start Time</th>
+                <th class="text-center">End Time</th>
+                <!-- <th class="text-center">actions</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let item of list; let i = index;">
+                <tr>
+                    <!-- <td><span [innerText]="i+1"></span></td> -->
+                    <!-- <td class="text-name">
+                        <span class="name" [innerText]="item.sessionStartTime"></span> -->
+                    <!-- <span class="time"> -->
+                    <!-- <span class="time__created" [innerText]="item.doctorGender"></span> -->
+                    <!-- <span class="time__updated" [innerText]="'Modified at: '+ (item.updated)"></span> -->
+                    <!-- </span> -->
+                    <!-- </td> -->
+                    <td class="text-center"><span [innerText]="item.sessionStartTime"></span></td>
+                    <td class="text-center"><span [innerText]="item.sessionEndTime"></span></td>
+                    <!-- <td class="text-name">
+                        <span class="name" [innerText]="item.clinicName"></span>
+                        <span class="time">
+                            <span class="time__created" [innerText]="item.clinicTime"></span>
+                        </span>
+                    </td> -->
+                </tr>
+            </ng-container>
+            <!-- <ng-container *ngIf="list.length === 0 && !loading">
+                <tr class="loading border-bottom-0">
+                    <td colspan="7" class="border-bottom-0">
+                        <div class="d-flex justify-content-center my-5">
+                            <h5 class="text-uppercase text-muted">
+                                no record found!
+                            </h5>
+                        </div>
+                    </td>
+                </tr>
+            </ng-container> -->
+            <!-- <ng-container *ngIf="loading">
+                <tr class="loading border-bottom-0">
+                    <td colspan="6" class="border-bottom-0">
+                        <div class="d-flex justify-content-center my-5">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    </td>
+                </tr>
+            </ng-container> -->
+        </tbody>
+    </table>
+    <!-- <div class="card-body"> -->
+
+    <!-- <div class="p-2 mt-2"> -->
+    <!-- <div class="row align-items-end" *ngFor="let slot of data"> -->
+
+
+
+    <!-- <div class="col-sm-2 p-0"> -->
+    <!-- <span class="align-bottom des">{{slot.sessionStartTime}} - {{slot.sessionEndTime}}</span> -->
+    <!-- </div> -->
+    <!-- <div class="col-sm-10 p-0 border-bottom mb-2">
+                    <button type="button" class="pill-btn" *ngIf="appointments.booked">Appointments
+                        Open+</button>
+                    <div class="w-100" *ngIf="!appointments.booked">
+                        <div class="card-sm mb-3 mr-2">
+                            <div class="id p-2">ID: 12312312</div>
+                            <div class="row align-items-center">
+                                <div class="col-md-3 d-flex">
+                                    <img class="image-size profile-image-small mx-md-auto rounded-circle p-2"
+                                        src="../../../assets/images/Group 3465065.png" alt="">
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="name text-muted h-6">{{appointments.patientName}}</div>
+                                    <div class="des">{{appointments.reason}}</div>
+                                </div>
+                                <div class="col-md-2 p-0">
+
+                                    <span *ngIf="appointments.status === 'Canceled'"
+                                        class="badge badge-danger">Canceled</span>
+                                    <span *ngIf="appointments.status === 'Completed'"
+                                        class="badge badge-success">Completed</span>
+                                    <span *ngIf="appointments.status === 'Scheduled'"
+                                        class="badge badge-primary">Scheduled</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+    <!-- </div> -->
+    <!-- </div> -->
+    <!-- </div> -->
+
+    <!-- <div class="card-footer"> -->
+
+
+    <div class="d-flex justify-content-center mt-2">
+        <ngb-pagination [collectionSize]="data.length" [(page)]="page" [maxSize]="1" [rotate]="true" [pageSize]="size"
+            [boundaryLinks]="true" size="sm" (pageChange)=" field = 'index'; pageChange($event)">
+        </ngb-pagination>
+    </div>
+
+    <!-- </div> -->
+</div>

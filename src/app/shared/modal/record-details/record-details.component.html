@@ -1,0 +1,83 @@
+<div class="p-4 border rounder shadow">
+
+    <div class="d-flex justify-content-center border-bottom">
+        <h4>Shirt Details</h4>
+    </div>
+
+    <div class="row p-4">
+        <div class="col-lg-3 p-0 d-flex align-items-start justify-content-lg-start justify-content-center">
+            <div class="mhs">
+                <img class="profiler" src="{{model.imageURL ? model.imageURL : '../../../assets/images/Ellipse 5.png'}}" alt="photo">
+
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div>
+                <div class="row mt-3 border-bottom">
+                    <div class="col-lg-6 label">UserName</div>
+                    <div class="col-lg-6 val">{{model.userName}}</div>
+                </div>
+                <div class="row mt-3 border-bottom">
+                    <div class="col-lg-6 label">widthTop</div>
+                    <div class="col-lg-6 val">{{model.widthTop}}</div>
+                </div>
+                <div class="row mt-3 border-bottom">
+                    <div class="col-lg-6 label">widthCenter</div>
+                    <div class="col-lg-6 val">{{model.widthCenter}}</div>
+                </div>
+                <div class="row mt-3 border-bottom">
+                    <div class="col-lg-6 label">sleevesLengthLeft</div>
+                    <div class="col-lg-6 val">{{model.sleevesLengthLeft}}</div>
+                </div>
+                <div class="row mt-3 border-bottom">
+                    <div class="col-lg-6 label">sleevesLengthRight</div>
+                    <div class="col-lg-6 val">{{model.sleevesLengthRight}}</div>
+                </div>
+                <div class="row mt-3 border-bottom">
+                    <div class="col-lg-6 label">sleevesLeftWidth</div>
+                    <div class="col-lg-6 val">{{model.sleevesLeftWidth}}</div>
+                </div>
+                <div class="row mt-3 border-bottom">
+                    <div class="col-lg-6 label">sleevesRightWidth</div>
+                    <div class="col-lg-6 val">{{model.widthCenter}}</div>
+                </div>
+                <div class="row mt-3 border-bottom">
+                    <div class="col-lg-6 label">submittedDate</div>
+                    <div class="col-lg-6 val">{{model.submittedTime  | date }}</div>
+                </div>
+                <div class="row mt-3 border-bottom">
+                    <div class="col-lg-6 label">submittedTime</div>
+                    <div class="col-lg-6 val">{{model.submittedTime  | date:'HH:mm:ss a' }}</div>
+                </div>
+                <div class="row mt-3 border-bottom">
+                    <div class="col-lg-6 label">shirtStatus</div>
+                    <!-- <div class="col-lg-6 val">{{model.shirtStatus}}</div> -->
+                    <div class="col-lg-6 val"  *ngIf="model.shirtStatus==='ACCEPTED'" > <span class="badge badge-success ">Accepted </span></div>
+                    <div class="col-lg-6 val"  *ngIf="model.shirtStatus==='REJECTED'" > <span class="badge badge-danger ">Rejected</span></div>
+
+                
+                <!-- <div class="row mt-3 border-bottom">
+                    <div class="col-lg-6 label">imageURL</div>
+                    <div class="col-lg-6 val">{{model.imageURL}}</div>
+                </div>  -->
+                <div class="row mt-3 border-bottom">
+                    <div class="col-lg-6 label">length</div>
+                    <div class="col-lg-6 val">{{model.length}}</div>
+                </div>
+
+                <!-- <div class="row mt-3 border-bottom">
+                    <div class="col-lg-6 label">userRole</div>
+                    <div class="col-lg-6 val">{{ +model.userRole===1 ? 'Desktop' : 'Mobile'}}</div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-primary my-lg-0 my-2 display-left mb-2"(click)="downloadCSV()" >
+            <span class="fw-600">Download CSV</span>
+        </button>
+    </div>
+    
+</div>
+
+

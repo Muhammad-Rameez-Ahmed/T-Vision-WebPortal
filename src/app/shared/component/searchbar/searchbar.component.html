@@ -1,0 +1,42 @@
+<input type="search" name="search" [(ngModel)]="inputValue" (ngModelChange)="inputValueChange.emit(inputValue)"
+    autocomplete="off" placeholder="{{inputPlaceholder}}">
+<div class="bg-white">
+    <div *ngFor="let item of list | filter: inputValue">
+        <div class="name">{{item.name}}</div>
+        <div class="des">{{item.des}}</div>
+    </div>
+</div>
+
+
+<!-- <div class="card drop p-0" *ngIf="value != ''">
+    <div class="card-body p-2">
+        <div *ngFor="let item of list | filter: value">
+            <div class="item border-bottom" (click)="test()">
+                <img [src]="item.image" alt="">
+                <div class="row mt-2">
+                    <div class="col-md-2">
+                        <div class="label">NHS ID</div>
+                        <div class="name">{{item.id}}</div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="label">Name</div>
+                        <div class="name">{{item.name}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="label">Age</div>
+                        <div class="name">{{item.age}}</div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="label">Gender</div>
+                        <div class="name">{{item.gender}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="label">Last Checkup</div>
+                        <div class="name">{{item.last}}</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
